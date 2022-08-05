@@ -82,32 +82,60 @@ class ListRows extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          color: Colors.amber,
-                          child: Text(
-                            products[index].title,
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                    Container(
+                      padding: EdgeInsets.all(8),
+                      child: Text(
+                        products[index].title,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(8),
+                      height: 40,
+                      child: Text(products[index].description),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(8),
+                      child: Row(
+                        children: [
+                          Text(
+                            "\$ ${products[index].price}",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
                           ),
-                        ),
-                      ],
+                          SizedBox(
+                            width: 10,
+                          ),
+                          const Icon(Icons.star,
+                              color: Colors.amber,
+                              size: 24.0,
+                              semanticLabel:
+                                  'Text to announce in accessibility modes'),
+                          const Icon(Icons.star,
+                              color: Colors.amber,
+                              size: 24.0,
+                              semanticLabel:
+                                  'Text to announce in accessibility modes'),
+                          const Icon(Icons.star,
+                              color: Colors.amber,
+                              size: 24.0,
+                              semanticLabel:
+                                  'Text to announce in accessibility modes'),
+                          const Icon(Icons.star_half,
+                              color: Colors.amber,
+                              size: 24.0,
+                              semanticLabel:
+                                  'Text to announce in accessibility modes'),
+                          const Icon(Icons.star_border,
+                              color: Colors.amber,
+                              size: 24.0,
+                              semanticLabel:
+                                  'Text to announce in accessibility modes'),
+                        ],
+                      ),
                     ),
-                    Row(
-                      children: [
-                        Container(
-                            color: Colors.blue,
-                            child: Text(products[index].description)),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                            color: Colors.red,
-                            child: Text(products[index].price.toString())),
-                      ],
-                    )
                   ],
                 ),
               ),
