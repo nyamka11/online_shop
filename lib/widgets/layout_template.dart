@@ -18,13 +18,25 @@ class LayoutTemplate extends StatelessWidget {
     // print(currenWidth);
 
     double w = 0;
-    if (currenWidth > 1200) {
+    if (currenWidth > 1300) {
       w = MediaQuery.of(context).size.width * 0.70;
+    } else if (currenWidth > 1200) {
+      w = MediaQuery.of(context).size.width * 0.85;
+      // } else if (currenWidth < 1300) {
+      // w = MediaQuery.of(context).size.width * 0.80;
     } else {
       w = MediaQuery.of(context).size.width;
     }
 
     return Scaffold(
+      endDrawer: Drawer(
+        child: ListView(children: [
+          Text("asdf"),
+          Text("asdf"),
+          Text("asdf"),
+          Text("asdf"),
+        ]),
+      ),
       body: SingleChildScrollView(
         child: Container(
           color: Color(0xFFecf6fa),
