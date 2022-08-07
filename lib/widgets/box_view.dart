@@ -16,16 +16,36 @@ class BoxView extends StatelessWidget {
       width: double.infinity,
       child: SizedBox(
           height: 800,
-          child: GridView.count(
-            crossAxisCount: 3,
-            children: [
-              ...products.map((e) => BoxItem(
-                    imageUrl: e.imageUrl,
-                    productTitle: e.title,
-                    productDescription: e.description,
-                  ))
-            ],
-          )
+          child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 350,
+                childAspectRatio: 0.9,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+              ),
+              itemCount: products.length,
+              itemBuilder: (BuildContext ctx, index) {
+                return Container(
+                  // color: Colors.red,
+                  child: BoxItem(
+                    imageUrl: products[index].imageUrl,
+                    productTitle: products[index].title,
+                    productDescription: products[index].description,
+                  ),
+                );
+              })
+
+          // GridView.count(
+          //   crossAxisCount: 3,
+          //   children: [
+          //     ...products.map((e) => BoxItem(
+          //           imageUrl: e.imageUrl,
+          //           productTitle: e.title,
+          //           productDescription: e.description,
+          //         ))
+          //   ],
+          // )
+
           // GridView.builder(
           //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           //       crossAxisCount: 2,
