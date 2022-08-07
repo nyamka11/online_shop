@@ -14,28 +14,48 @@ class BoxView extends StatelessWidget {
       // alignment: Alignment.center,
       color: Colors.white,
       width: double.infinity,
-      child: Column(
-        children: [
-          const Text(
-            "今月のお勧め商品",
-            style: TextStyle(
-              fontFamily: "OpenSans",
-              fontSize: 18,
-            ),
-          ),
-          const SizedBox(height: 15),
-          Wrap(
+      child: SizedBox(
+          height: 800,
+          child: GridView.count(
+            crossAxisCount: 3,
             children: [
-              for (var e in productDatas)
-                BoxItem(
-                  imageUrl: e.imageUrl,
-                  productTitle: e.title,
-                  productDescription: e.description,
-                )
+              ...products.map((e) => BoxItem(
+                    imageUrl: e.imageUrl,
+                    productTitle: e.title,
+                    productDescription: e.description,
+                  ))
             ],
+          )
+          // GridView.builder(
+          //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          //       crossAxisCount: 2,
+          //     ),
+          //     itemBuilder: (BuildContext context, int index) {
+          //       return Container(
+          //           height: 400,
+          //           color: Colors.red,
+          //           child: Text(products[index].price.toString()));
+          //       // if (index >= grid.length) {
+          //       //   grid.addAll(["pic0", "pic1", "pic2", "pic3", "pic4", "pic5",]);
+          //       // }
+          //       // return _photoItem(grid[index]);
+          //     })
+
+          // GridView.builder(
+          //     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          //         maxCrossAxisExtent: 800,
+          //         childAspectRatio: 3 / 2,
+          //         crossAxisSpacing: 20,
+          //         mainAxisSpacing: 20),
+          //     itemCount: products.length,
+          //     itemBuilder: (BuildContext ctx, index) {
+          //       return BoxItem(
+          //         imageUrl: products[index].imageUrl,
+          //         productTitle: products[index].title,
+          //         productDescription: products[index].description,
+          //       );
+          //     }),
           ),
-        ],
-      ),
     );
   }
 }

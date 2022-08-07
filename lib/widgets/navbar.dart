@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:online_shop/_constants.dart';
 import 'package:online_shop/pages/homepage.dart';
 import 'package:online_shop/_routers.dart';
 
 class Navbar extends StatelessWidget {
   Navbar({super.key});
-  final double fsize = 15;
-  List<String> pageNemas = [
-    "TOP",
-    "E-MON MARKETについて",
-    "お知らせ",
-    "会員登録",
-    "会員ログイン",
-    "お問い合わせ"
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -33,24 +25,56 @@ class Navbar extends StatelessWidget {
         Container(
           color: Color.fromARGB(221, 12, 12, 12),
           height: 50,
-          child: currentWidth < 870
-              ? SmallScreen(pageNemas: pageNemas, fsize: fsize)
-              : BigScreen(pageNemas: pageNemas, fsize: fsize),
+          child: currentWidth < 870 ? const SmallScreen() : const BigScreen(),
         ),
       ],
     );
   }
 }
 
-class SmallScreen extends StatelessWidget {
-  const SmallScreen({
-    Key? key,
-    required this.pageNemas,
-    required this.fsize,
-  }) : super(key: key);
+class DrawarCustom extends StatelessWidget {
+  const DrawarCustom({Key? key}) : super(key: key);
 
-  final List<String> pageNemas;
-  final double fsize;
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Container(
+        margin: const EdgeInsets.only(top: 100, left: 20, right: 20),
+        child: ListView(
+          children: [
+            ...Common.pageNemas
+                .map(
+                  (item) => Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: OutlinedButton(
+                      style: TextButton.styleFrom(
+                        textStyle: TextStyle(fontSize: Common.navbarFontSize),
+                        padding: const EdgeInsets.only(right: 30, left: 30),
+                        backgroundColor: Colors.black87,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(Routes.homePage);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(9.0),
+                        child: Text(
+                          item,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+                .toList(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SmallScreen extends StatelessWidget {
+  const SmallScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +83,6 @@ class SmallScreen extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
-            print("aa");
             Scaffold.of(context).openEndDrawer();
           },
           child: Container(
@@ -77,24 +100,17 @@ class SmallScreen extends StatelessWidget {
 }
 
 class BigScreen extends StatelessWidget {
-  const BigScreen({
-    Key? key,
-    required this.pageNemas,
-    required this.fsize,
-  }) : super(key: key);
-
-  final List<String> pageNemas;
-  final double fsize;
+  const BigScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
-      children: pageNemas
+      children: Common.pageNemas
           .map(
             (item) => TextButton(
               style: TextButton.styleFrom(
-                textStyle: TextStyle(fontSize: fsize),
+                textStyle: TextStyle(fontSize: Common.navbarFontSize),
                 padding: const EdgeInsets.only(right: 30, left: 30),
               ),
               onPressed: () {

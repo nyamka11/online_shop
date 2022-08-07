@@ -29,14 +29,7 @@ class LayoutTemplate extends StatelessWidget {
     }
 
     return Scaffold(
-      endDrawer: Drawer(
-        child: ListView(children: [
-          Text("asdf"),
-          Text("asdf"),
-          Text("asdf"),
-          Text("asdf"),
-        ]),
-      ),
+      endDrawer: const DrawarCustom(),
       body: SingleChildScrollView(
         child: Container(
           color: Color(0xFFecf6fa),
