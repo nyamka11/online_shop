@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:online_shop/widgets/Common/layout_template.dart';
-
+import '../widgets/_Common/layout_template.dart';
 import '../_constants.dart';
 
 class ProductsDetail extends StatelessWidget {

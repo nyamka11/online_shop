@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/data/productData.dart';
-import 'package:online_shop/widgets/Common/layout_template.dart';
+import '../widgets/_Common/layout_template.dart';
 import '../_routers.dart';
 
 class ProductList extends StatelessWidget {
