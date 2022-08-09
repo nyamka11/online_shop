@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/_constants.dart';
-import 'package:online_shop/widgets/layout_template.dart';
-
-import '../widgets/box_view.dart';
+import '../widgets/CategoryBoxs/cat_view.dart';
+import '../widgets/_Common/box_custom.dart';
+import '../widgets/_Common/layout_template.dart';
+import '../widgets/RecommendProductsBoxs/box_view.dart';
 import '../widgets/link.dart';
 import '../widgets/slider.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   final String textStr =
       "TEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXT";
@@ -15,11 +16,14 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutTemplate(
-      bgColor: Colors.white,
+      bgColor: const Color(0xFFecf6fa),
       body: Column(
         children: [
           SlideBar(),
+          const SizedBox(height: Common.lineHeightSpacer),
           BoxView(),
+          const SizedBox(height: Common.lineHeightSpacer),
+          CategoriesView(),
           const SizedBox(height: Common.lineHeightSpacer),
           const Text("お式し会員登録して　SDGS生活を始めよう！"),
           const SizedBox(height: Common.lineHeightSpacer),

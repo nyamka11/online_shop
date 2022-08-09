@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'footer.dart';
-import 'navbar.dart';
+import './footer.dart';
+import './navbar.dart';
 
 class LayoutTemplate extends StatelessWidget {
   final Widget body;
@@ -22,8 +22,6 @@ class LayoutTemplate extends StatelessWidget {
       w = MediaQuery.of(context).size.width * 0.70;
     } else if (currenWidth > 1200) {
       w = MediaQuery.of(context).size.width * 0.85;
-      // } else if (currenWidth < 1300) {
-      // w = MediaQuery.of(context).size.width * 0.80;
     } else {
       w = MediaQuery.of(context).size.width;
     }

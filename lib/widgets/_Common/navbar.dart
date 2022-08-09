@@ -1,33 +1,95 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/_constants.dart';
-import 'package:online_shop/pages/homepage.dart';
 import 'package:online_shop/_routers.dart';
 
 class Navbar extends StatelessWidget {
-  Navbar({super.key});
+  const Navbar({super.key});
 
   @override
   Widget build(BuildContext context) {
     var currentWidth = MediaQuery.of(context).size.width;
 
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.all(8),
-          height: 80,
-          width: double.infinity,
-          color: Color.fromARGB(255, 248, 132, 171),
-          child: CircleAvatar(
-            backgroundColor: Colors.brown.shade800,
-            child: const Text('LOGO'),
+    return Container(
+      color: Color.fromARGB(255, 218, 247, 221),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Stack(
+              //   children: [
+              //     Container(
+              //       // color: Colors.red,
+              //       height: 100,
+              //       width: 500,
+              //     ),
+              //     Positioned(
+              //       left: 10,
+              //       child: Container(
+              //         height: 100,
+              //         width: 120,
+              //         child: Image.asset(
+              //             "/images/header/tree-g6de875e39_1280.png"),
+              //       ),
+              //     ),
+              //     Positioned(
+              //       left: 100,
+              //       child: Container(
+              //         height: 115,
+              //         width: 200,
+              //         child: Image.asset(
+              //             "/images/header/flower-g26ed6245e_1920-1.png"),
+              //       ),
+              //     ),
+              //     Positioned(
+              //       left: 265,
+              //       child: Container(
+              //         height: 105,
+              //         width: 200,
+              //         child: Image.asset("/images/header/title1_03.png"),
+              //       ),
+              //     )
+              //   ],
+              // ),
+              Container(
+                height: 100,
+                width: 120,
+                child: Image.asset("/images/header/logo.png"),
+              ),
+              // Stack(
+              //   children: [
+              //     Container(
+              //       // color: Colors.red,
+              //       height: 100,
+              //       width: 500,
+              //     ),
+              //     Positioned(
+              //       right: 10,
+              //       child: Container(
+              //         height: 110,
+              //         width: 140,
+              //         child: Image.asset("/images/header/title1_01.png"),
+              //       ),
+              //     ),
+              //     Positioned(
+              //       right: 160,
+              //       child: Container(
+              //         height: 110,
+              //         width: 140,
+              //         child: Image.asset("/images/header/title1_02.png"),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+            ],
           ),
-        ),
-        Container(
-          color: Color.fromARGB(221, 12, 12, 12),
-          height: 50,
-          child: currentWidth < 870 ? const SmallScreen() : const BigScreen(),
-        ),
-      ],
+          Container(
+            color: Color.fromARGB(221, 12, 12, 12),
+            height: 50,
+            child: currentWidth < 870 ? const SmallScreen() : const BigScreen(),
+          ),
+        ],
+      ),
     );
   }
 }

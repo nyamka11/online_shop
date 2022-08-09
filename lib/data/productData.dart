@@ -34,30 +34,30 @@ final List<ProductsModel> products = [
     imageUrl:
         'https://cdn.pixabay.com/photo/2015/09/05/21/51/reading-925589_960_720.jpg',
   ),
-  ProductsModel(
-    id: 'p5',
-    title: 'Better Flutter',
-    description: 'Learn all the necessary concepts of building a Flutter App.',
-    price: 9.99,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2015/09/05/07/28/writing-923882_960_720.jpg',
-  ),
-  ProductsModel(
-    id: 'p6',
-    title: 'Discrete Mathematical Data Structures and Algorithm',
-    description:
-        'Discrete mathematical concepts are necessary to learn Data Structures and Algorithm.',
-    price: 9.99,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2015/11/19/21/14/glasses-1052023_960_720.jpg',
-  ),
-  ProductsModel(
-    id: 'p6',
-    title: 'Discrete Mathematical Data Structures and Algorithm',
-    description:
-        'Discrete mathematical concepts are necessary to learn Data Structures and Algorithm.',
-    price: 9.99,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2015/11/19/21/14/glasses-1052023_960_720.jpg',
-  ),
+  // ProductsModel(
+  //   id: 'p5',
+  //   title: 'Better Flutter',
+  //   description: 'Learn all the necessary concepts of building a Flutter App.',
+  //   price: 9.99,
+  //   imageUrl:
+  //       'https://cdn.pixabay.com/photo/2015/09/05/07/28/writing-923882_960_720.jpg',
+  // ),
+  // ProductsModel(
+  //   id: 'p6',
+  //   title: 'Discrete Mathematical Data Structures and Algorithm',
+  //   description:
+  //       'Discrete mathematical concepts are necessary to learn Data Structures and Algorithm.',
+  //   price: 9.99,
+  //   imageUrl:
+  //       'https://cdn.pixabay.com/photo/2015/11/19/21/14/glasses-1052023_960_720.jpg',
+  // ),
+  // ProductsModel(
+  //   id: 'p6',
+  //   title: 'Discrete Mathematical Data Structures and Algorithm',
+  //   description:
+  //       'Discrete mathematical concepts are necessary to learn Data Structures and Algorithm.',
+  //   price: 9.99,
+  //   imageUrl:
+  //       'https://cdn.pixabay.com/photo/2015/11/19/21/14/glasses-1052023_960_720.jpg',
+  // ),
 ];
