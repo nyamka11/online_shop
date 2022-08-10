@@ -15,10 +15,14 @@ class LayoutTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var currenWidth = MediaQuery.of(context).size.width;
-    // print(currenWidth);
+    print(currenWidth);
 
     double w = 0;
-    if (currenWidth > 1300) {
+    if (currenWidth > 3800) {
+      w = MediaQuery.of(context).size.width * 0.30;
+    } else if (currenWidth > 2400) {
+      w = MediaQuery.of(context).size.width * 0.50;
+    } else if (currenWidth > 1300) {
       w = MediaQuery.of(context).size.width * 0.70;
     } else if (currenWidth > 1200) {
       w = MediaQuery.of(context).size.width * 0.85;

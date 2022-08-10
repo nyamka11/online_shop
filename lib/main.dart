@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:online_shop/pages/homepage.dart';
+import 'package:online_shop/pages/home_page.dart';
 import 'package:online_shop/pages/product_detail.dart';
 
 import '_routers.dart';
@@ -22,9 +22,9 @@ class MyApp extends StatelessWidget {
       ),
       // home: HomePage(),
       routes: {
-        Routes.homePage: (context) => HomePage(),
-        Routes.productDetail: (context) => ProductsDetail(),
-        Routes.productList: (context) => ProductList(),
+        Routes.homePage: (context) => const HomePage(),
+        Routes.productDetail: (context) => const ProductsDetail(),
+        Routes.productList: (context) => const ProductList(),
       },
     );
   }

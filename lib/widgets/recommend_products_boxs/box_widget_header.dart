@@ -31,20 +31,20 @@ class BoxItemHeader extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(left: 16),
-              child: MaterialButton(
-                color: Colors.white,
-                onPressed: () {},
-                textColor: Colors.black,
-                padding: const EdgeInsets.all(10),
-                shape: const CircleBorder(),
-                child: const Icon(
-                  Icons.favorite_border,
-                  size: 20,
-                ),
-              ),
-            ),
+            // Container(
+            //   margin: const EdgeInsets.only(left: 16),
+            //   child: MaterialButton(
+            //     color: Colors.white,
+            //     onPressed: () {},
+            //     textColor: Colors.black,
+            //     padding: const EdgeInsets.all(10),
+            //     shape: const CircleBorder(),
+            //     child: const Icon(
+            //       Icons.favorite_border,
+            //       size: 20,
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

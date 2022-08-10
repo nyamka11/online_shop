@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:online_shop/data/productData.dart';
-import '../widgets/_Common/layout_template.dart';
+import 'package:online_shop/data/product_data.dart';
+import '../widgets/_common/layout_template.dart';
 import '../_routers.dart';
 
 class ProductList extends StatelessWidget {
@@ -35,11 +35,11 @@ class ProductList extends StatelessWidget {
               child: Card(
                 elevation: 3,
                 // color: Color.fromARGB(255, 129, 129, 129),
-                child: Container(
+                child: SizedBox(
                   // color: Color.fromARGB(255, 148, 148, 148),
                   width: double.infinity,
-                  child: Text("asdf"),
                   height: MediaQuery.of(context).size.height + 200,
+                  child: const Text("asdf"),
                 ),
               ),
             ),
@@ -64,18 +64,24 @@ class ListRows extends StatelessWidget {
           Navigator.of(context).pushNamed(Routes.productDetail);
         },
         child: Padding(
-          padding: const EdgeInsets.all(15),
+          padding: const EdgeInsets.all(8),
           child: Row(
             children: [
               Expanded(
                 flex: 1,
                 child: Container(
-                  color: Colors.green,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color.fromARGB(255, 207, 207, 207),
+                    ),
+                  ),
+                  height: 120,
+                  // color: Colors.grey,
                   // width: double.infinity,
                   // height: double.infinity,
                   child: Image.network(
                     products[index].imageUrl,
-                    fit: BoxFit.cover,
+                    // fit: BoxFit.cover,
                   ),
                 ),
               ),

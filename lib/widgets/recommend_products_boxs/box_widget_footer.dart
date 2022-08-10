@@ -55,7 +55,13 @@ class BoxItemFooter extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Starts(),
+                  // Text(
+                  //   "¥$price",
+                  //   style: const TextStyle(
+                  //     color: Colors.amber,
+                  //     fontSize: 18,
+                  //   ),
+                  // ),
                   Container(
                     alignment: Alignment.bottomLeft,
                     color: Colors.red,
@@ -79,51 +85,6 @@ class BoxItemFooter extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class Starts extends StatelessWidget {
-  const Starts({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: const [
-        Icon(
-          Icons.star,
-          color: Color.fromARGB(255, 238, 171, 70),
-          size: 16,
-        ),
-        Icon(
-          Icons.star,
-          color: Color.fromARGB(255, 238, 171, 70),
-          size: 16,
-        ),
-        Icon(
-          Icons.star,
-          color: Color.fromARGB(255, 238, 171, 70),
-          size: 16,
-        ),
-        Icon(
-          Icons.star_half,
-          color: Color.fromARGB(255, 238, 171, 70),
-          size: 16,
-        ),
-        Icon(
-          Icons.star_outline,
-          color: Color.fromARGB(255, 238, 171, 70),
-          size: 16,
-        ),
-        Text(
-          "123",
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ],
     );
   }
 }

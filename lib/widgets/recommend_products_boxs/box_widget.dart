@@ -34,12 +34,15 @@ class BoxItem extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   height: 600,
-                  child: Image.network(
-                    imageUrl,
-                    fit: BoxFit.cover,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Image.network(
+                      imageUrl,
+                      fit: BoxFit.scaleDown,
+                    ),
                   ),
                 ),
-                BoxItemHeader(w: w, price: price),
+                // BoxItemHeader(w: w, price: price),
                 BoxItemFooter(
                   boxWidth: w,
                   productTitle: productTitle,

@@ -6,16 +6,14 @@ final List<ProductsModel> products = [
     title: 'Beginning Flutter With Dart',
     description: 'You can learn Flutter as well Dart.',
     price: 9.99,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2014/09/05/18/32/old-ProductsModels-436498_960_720.jpg',
+    imageUrl: 'https://m.media-amazon.com/images/I/515myPUnjaL._AC_SL1500_.jpg',
   ),
   ProductsModel(
     id: 'p2',
     title: 'Flutter State Management',
     description: 'Everything you should know about Flutter State.',
     price: 9.99,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2016/09/10/17/18/ProductsModel-1659717_960_720.jpg',
+    imageUrl: 'https://m.media-amazon.com/images/I/719F0Zu9veL._AC_SL1500_.jpg',
   ),
   ProductsModel(
     id: 'p3',
@@ -23,16 +21,14 @@ final List<ProductsModel> products = [
     description:
         'WordPress coding is not difficult, in fact it is interesting.',
     price: 9.99,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_960_720.jpg',
+    imageUrl: 'https://m.media-amazon.com/images/I/61BUt5ZErdL._AC_SL1500_.jpg',
   ),
   ProductsModel(
     id: 'p4',
     title: 'PHP 8 Standard Library',
     description: 'PHP 8 Standard Library has made developers life easier.',
     price: 9.99,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2015/09/05/21/51/reading-925589_960_720.jpg',
+    imageUrl: 'https://m.media-amazon.com/images/I/318PGlVm7xL._AC_.jpg',
   ),
   // ProductsModel(
   //   id: 'p5',

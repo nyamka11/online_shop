@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/_constants.dart';
-import '../widgets/CategoryBoxs/cat_view.dart';
-import '../widgets/_Common/box_custom.dart';
-import '../widgets/_Common/layout_template.dart';
-import '../widgets/RecommendProductsBoxs/box_view.dart';
+import '../widgets/_common/layout_template.dart';
+import '../widgets/category_boxs/category_view.dart';
+import '../widgets/recommend_products_boxs/box_view.dart';
 import '../widgets/link.dart';
 import '../widgets/slider.dart';
 
@@ -142,27 +141,25 @@ class TextBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(children: [
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.35,
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Text(textStr),
-            ),
+    return Row(children: [
+      SizedBox(
+        width: MediaQuery.of(context).size.width * 0.35,
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Text(textStr),
           ),
         ),
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.35,
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Text(textStr),
-            ),
+      ),
+      SizedBox(
+        width: MediaQuery.of(context).size.width * 0.35,
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Text(textStr),
           ),
         ),
-      ]),
-    );
+      ),
+    ]);
   }
 }

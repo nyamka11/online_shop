@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/_Common/layout_template.dart';
+import '../widgets/_common/layout_template.dart';
 import '../_constants.dart';
 
 class ProductsDetail extends StatelessWidget {
@@ -12,7 +12,7 @@ class ProductsDetail extends StatelessWidget {
       body: SizedBox(
         height: MediaQuery.of(context).size.height - Common.footerHeigth,
         width: double.infinity,
-        child: Text("aa"),
+        child: const Text("aa"),
       ),
     );
   }

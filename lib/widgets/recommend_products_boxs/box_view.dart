@@ -13,7 +13,7 @@ class BoxView extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       // alignment: Alignment.center,
-      color: Color.fromARGB(255, 231, 230, 230),
+      color: Colors.white,
       width: double.infinity,
       child: Column(
         children: [
@@ -28,8 +28,8 @@ class BoxView extends StatelessWidget {
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 350,
                 childAspectRatio: 0.9,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
               ),
               itemCount: products.length,
               itemBuilder: (BuildContext ctx, index) {
