@@ -15,7 +15,7 @@ class MainLayoutTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var currenWidth = MediaQuery.of(context).size.width;
-    print(currenWidth);
+    // print(currenWidth);
 
     double w = 0;
     if (currenWidth > 3800) {
