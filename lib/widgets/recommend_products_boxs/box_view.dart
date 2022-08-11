@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../data/productData.dart';
-import './box_item.dart';
+import '../../data/product_data.dart';
+import './box_widget.dart';
 
 class BoxView extends StatelessWidget {
   final productDatas = products;
@@ -22,25 +22,23 @@ class BoxView extends StatelessWidget {
             style: TextStyle(fontSize: 20),
           ),
           const SizedBox(height: 20),
-          SizedBox(
-            height: 360,
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 350,
-                childAspectRatio: 0.9,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-              ),
-              itemCount: products.length,
-              itemBuilder: (BuildContext ctx, index) {
-                return BoxItem(
-                  imageUrl: products[index].imageUrl,
-                  productTitle: products[index].title,
-                  productDescription: products[index].description,
-                  price: products[index].price.toString(),
-                );
-              },
+          GridView.builder(
+            shrinkWrap: true,
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 350,
+              childAspectRatio: 0.9,
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
             ),
+            itemCount: products.length,
+            itemBuilder: (BuildContext ctx, index) {
+              return BoxWidget(
+                imageUrl: products[index].imageUrl,
+                productTitle: products[index].title,
+                productDescription: products[index].description,
+                price: products[index].price.toString(),
+              );
+            },
           ),
         ],
       ),

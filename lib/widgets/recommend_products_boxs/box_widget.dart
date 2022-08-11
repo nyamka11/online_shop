@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/_routers.dart';
-import 'package:online_shop/widgets/_Common/box_custom.dart';
+import 'package:online_shop/widgets/_common/box_custom.dart';
+import 'box_widget_footer.dart';
 
-import 'box_item_footer.dart';
-import 'box_item_header.dart';
-
-class BoxItem extends StatelessWidget {
+class BoxWidget extends StatelessWidget {
   final String imageUrl;
   final String productTitle;
   final String productDescription;
   final String price;
 
-  const BoxItem({
+  const BoxWidget({
     super.key,
     required this.imageUrl,
     required this.productTitle,
@@ -28,12 +26,12 @@ class BoxItem extends StatelessWidget {
           onTap: () {
             Navigator.of(context).pushNamed(Routes.productList);
           },
-          child: BoxCustom(
+          child: BoxCustomWidget(
             child: Stack(
               children: [
                 SizedBox(
                   width: double.infinity,
-                  height: 600,
+                  // height: 600,
                   child: Padding(
                     padding: const EdgeInsets.all(15),
                     child: Image.network(
@@ -42,8 +40,7 @@ class BoxItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                // BoxItemHeader(w: w, price: price),
-                BoxItemFooter(
+                BoxWidgetFooter(
                   boxWidth: w,
                   productTitle: productTitle,
                   productDescription: productDescription,

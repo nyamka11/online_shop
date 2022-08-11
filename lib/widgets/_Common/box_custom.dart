@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class BoxCustom extends StatelessWidget {
+class BoxCustomWidget extends StatelessWidget {
   final double width;
   final double height;
   final Widget child;
   final Color color;
 
-  const BoxCustom({
+  const BoxCustomWidget({
     super.key,
     this.width = 100,
     this.height = 100,

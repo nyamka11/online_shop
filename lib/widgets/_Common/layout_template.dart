@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import './footer.dart';
 import './navbar.dart';
 
-class LayoutTemplate extends StatelessWidget {
+class MainLayoutTemplate extends StatelessWidget {
   final Widget body;
   final Color bgColor;
 
-  const LayoutTemplate({
+  const MainLayoutTemplate({
     super.key,
     required this.body,
     this.bgColor = const Color(0xFFecf6fa),

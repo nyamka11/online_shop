@@ -7,7 +7,7 @@ class ProductsDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutTemplate(
+    return MainLayoutTemplate(
       bgColor: Colors.black12,
       body: SizedBox(
         height: MediaQuery.of(context).size.height - Common.footerHeigth,

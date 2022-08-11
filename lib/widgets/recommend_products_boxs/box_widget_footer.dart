@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class BoxItemFooter extends StatelessWidget {
-  const BoxItemFooter({
+class BoxWidgetFooter extends StatelessWidget {
+  const BoxWidgetFooter({
     Key? key,
     required this.boxWidth,
     required this.productTitle,

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/_routers.dart';
-import 'package:online_shop/widgets/_Common/box_custom.dart';
+import 'package:online_shop/widgets/_common/box_custom.dart';
 
-class CatBoxItem extends StatelessWidget {
+class CatBoxWidget extends StatelessWidget {
   final Color color;
   final String name;
   final String imageUrl;
 
-  const CatBoxItem({
+  const CatBoxWidget({
     super.key,
     required this.color,
     required this.name,
@@ -23,7 +23,7 @@ class CatBoxItem extends StatelessWidget {
           onTap: () {
             Navigator.of(context).pushNamed(Routes.productList);
           },
-          child: BoxCustom(
+          child: BoxCustomWidget(
             child: Stack(
               children: [
                 SizedBox(

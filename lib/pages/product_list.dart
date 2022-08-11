@@ -8,7 +8,7 @@ class ProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutTemplate(
+    return MainLayoutTemplate(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(

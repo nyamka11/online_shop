@@ -38,10 +38,4 @@ final List<CategoryModel> categories = [
     color: Color.fromARGB(255, 201, 33, 243),
     imageUrl: 'https://m.media-amazon.com/images/I/61ZsXVg8EOL._AC_SX679_.jpg',
   ),
-  CategoryModel(
-    id: 'c7',
-    name: 'Children & Infants',
-    color: Color.fromARGB(255, 243, 135, 33),
-    imageUrl: 'https://m.media-amazon.com/images/I/61ZsXVg8EOL._AC_SX679_.jpg',
-  ),
 ];

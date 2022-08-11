@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutTemplate(
+    return MainLayoutTemplate(
       bgColor: const Color(0xFFecf6fa),
       body: Column(
         children: [
