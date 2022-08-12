@@ -22,7 +22,7 @@ class _ProductListState extends State<ProductList> {
         print(constraints.maxHeight);
 
         return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.,
           children: [
             const Padding(
               padding: EdgeInsets.all(15),
