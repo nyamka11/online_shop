@@ -26,24 +26,25 @@ class CatBoxWidget extends StatelessWidget {
           child: BoxCustomWidget(
             child: Stack(
               children: [
-                SizedBox(
+                Container(
                   width: double.infinity,
-                  height: 600,
+                  padding: const EdgeInsets.all(20),
+                  // height: 600,
                   child: Image.network(
                     imageUrl,
-                    // fit: BoxFit.cover,
+                    fit: BoxFit.scaleDown,
                   ),
                 ),
                 Positioned(
                   bottom: 0,
                   child: Container(
-                    padding: EdgeInsets.all(17),
+                    padding: const EdgeInsets.all(17),
                     height: 60,
                     width: w,
                     color: color,
                     child: Text(
                       name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 17,
                         color: Colors.white,
                       ),

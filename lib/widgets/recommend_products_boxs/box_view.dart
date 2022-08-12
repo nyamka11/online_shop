@@ -1,48 +1,47 @@
 import 'package:flutter/material.dart';
 
-import '../../data/product_data.dart';
+import '../../data/recomment_data.dart';
 import './box_widget.dart';
 
 class BoxView extends StatelessWidget {
-  final productDatas = products;
+  const BoxView({super.key});
 
-  BoxView({super.key});
-
-  Widget girdViewC(BuildContext context) {
+  Widget girdViewCustom(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    return screenWidth > 880
+    return screenWidth > 1000
         ? GridView.count(
             shrinkWrap: true,
             primary: false,
             padding: const EdgeInsets.all(20),
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
-            crossAxisCount: 3,
+            crossAxisCount: 4,
             children: List.generate(
-              products.length,
+              recommentProducts.length,
               (index) => BoxWidget(
-                imageUrl: products[index].imageUrl,
-                productTitle: products[index].title,
-                productDescription: products[index].description,
-                price: products[index].price.toString(),
+                imageUrl: recommentProducts[index].imageUrl,
+                productTitle: recommentProducts[index].title,
+                productDescription: recommentProducts[index].description,
+                price: recommentProducts[index].price,
               ),
             ),
           )
         : GridView.builder(
             shrinkWrap: true,
+            padding: const EdgeInsets.all(20),
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 350,
               childAspectRatio: 0.9,
               crossAxisSpacing: 20,
               mainAxisSpacing: 20,
             ),
-            itemCount: products.length,
+            itemCount: recommentProducts.length,
             itemBuilder: (BuildContext ctx, index) {
               return BoxWidget(
-                imageUrl: products[index].imageUrl,
-                productTitle: products[index].title,
-                productDescription: products[index].description,
-                price: products[index].price.toString(),
+                imageUrl: recommentProducts[index].imageUrl,
+                productTitle: recommentProducts[index].title,
+                productDescription: recommentProducts[index].description,
+                price: recommentProducts[index].price,
               );
             },
           );
@@ -57,12 +56,12 @@ class BoxView extends StatelessWidget {
       width: double.infinity,
       child: Column(
         children: [
+          const SizedBox(height: 20),
           const Text(
             "今月のお勧め商品",
             style: TextStyle(fontSize: 20),
           ),
-          const SizedBox(height: 20),
-          girdViewC(context),
+          girdViewCustom(context),
         ],
       ),
     );

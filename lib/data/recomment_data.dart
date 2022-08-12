@@ -1,6 +1,6 @@
 import '../models/product.dart';
 
-final List<ProductsModel> products = [
+final List<ProductsModel> recommentProducts = [
   ProductsModel(
     id: 'p1',
     title: 'Beginning Flutter With Dart',
@@ -29,31 +29,5 @@ final List<ProductsModel> products = [
     description: 'PHP 8 Standard Library has made developers life easier.',
     price: 2500,
     imageUrl: 'https://m.media-amazon.com/images/I/318PGlVm7xL._AC_.jpg',
-  ),
-  ProductsModel(
-    id: 'p5',
-    title: 'Better Flutter',
-    description: 'Learn all the necessary concepts of building a Flutter App.',
-    price: 9.99,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2015/09/05/07/28/writing-923882_960_720.jpg',
-  ),
-  ProductsModel(
-    id: 'p6',
-    title: 'Discrete Mathematical Data Structures and Algorithm',
-    description:
-        'Discrete mathematical concepts are necessary to learn Data Structures and Algorithm.',
-    price: 9.99,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2015/11/19/21/14/glasses-1052023_960_720.jpg',
-  ),
-  ProductsModel(
-    id: 'p6',
-    title: 'Discrete Mathematical Data Structures and Algorithm',
-    description:
-        'Discrete mathematical concepts are necessary to learn Data Structures and Algorithm.',
-    price: 9.99,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2015/11/19/21/14/glasses-1052023_960_720.jpg',
   ),
 ];

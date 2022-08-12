@@ -7,7 +7,7 @@ class BoxWidget extends StatelessWidget {
   final String imageUrl;
   final String productTitle;
   final String productDescription;
-  final String price;
+  final double price;
 
   const BoxWidget({
     super.key,
@@ -44,6 +44,7 @@ class BoxWidget extends StatelessWidget {
                   boxWidth: w,
                   productTitle: productTitle,
                   productDescription: productDescription,
+                  price: price,
                 ),
               ],
             ),

@@ -7,6 +7,45 @@ class CategoriesView extends StatelessWidget {
 
   final categoriesData = categories;
 
+  Widget girdViewCustom(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    return screenWidth > 1000
+        ? GridView.count(
+            shrinkWrap: true,
+            primary: false,
+            padding: const EdgeInsets.all(20),
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            crossAxisCount: 3,
+            children: List.generate(
+              categories.length,
+              (index) => CatBoxWidget(
+                color: categories[index].color,
+                name: categories[index].name,
+                imageUrl: categories[index].imageUrl,
+              ),
+            ),
+          )
+        : GridView.builder(
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(20),
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 350,
+              childAspectRatio: 0.9,
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
+            ),
+            itemCount: categories.length,
+            itemBuilder: (BuildContext ctx, index) {
+              return CatBoxWidget(
+                color: categories[index].color,
+                name: categories[index].name,
+                imageUrl: categories[index].imageUrl,
+              );
+            },
+          );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,24 +57,7 @@ class CategoriesView extends StatelessWidget {
             "カテゴリー",
             style: TextStyle(fontSize: 20),
           ),
-          const SizedBox(height: 20),
-          GridView.builder(
-            shrinkWrap: true,
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 360,
-              childAspectRatio: 1,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-            ),
-            itemCount: categories.length,
-            itemBuilder: (BuildContext ctx, index) {
-              return CatBoxWidget(
-                color: categories[index].color,
-                name: categories[index].name,
-                imageUrl: categories[index].imageUrl,
-              );
-            },
-          ),
+          girdViewCustom(context)
         ],
       ),
     );

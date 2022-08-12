@@ -3,49 +3,146 @@ import 'package:online_shop/data/product_data.dart';
 import '../widgets/_common/layout_template.dart';
 import '../_routers.dart';
 
-class ProductList extends StatelessWidget {
-  const ProductList({super.key});
+class ProductList extends StatefulWidget {
+  ProductList({super.key});
+
+  @override
+  State<ProductList> createState() => _ProductListState();
+}
+
+class _ProductListState extends State<ProductList> {
+  String dropdownValue = 'One';
+
+  final List<String> list = ['One', 'Two', 'Free', 'Four'];
 
   @override
   Widget build(BuildContext context) {
     return MainLayoutTemplate(
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
+      body: LayoutBuilder(builder: (context, constraints) {
+        print(constraints.maxHeight);
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              flex: 7,
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height + 200,
-                // width: double.infinity,
-                // width: MediaQuery.of(context).size.width * 0.50,
-                child: ListView.builder(
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListRows(
-                      index: index,
-                      ctx: context,
-                    );
-                  },
-                  itemCount: products.length,
+            const Padding(
+              padding: EdgeInsets.all(15),
+              child: Text("以下の高品は、正会員の登録をすると購入できます。"),
+            ),
+            Container(
+              margin: EdgeInsets.all(6),
+              padding: EdgeInsets.all(6),
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    const SizedBox(width: 20),
+                    const Text("カテゴリ"),
+                    const SizedBox(width: 20),
+                    const Text("条件 : "),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      padding: EdgeInsets.only(left: 8, right: 8),
+                      // margin: EdgeInsets.all(8),
+                      // color: Colors.white,
+                      width: 200,
+                      height: 35,
+                      child: DropdownButton(
+                        underline: SizedBox(),
+                        value: dropdownValue,
+                        items: list
+                            .map(
+                              (value) => DropdownMenuItem(
+                                value: value,
+                                child: Text(value),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            dropdownValue = newValue!;
+                          });
+                        },
+                        isExpanded: true,
+                      ),
+                    ),
+                    const SizedBox(width: 20),
+                    const Text("バッチ : "),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      padding: EdgeInsets.only(left: 8, right: 8),
+                      // margin: EdgeInsets.all(8),
+                      // color: Colors.white,
+                      width: 200,
+                      height: 35,
+                      child: DropdownButton(
+                        underline: SizedBox(),
+                        value: dropdownValue,
+                        items: list
+                            .map(
+                              (value) => DropdownMenuItem(
+                                value: value,
+                                child: Text(value),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            dropdownValue = newValue!;
+                          });
+                        },
+                        isExpanded: true,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-            Expanded(
-              flex: 2,
-              child: Card(
-                elevation: 3,
-                // color: Color.fromARGB(255, 129, 129, 129),
-                child: SizedBox(
-                  // color: Color.fromARGB(255, 148, 148, 148),
-                  width: double.infinity,
-                  height: MediaQuery.of(context).size.height + 200,
-                  child: const Text("asdf"),
+            Row(
+              children: [
+                Expanded(
+                  flex: 7,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListRows(
+                        index: index,
+                        ctx: context,
+                      );
+                    },
+                    itemCount: products.length,
+                  ),
                 ),
-              ),
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    color: Colors.grey,
+                    child: Column(
+                      children: [
+                        Flexible(
+                          flex: 3,
+                          child: Container(color: Colors.amber),
+                        ),
+                        Flexible(
+                          flex: 5,
+                          child: Container(color: Colors.green),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
-        ),
-      ),
+        );
+      }),
     );
   }
 }
