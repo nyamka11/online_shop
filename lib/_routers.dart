@@ -1,5 +1,6 @@
 class Routes {
   static const String homePage = "/";
-  static const String productList = "/productList";
-  static const String productDetail = "/productDetail";
+  static const String productListPage = "/productListPage";
+  static const String productDetailPage = "/productDetailPage";
+  static const String shopingCartPage = "/shopingCartPage";
 }

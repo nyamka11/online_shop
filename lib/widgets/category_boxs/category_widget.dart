@@ -21,7 +21,7 @@ class CatBoxWidget extends StatelessWidget {
         double w = costraints.maxWidth;
         return InkWell(
           onTap: () {
-            Navigator.of(context).pushNamed(Routes.productList);
+            Navigator.of(context).pushNamed(Routes.productListPage);
           },
           child: BoxCustomWidget(
             child: Stack(

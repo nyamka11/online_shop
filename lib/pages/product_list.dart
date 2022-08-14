@@ -3,14 +3,14 @@ import 'package:online_shop/data/product_data.dart';
 import '../widgets/_common/layout_template.dart';
 import '../_routers.dart';
 
-class ProductList extends StatefulWidget {
-  ProductList({super.key});
+class ProductListPage extends StatefulWidget {
+  ProductListPage({super.key});
 
   @override
-  State<ProductList> createState() => _ProductListState();
+  State<ProductListPage> createState() => _ProductListPageState();
 }
 
-class _ProductListState extends State<ProductList> {
+class _ProductListPageState extends State<ProductListPage> {
   String dropdownValue = 'One';
 
   final List<String> list = ['One', 'Two', 'Free', 'Four'];
@@ -158,7 +158,7 @@ class ListRows extends StatelessWidget {
       elevation: 3,
       child: InkWell(
         onTap: () {
-          Navigator.of(context).pushNamed(Routes.productDetail);
+          Navigator.of(context).pushNamed(Routes.productDetailPage);
         },
         child: Padding(
           padding: const EdgeInsets.all(8),

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../widgets/_common/layout_template.dart';
 import '../_constants.dart';
 
-class ProductsDetail extends StatelessWidget {
-  const ProductsDetail({super.key});
+class ProductsDetailPage extends StatelessWidget {
+  const ProductsDetailPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/pages/home_page.dart';
 import 'package:online_shop/pages/product_detail.dart';
+import 'package:online_shop/provider/shoping_cart_provider.dart';
+import 'package:provider/provider.dart';
 
 import '_routers.dart';
 import 'pages/product_list.dart';
+import 'pages/shoping_cart.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => ShopingCart(),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -21,10 +33,12 @@ class MyApp extends StatelessWidget {
         textTheme: Theme.of(context).textTheme.apply(fontFamily: "Open Sans"),
       ),
       // home: HomePage(),
+      initialRoute: Routes.homePage,
       routes: {
         Routes.homePage: (context) => const HomePage(),
-        Routes.productDetail: (context) => const ProductsDetail(),
-        Routes.productList: (context) => ProductList(),
+        Routes.productDetailPage: (context) => const ProductsDetailPage(),
+        Routes.productListPage: (context) => ProductListPage(),
+        Routes.shopingCartPage: (context) => ShopingCartPage()
       },
     );
   }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/_constants.dart';
 import 'package:online_shop/_routers.dart';
+import 'package:provider/provider.dart';
+
+import '../../provider/shoping_cart_provider.dart';
 
 class Navbar extends StatelessWidget {
   const Navbar({super.key});
@@ -10,81 +13,21 @@ class Navbar extends StatelessWidget {
     var currentWidth = MediaQuery.of(context).size.width;
 
     return Container(
-      color: Color.fromARGB(255, 218, 247, 221),
+      color: const Color.fromARGB(255, 218, 247, 221),
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Stack(
-              //   children: [
-              //     Container(
-              //       // color: Colors.red,
-              //       height: 100,
-              //       width: 500,
-              //     ),
-              //     Positioned(
-              //       left: 10,
-              //       child: Container(
-              //         height: 100,
-              //         width: 120,
-              //         child: Image.asset(
-              //             "/images/header/tree-g6de875e39_1280.png"),
-              //       ),
-              //     ),
-              //     Positioned(
-              //       left: 100,
-              //       child: Container(
-              //         height: 115,
-              //         width: 200,
-              //         child: Image.asset(
-              //             "/images/header/flower-g26ed6245e_1920-1.png"),
-              //       ),
-              //     ),
-              //     Positioned(
-              //       left: 265,
-              //       child: Container(
-              //         height: 105,
-              //         width: 200,
-              //         child: Image.asset("/images/header/title1_03.png"),
-              //       ),
-              //     )
-              //   ],
-              // ),
-              Container(
+              SizedBox(
                 height: 100,
                 width: 120,
                 child: Image.asset("/images/header/logo.png"),
               ),
-              // Stack(
-              //   children: [
-              //     Container(
-              //       // color: Colors.red,
-              //       height: 100,
-              //       width: 500,
-              //     ),
-              //     Positioned(
-              //       right: 10,
-              //       child: Container(
-              //         height: 110,
-              //         width: 140,
-              //         child: Image.asset("/images/header/title1_01.png"),
-              //       ),
-              //     ),
-              //     Positioned(
-              //       right: 160,
-              //       child: Container(
-              //         height: 110,
-              //         width: 140,
-              //         child: Image.asset("/images/header/title1_02.png"),
-              //       ),
-              //     ),
-              //   ],
-              // ),
             ],
           ),
           Container(
-            color: Color.fromARGB(221, 12, 12, 12),
+            color: const Color.fromARGB(221, 12, 12, 12),
             height: 50,
             child: currentWidth < 870 ? const SmallScreen() : const BigScreen(),
           ),
@@ -166,25 +109,69 @@ class BigScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final shopingCard = Provider.of<ShopingCart>(context);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
-      children: Common.pageNemas
-          .map(
-            (item) => TextButton(
-              style: TextButton.styleFrom(
-                textStyle: TextStyle(fontSize: Common.navbarFontSize),
-                padding: const EdgeInsets.only(right: 30, left: 30),
+      children: [
+        ...Common.pageNemas
+            .map(
+              (item) => TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: TextStyle(fontSize: Common.navbarFontSize),
+                  padding: const EdgeInsets.only(right: 30, left: 30),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(Routes.homePage);
+                },
+                child: Text(
+                  item,
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
-              onPressed: () {
-                Navigator.of(context).pushNamed(Routes.homePage);
-              },
-              child: Text(
-                item,
-                style: const TextStyle(color: Colors.white),
+            )
+            .toList(),
+        InkWell(
+          onTap: () {
+            Navigator.of(context).pushNamed(Routes.shopingCartPage);
+          },
+          child: Stack(
+            children: [
+              Container(
+                height: 100,
+                width: 70,
+                color: Colors.white,
+                child: const IconButton(
+                  onPressed: null,
+                  icon: Icon(
+                    Icons.shopping_cart,
+                    color: Color.fromARGB(255, 126, 44, 71),
+                    size: 30,
+                  ),
+                ),
               ),
-            ),
-          )
-          .toList(),
+              Positioned(
+                right: 0,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: Colors.red,
+                  ),
+                  child: Text(
+                    shopingCard.count.toString(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+        SizedBox(width: 30)
+      ],
     );
   }
 }

@@ -1,15 +1,17 @@
-class ProductsModel {
+class ProductModel {
   final String id;
   final String title;
   final String description;
   final double price;
   final String imageUrl;
+  late final bool isCarted;
 
-  ProductsModel({
+  ProductModel({
     required this.id,
     required this.title,
     required this.description,
     required this.price,
     required this.imageUrl,
+    this.isCarted = false,
   });
 }

@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:online_shop/provider/shoping_cart_provider.dart';
+import 'package:provider/provider.dart';
+
+import '../../models/product.dart';
 
 class BoxWidgetFooter extends StatelessWidget {
   final double boxWidth;
-  final String productTitle;
-  final String productDescription;
-  final double price;
+  final ProductModel product;
 
   const BoxWidgetFooter({
     Key? key,
     required this.boxWidth,
-    required this.productTitle,
-    required this.productDescription,
-    required this.price,
+    required this.product,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final shopingCard = Provider.of<ShopingCart>(context);
+
     return Positioned(
       bottom: 0,
       child: Container(
@@ -28,7 +30,7 @@ class BoxWidgetFooter extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(5),
               child: Text(
-                productTitle,
+                product.title,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 15,
@@ -45,7 +47,7 @@ class BoxWidgetFooter extends StatelessWidget {
                 right: 6,
               ),
               child: Text(
-                productDescription,
+                product.description,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 13,
@@ -61,21 +63,28 @@ class BoxWidgetFooter extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "¥$price",
+                    "¥${product.price}",
                     style: const TextStyle(
                       color: Colors.amber,
                       fontSize: 18,
                       fontFamily: "OpenSans",
                     ),
                   ),
-                  MaterialButton(
-                    color: Colors.red,
-                    onPressed: () {},
-                    textColor: Colors.white,
-                    child: Icon(
-                      Icons.shopping_cart_outlined,
+                  Tooltip(
+                    message: "Add to cart",
+                    height: 30,
+                    // verticalOffset: ,
+                    child: MaterialButton(
+                      color: Colors.red,
+                      onPressed: () => {
+                        shopingCard.addItem(product),
+                      },
+                      textColor: Colors.white,
+                      child: Icon(
+                        Icons.shopping_cart_outlined,
+                      ),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
