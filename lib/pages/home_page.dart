@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/_constants.dart';
 import '../widgets/_common/layout_template.dart';
-import '../widgets/category_boxs/category_view.dart';
-import '../widgets/recommend_products_boxs/box_view.dart';
+import '../widgets/category_boxs/view.dart';
+import '../widgets/recommend_products_boxs/view.dart';
 import '../widgets/link.dart';
 import '../widgets/slider.dart';
 

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/pages/home_page.dart';
-import 'package:online_shop/pages/product_detail.dart';
+import 'package:online_shop/pages/product_detail/view.dart';
 import 'package:online_shop/provider/shoping_cart_provider.dart';
 import 'package:provider/provider.dart';
 
 import '_routers.dart';
-import 'pages/product_list.dart';
+import 'pages/product_list/view.dart';
 import 'pages/shoping_cart.dart';
 
 void main() {
