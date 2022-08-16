@@ -19,8 +19,8 @@ class BoxWidget extends StatelessWidget {
         double w = costraints.maxWidth;
         return InkWell(
           onTap: () {
-            Navigator.of(context).pushNamed(Routes.productDetailPage,
-                arguments: {"ProductItem": productItem});
+            Navigator.of(context)
+                .pushNamed(Routes.productDetailPage, arguments: productItem);
           },
           child: BoxCustomWidget(
             child: Stack(

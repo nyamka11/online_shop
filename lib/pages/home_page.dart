@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
         children: [
           SlideBar(),
           const SizedBox(height: Common.lineHeightSpacer),
-          BoxView(),
+          const BoxView(),
           const SizedBox(height: Common.lineHeightSpacer),
           CategoriesView(),
           const SizedBox(height: Common.lineHeightSpacer),
