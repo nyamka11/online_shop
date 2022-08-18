@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/widgets/right_window/view.dart';
+import 'package:provider/provider.dart';
 import '../../models/product.dart';
+import '../../provider/shoping_cart_provider.dart';
 import '../../widgets/_common/layout_template.dart';
-import '../../_constants.dart';
 
 class ProductsDetailPage extends StatelessWidget {
   const ProductsDetailPage({super.key});
@@ -13,8 +14,10 @@ class ProductsDetailPage extends StatelessWidget {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.of(context).pushNamed('/');
       });
-      return Container(); //BUILD SOMETHING
+      return Container();
     }
+
+    final shopingCard = Provider.of<ShopingCart>(context);
 
     final productItem =
         ModalRoute.of(context)!.settings.arguments as ProductModel;
@@ -32,20 +35,29 @@ class ProductsDetailPage extends StatelessWidget {
                 width: constraints.maxWidth * 0.75,
                 child: Column(
                   children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Column(
                       children: [
-                        BigPicFrame(
-                          productItem: productItem,
-                          constWidth: constraints.maxWidth,
-                        ),
-                        BasicInfo(productItem: productItem),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SmallPicsFrame(productItem: productItem),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Column(
+                              children: [
+                                PictureLayout(
+                                  productItem: productItem,
+                                  constWidth: constraints.maxWidth,
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                BasicInfo(
+                                  productItem: productItem,
+                                  constWidth: constraints.maxWidth,
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
                       ],
                     ),
                     Row(
@@ -57,7 +69,7 @@ class ProductsDetailPage extends StatelessWidget {
                           height: 35,
                           child: ElevatedButton.icon(
                             onPressed: () {
-                              //タップ時の処理
+                              shopingCard.addItem(productItem);
                             },
                             icon: const Icon(Icons.add_shopping_cart_outlined),
                             label: const Text('カートに入れる'),
@@ -117,13 +129,11 @@ class ProductsDetailPage extends StatelessWidget {
                   ],
                 ),
               ),
-
               Container(
                 padding: const EdgeInsets.all(10),
                 width: constraints.maxWidth * 0.25,
                 child: const RightWindow(),
               ),
-              // Image.network(productItem.imageUrl),
             ],
           ),
         ),
@@ -132,72 +142,76 @@ class ProductsDetailPage extends StatelessWidget {
   }
 }
 
-class SmallPicsFrame extends StatelessWidget {
-  const SmallPicsFrame({
+class PictureLayout extends StatefulWidget {
+  final ProductModel productItem;
+  final double constWidth;
+
+  const PictureLayout({
     Key? key,
     required this.productItem,
+    required this.constWidth,
   }) : super(key: key);
 
-  final ProductModel productItem;
+  @override
+  State<PictureLayout> createState() => _PictureLayoutState();
+}
+
+class _PictureLayoutState extends State<PictureLayout> {
+  String bigFrameImageUrl = "";
+
+  @override
+  void initState() {
+    super.initState();
+    bigFrameImageUrl = widget.productItem.imageUrl;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        InkWell(
-          onTap: () {
-            print("asdfa");
-          },
-          child: Container(
-            padding: const EdgeInsets.all(2),
-            margin: const EdgeInsets.all(10),
-            width: 100,
-            height: 100,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(
-                color: const Color.fromARGB(255, 146, 146, 146),
-              ),
-            ),
-            child: Image.network(productItem.imageUrl),
+        Container(
+          padding: const EdgeInsets.all(5),
+          margin: const EdgeInsets.only(
+            right: 10,
+            top: 10,
+            left: 10,
           ),
-        ),
-        InkWell(
-          onTap: () {
-            print("asdfa");
-          },
-          child: Container(
-            padding: const EdgeInsets.all(2),
-            margin: const EdgeInsets.all(10),
-            width: 100,
-            height: 100,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(
-                color: const Color.fromARGB(255, 146, 146, 146),
-              ),
+          width: widget.constWidth * 0.7 / 2,
+          height: widget.constWidth * 0.7 / 2,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(
+              color: const Color.fromARGB(255, 146, 146, 146),
             ),
-            child: Image.network(productItem.imageUrl),
           ),
+          child: Image.network(bigFrameImageUrl),
         ),
-        InkWell(
-          onTap: () {
-            print("asdfa");
-          },
-          child: Container(
-            padding: const EdgeInsets.all(2),
-            margin: const EdgeInsets.all(10),
-            width: 100,
-            height: 100,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(
-                color: const Color.fromARGB(255, 146, 146, 146),
+        Row(
+          children: [
+            ...widget.productItem.morePics.map(
+              (path) => InkWell(
+                onTap: () {
+                  setState(() {
+                    bigFrameImageUrl = path;
+                  });
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(2),
+                  margin: const EdgeInsets.all(10),
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                      color: const Color.fromARGB(255, 146, 146, 146),
+                    ),
+                  ),
+                  child: Image.network(path),
+                ),
               ),
-            ),
-            child: Image.network(productItem.imageUrl),
-          ),
-        ),
+            )
+          ],
+        )
       ],
     );
   }
@@ -207,13 +221,16 @@ class BasicInfo extends StatelessWidget {
   const BasicInfo({
     Key? key,
     required this.productItem,
+    required this.constWidth,
   }) : super(key: key);
 
   final ProductModel productItem;
+  final double constWidth;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: (constWidth * 0.7) / 2 + 38,
       padding: const EdgeInsets.all(8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -221,6 +238,7 @@ class BasicInfo extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             productItem.title,
+            softWrap: true,
             style: const TextStyle(
               fontFamily: "OpenSans",
               fontSize: 25,
@@ -230,7 +248,7 @@ class BasicInfo extends StatelessWidget {
           const Text("新着/お勧め"),
           const SizedBox(height: 20),
           Text(
-            "単価 ${productItem.price}¥",
+            "単価 ${productItem.total}¥",
             style: const TextStyle(
               fontFamily: "OpenSans",
               fontSize: 20,
@@ -298,38 +316,6 @@ class BasicInfo extends StatelessWidget {
           )
         ],
       ),
-    );
-  }
-}
-
-class BigPicFrame extends StatelessWidget {
-  const BigPicFrame({
-    Key? key,
-    required this.productItem,
-    required this.constWidth,
-  }) : super(key: key);
-
-  final ProductModel productItem;
-  final double constWidth;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(5),
-      margin: const EdgeInsets.only(
-        right: 10,
-        top: 10,
-        left: 10,
-      ),
-      width: constWidth * 0.7 / 2,
-      height: constWidth * 0.7 / 2,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(
-          color: const Color.fromARGB(255, 146, 146, 146),
-        ),
-      ),
-      child: Image.network(productItem.imageUrl),
     );
   }
 }

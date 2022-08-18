@@ -1,23 +1,104 @@
 import 'package:flutter/material.dart';
 
+import '../../_constants.dart';
+
 class Footer extends StatelessWidget {
   const Footer({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.black54,
+      color: Color.fromARGB(221, 31, 31, 31),
       width: double.infinity,
       height: 200,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: const [
-          Text(
-            "aaaasdfasdfasdf\nasdfasfasdfasddaaaasdfasdfasdf\nasdfasfasdfasddaaaasdfasdfasdf\nasdfasfasdfasdd",
-            style: TextStyle(color: Colors.white),
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            flex: 6,
+            child: Container(
+              child: Column(
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    "会社名: XXXXXXXXXXXXXXXX",
+                    style: TextStyle(
+                      color: Colors.amberAccent,
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    "住所: XXXXXXXXXXXXXXXX",
+                    style: TextStyle(
+                      color: Colors.amberAccent,
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    "電話番号: XXXXXXXXXXXXXXXX",
+                    style: TextStyle(
+                      color: Colors.amberAccent,
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    "Fax番号: XXXXXXXXXXXXXXXX",
+                    style: TextStyle(
+                      color: Colors.amberAccent,
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    "お問い合わせ対応時間: XXXXXXXXXXXXXXXX",
+                    style: TextStyle(
+                      color: Colors.amberAccent,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-          Text("aaa"),
-          Text("aaa"),
+          Expanded(
+            flex: 1,
+            child: Container(
+              color: Colors.amber,
+              child: Image.asset("/images/header/logo.png"),
+            ),
+          ),
+          Expanded(
+            flex: 6,
+            child: Row(
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ...Common.pageNemas.map(
+                  (e) => Row(
+                    children: [
+                      Container(
+                        height: 15,
+                        width: 2,
+                        color: Colors.amber,
+                        margin: EdgeInsets.all(15),
+                      ),
+                      Text(
+                        e,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 15,
+                  width: 2,
+                  color: Colors.amber,
+                  margin: EdgeInsets.all(15),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

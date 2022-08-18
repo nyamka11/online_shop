@@ -131,45 +131,45 @@ class BigScreen extends StatelessWidget {
               ),
             )
             .toList(),
-        InkWell(
-          onTap: () {
-            Navigator.of(context).pushNamed(Routes.shopingCartPage);
-          },
-          child: Stack(
-            children: [
-              Container(
-                height: 100,
-                width: 70,
-                color: Colors.white,
-                child: const IconButton(
-                  onPressed: null,
-                  icon: Icon(
-                    Icons.shopping_cart,
-                    color: Color.fromARGB(255, 126, 44, 71),
-                    size: 30,
-                  ),
-                ),
-              ),
-              Positioned(
-                right: 0,
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: Colors.red,
-                  ),
-                  child: Text(
-                    shopingCard.count.toString(),
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
+        // InkWell(
+        //   onTap: () {
+        //     Navigator.of(context).pushNamed(Routes.shopingCartPage);
+        //   },
+        //   child: Stack(
+        //     children: [
+        //       Container(
+        //         height: 100,
+        //         width: 70,
+        //         color: Colors.white,
+        //         child: const IconButton(
+        //           onPressed: null,
+        //           icon: Icon(
+        //             Icons.shopping_cart,
+        //             color: Color.fromARGB(255, 126, 44, 71),
+        //             size: 30,
+        //           ),
+        //         ),
+        //       ),
+        //       Positioned(
+        //         right: 0,
+        //         child: Container(
+        //           padding:
+        //               const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
+        //           decoration: BoxDecoration(
+        //             borderRadius: BorderRadius.circular(50),
+        //             color: Colors.red,
+        //           ),
+        //           child: Text(
+        //             shopingCard.count.toString(),
+        //             style: const TextStyle(
+        //               color: Colors.white,
+        //             ),
+        //           ),
+        //         ),
+        //       )
+        //     ],
+        //   ),
+        // ),
         SizedBox(width: 30)
       ],
     );

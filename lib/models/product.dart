@@ -2,16 +2,20 @@ class ProductModel {
   final String id;
   final String title;
   final String description;
-  final double price;
   final String imageUrl;
-  late final bool isCarted;
+  final List morePics;
+  final double total;
+  final double tax;
+  final double totalIncludingTax;
 
   ProductModel({
     required this.id,
     required this.title,
     required this.description,
-    required this.price,
     required this.imageUrl,
-    this.isCarted = false,
+    required this.morePics,
+    required this.total,
+    required this.tax,
+    required this.totalIncludingTax,
   });
 }

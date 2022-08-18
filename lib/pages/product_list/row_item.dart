@@ -18,7 +18,8 @@ class ListRows extends StatelessWidget {
       elevation: 3,
       child: InkWell(
         onTap: () {
-          Navigator.of(context).pushNamed(Routes.productDetailPage);
+          Navigator.of(context)
+              .pushNamed(Routes.productDetailPage, arguments: products[index]);
         },
         child: Padding(
           padding: const EdgeInsets.all(8),
@@ -63,71 +64,11 @@ class ListRows extends StatelessWidget {
                       // color: Colors.red,
                       padding: EdgeInsets.all(8),
                       child: Text(
-                        "¥${products[index].price}",
+                        "¥${products[index].total}",
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
                         ),
-                      ),
-                    ),
-                    Container(
-                      // color: Colors.green,
-                      // padding: EdgeInsets.all(8),
-                      child: Row(
-                        children: const [
-                          SizedBox(width: 10),
-                          Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                            size: 24.0,
-                            semanticLabel:
-                                'Text to announce in accessibility modes',
-                          ),
-                          Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                            size: 24.0,
-                            semanticLabel:
-                                'Text to announce in accessibility modes',
-                          ),
-                          Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                            size: 24.0,
-                            semanticLabel:
-                                'Text to announce in accessibility modes',
-                          ),
-                          Icon(
-                            Icons.star_half,
-                            color: Colors.amber,
-                            size: 24.0,
-                            semanticLabel:
-                                'Text to announce in accessibility modes',
-                          ),
-                          Icon(
-                            Icons.star_border,
-                            color: Colors.amber,
-                            size: 24.0,
-                            semanticLabel:
-                                'Text to announce in accessibility modes',
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: Text("923"),
-                          ),
-                          SizedBox(width: 20),
-                          Icon(
-                            Icons.comment_outlined,
-                            color: Color.fromARGB(255, 42, 42, 41),
-                            size: 18.0,
-                            semanticLabel:
-                                'Text to announce in accessibility modes',
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: Text("230"),
-                          ),
-                        ],
                       ),
                     ),
                   ],

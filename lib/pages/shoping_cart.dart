@@ -128,7 +128,7 @@ class ListRows extends StatelessWidget {
                       // color: Colors.red,
                       padding: EdgeInsets.all(8),
                       child: Text(
-                        "¥${shopingCartList[index].price}",
+                        "¥${shopingCartList[index].total}",
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,

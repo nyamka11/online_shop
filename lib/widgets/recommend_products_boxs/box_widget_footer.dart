@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:online_shop/provider/shoping_cart_provider.dart';
-import 'package:provider/provider.dart';
 
 import '../../models/product.dart';
 
@@ -16,8 +14,6 @@ class BoxWidgetFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shopingCard = Provider.of<ShopingCart>(context);
-
     return Positioned(
       bottom: 0,
       child: Container(
@@ -63,28 +59,13 @@ class BoxWidgetFooter extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "¥${product.price}",
+                    "¥${product.total}",
                     style: const TextStyle(
                       color: Colors.amber,
                       fontSize: 18,
                       fontFamily: "OpenSans",
                     ),
                   ),
-                  Tooltip(
-                    message: "Add to cart",
-                    height: 30,
-                    // verticalOffset: ,
-                    child: MaterialButton(
-                      color: Colors.red,
-                      onPressed: () => {
-                        shopingCard.addItem(product),
-                      },
-                      textColor: Colors.white,
-                      child: Icon(
-                        Icons.shopping_cart_outlined,
-                      ),
-                    ),
-                  )
                 ],
               ),
             ),
