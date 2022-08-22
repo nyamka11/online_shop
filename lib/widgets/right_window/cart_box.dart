@@ -29,7 +29,7 @@ class CartBox extends StatelessWidget {
           ),
         ),
         Container(
-          height: 500,
+          height: 1000,
           width: double.infinity,
           decoration: const BoxDecoration(
             border: Border(
@@ -39,48 +39,49 @@ class CartBox extends StatelessWidget {
             ),
             color: Colors.white,
           ),
-          child: Column(
+          child: ListView(
+            shrinkWrap: true,
             children: [
               ...shopingCard.cartList.map(
                 (e) => Column(
                   children: [
-                    Container(
-                      width: double.infinity,
-                      margin: EdgeInsets.all(2),
-                      padding: EdgeInsets.all(5),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            e.title,
-                            textAlign: TextAlign.right,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                    Card(
+                      elevation: 3,
+                      child: Container(
+                        width: double.infinity,
+                        margin: const EdgeInsets.all(2),
+                        padding: const EdgeInsets.all(5),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              e.title,
+                              textAlign: TextAlign.right,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 3),
-                          Text("会計: ${e.total}¥"),
-                          SizedBox(height: 3),
-                          Text(
-                            "会計: ${e.tax}%",
-                            style: TextStyle(color: Colors.orange[900]),
-                          ),
-                          SizedBox(height: 3),
-                          Text(
-                            "会計: ${e.totalIncludingTax}¥ (税込)",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                            const SizedBox(height: 3),
+                            Text("会計: ${e.total}¥"),
+                            const SizedBox(height: 3),
+                            Text(
+                              "税金: ${e.tax}%",
+                              style: TextStyle(color: Colors.orange[900]),
                             ),
-                          ),
-                          SizedBox(height: 3),
-                        ],
+                            const SizedBox(height: 3),
+                            Text(
+                              "税込合計: ${e.totalIncludingTax}¥ (税込)",
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                            ),
+                            const SizedBox(height: 3),
+                          ],
+                        ),
                       ),
                     ),
-                    Divider(
-                      height: 1,
-                    )
                   ],
                 ),
               ),

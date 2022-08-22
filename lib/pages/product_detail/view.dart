@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/widgets/right_window/view.dart';
 import 'package:provider/provider.dart';
+import '../../_routers.dart';
 import '../../models/product.dart';
 import '../../provider/shoping_cart_provider.dart';
 import '../../widgets/_common/layout_template.dart';
@@ -69,7 +70,32 @@ class ProductsDetailPage extends StatelessWidget {
                           height: 35,
                           child: ElevatedButton.icon(
                             onPressed: () {
-                              shopingCard.addItem(productItem);
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext ctx) {
+                                  return AlertDialog(
+                                    title: const Text('このままお買い物をつづけますか。'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          shopingCard.addItem(productItem);
+                                          Navigator.of(context).pop();
+                                          Navigator.of(context).pushNamed(
+                                              Routes.productListPage);
+                                        },
+                                        child: const Text('買い物を続ける'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          // Close the dialog
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text('注文に進む'),
+                                      )
+                                    ],
+                                  );
+                                },
+                              );
                             },
                             icon: const Icon(Icons.add_shopping_cart_outlined),
                             label: const Text('カートに入れる'),
@@ -94,7 +120,7 @@ class ProductsDetailPage extends StatelessWidget {
                       children: [
                         Container(
                           alignment: Alignment.center,
-                          margin: EdgeInsets.only(top: 20),
+                          margin: EdgeInsets.only(top: 2),
                           height: 100,
                           color: Color.fromARGB(255, 240, 240, 240),
                           width: double.infinity,
@@ -102,27 +128,95 @@ class ProductsDetailPage extends StatelessWidget {
                         ),
                         Container(
                           alignment: Alignment.center,
-                          margin: EdgeInsets.only(top: 20),
+                          margin: EdgeInsets.only(top: 2),
                           height: 150,
                           color: Color.fromARGB(255, 240, 240, 240),
                           width: double.infinity,
-                          child: Text("TEXT"),
                         ),
                         Container(
                           alignment: Alignment.center,
-                          margin: EdgeInsets.only(top: 20),
+                          margin: EdgeInsets.only(top: 2),
                           height: 200,
                           color: Color.fromARGB(255, 240, 240, 240),
                           width: double.infinity,
-                          child: Text("TEXT"),
                         ),
                         Container(
+                          padding: const EdgeInsets.all(20),
                           alignment: Alignment.center,
-                          margin: EdgeInsets.only(top: 20),
-                          height: 200,
-                          color: Color.fromARGB(255, 192, 198, 247),
+                          margin: const EdgeInsets.only(top: 2),
+                          color: const Color.fromARGB(255, 192, 198, 247),
                           width: double.infinity,
-                          child: Text("TEXT"),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.all(4),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(Icons.recycling),
+                                    SizedBox(width: 5),
+                                    Text("地産地消"),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.all(4),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(Icons.recycling),
+                                    SizedBox(width: 5),
+                                    Text("アップサイクル商品"),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.all(4),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(Icons.recycling),
+                                    SizedBox(width: 5),
+                                    Text("オーガニック"),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.all(4),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(Icons.recycling),
+                                    SizedBox(width: 5),
+                                    Text("ビーガン商品"),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.all(4),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(Icons.recycling),
+                                    SizedBox(width: 5),
+                                    Text("寄付金"),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.all(4),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(Icons.recycling),
+                                    SizedBox(width: 5),
+                                    Text("フェアトレード"),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -294,22 +388,38 @@ class BasicInfo extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: 200,
+            width: 250,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 SizedBox(height: 100),
                 CircleAvatar(
-                  backgroundColor: Colors.brown.shade800,
-                  child: const Text('AH'),
+                  backgroundColor: Color.fromARGB(221, 34, 34, 34),
+                  child: Icon(
+                    Icons.recycling,
+                    color: Colors.white,
+                  ),
                 ),
                 CircleAvatar(
-                  backgroundColor: Colors.brown.shade800,
-                  child: const Text('AH'),
+                  backgroundColor: Color.fromARGB(221, 34, 34, 34),
+                  child: Icon(
+                    Icons.language_sharp,
+                    color: Colors.white,
+                  ),
                 ),
                 CircleAvatar(
-                  backgroundColor: Colors.brown.shade800,
-                  child: const Text('AH'),
+                  backgroundColor: Color.fromARGB(221, 34, 34, 34),
+                  child: Icon(
+                    Icons.compost,
+                    color: Colors.white,
+                  ),
+                ),
+                CircleAvatar(
+                  backgroundColor: Color.fromARGB(221, 34, 34, 34),
+                  child: Icon(
+                    Icons.recycling,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../_constants.dart';
 
@@ -61,9 +62,19 @@ class Footer extends StatelessWidget {
           ),
           Expanded(
             flex: 1,
-            child: Container(
-              color: Colors.amber,
-              child: Image.asset("/images/header/logo.png"),
+            child: Column(
+              children: [
+                Container(
+                  color: Colors.amber,
+                  child: Image.asset("/images/header/logo.png"),
+                ),
+                Row(
+                  children: [
+                    // Icon(Icons.facebook),
+                    // FaIcon(FontAwesomeIcons.twitter),
+                  ],
+                )
+              ],
             ),
           ),
           Expanded(
