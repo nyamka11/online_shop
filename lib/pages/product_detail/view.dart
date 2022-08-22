@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:online_shop/models/shoping_cart.dart';
+import 'package:online_shop/pages/product_detail/picture_layout.dart';
 import 'package:online_shop/widgets/right_window/view.dart';
 import 'package:provider/provider.dart';
 import '../../_routers.dart';
 import '../../models/product.dart';
 import '../../provider/shoping_cart_provider.dart';
 import '../../widgets/_common/layout_template.dart';
+import 'basic_info.dart';
 
 class ProductsDetailPage extends StatelessWidget {
   const ProductsDetailPage({super.key});
@@ -18,10 +21,14 @@ class ProductsDetailPage extends StatelessWidget {
       return Container();
     }
 
-    final shopingCard = Provider.of<ShopingCart>(context);
-
+    final shopingCardProvider = Provider.of<ShopingCartProvider>(context);
     final productItem =
         ModalRoute.of(context)!.settings.arguments as ProductModel;
+
+    final shopingCartItem = ShopingCartModel(
+      quantity: 1,
+      product: productItem,
+    );
 
     return MainLayoutTemplate(
       body: SizedBox(
@@ -52,7 +59,7 @@ class ProductsDetailPage extends StatelessWidget {
                             Column(
                               children: [
                                 BasicInfo(
-                                  productItem: productItem,
+                                  shopingCartItem: shopingCartItem,
                                   constWidth: constraints.maxWidth,
                                 ),
                               ],
@@ -78,10 +85,13 @@ class ProductsDetailPage extends StatelessWidget {
                                     actions: [
                                       TextButton(
                                         onPressed: () {
-                                          shopingCard.addItem(productItem);
+                                          shopingCardProvider.addItem(
+                                            shopingCartItem,
+                                          );
                                           Navigator.of(context).pop();
                                           Navigator.of(context).pushNamed(
-                                              Routes.productListPage);
+                                            Routes.productListPage,
+                                          );
                                         },
                                         child: const Text('買い物を続ける'),
                                       ),
@@ -231,200 +241,6 @@ class ProductsDetailPage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class PictureLayout extends StatefulWidget {
-  final ProductModel productItem;
-  final double constWidth;
-
-  const PictureLayout({
-    Key? key,
-    required this.productItem,
-    required this.constWidth,
-  }) : super(key: key);
-
-  @override
-  State<PictureLayout> createState() => _PictureLayoutState();
-}
-
-class _PictureLayoutState extends State<PictureLayout> {
-  String bigFrameImageUrl = "";
-
-  @override
-  void initState() {
-    super.initState();
-    bigFrameImageUrl = widget.productItem.imageUrl;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(5),
-          margin: const EdgeInsets.only(
-            right: 10,
-            top: 10,
-            left: 10,
-          ),
-          width: widget.constWidth * 0.7 / 2,
-          height: widget.constWidth * 0.7 / 2,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border.all(
-              color: const Color.fromARGB(255, 146, 146, 146),
-            ),
-          ),
-          child: Image.network(bigFrameImageUrl),
-        ),
-        Row(
-          children: [
-            ...widget.productItem.morePics.map(
-              (path) => InkWell(
-                onTap: () {
-                  setState(() {
-                    bigFrameImageUrl = path;
-                  });
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(2),
-                  margin: const EdgeInsets.all(10),
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                      color: const Color.fromARGB(255, 146, 146, 146),
-                    ),
-                  ),
-                  child: Image.network(path),
-                ),
-              ),
-            )
-          ],
-        )
-      ],
-    );
-  }
-}
-
-class BasicInfo extends StatelessWidget {
-  const BasicInfo({
-    Key? key,
-    required this.productItem,
-    required this.constWidth,
-  }) : super(key: key);
-
-  final ProductModel productItem;
-  final double constWidth;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: (constWidth * 0.7) / 2 + 38,
-      padding: const EdgeInsets.all(8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 10),
-          Text(
-            productItem.title,
-            softWrap: true,
-            style: const TextStyle(
-              fontFamily: "OpenSans",
-              fontSize: 25,
-            ),
-          ),
-          const SizedBox(height: 10),
-          const Text("新着/お勧め"),
-          const SizedBox(height: 20),
-          Text(
-            "単価 ${productItem.total}¥",
-            style: const TextStyle(
-              fontFamily: "OpenSans",
-              fontSize: 20,
-            ),
-          ),
-          const SizedBox(height: 10),
-          const Text(
-            "税率 99%",
-            style: TextStyle(
-                fontFamily: "OpenSans",
-                fontSize: 16,
-                color: Color.fromARGB(255, 255, 72, 0)),
-          ),
-          const SizedBox(height: 10),
-          const Text(
-            "数量: ",
-            style: TextStyle(
-              fontFamily: "OpenSans",
-              fontSize: 16,
-            ),
-          ),
-          const SizedBox(height: 20),
-          const Text(
-            "金額 999,999¥",
-            style: TextStyle(
-              fontFamily: "OpenSans",
-              fontSize: 17,
-            ),
-          ),
-          const Text(
-            "単価 999,999,999¥",
-            style: TextStyle(
-              fontFamily: "OpenSans",
-              fontSize: 17,
-            ),
-          ),
-          const Text(
-            "会計 999,999,999¥",
-            style: TextStyle(
-              fontFamily: "OpenSans",
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            ),
-          ),
-          SizedBox(
-            width: 250,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                SizedBox(height: 100),
-                CircleAvatar(
-                  backgroundColor: Color.fromARGB(221, 34, 34, 34),
-                  child: Icon(
-                    Icons.recycling,
-                    color: Colors.white,
-                  ),
-                ),
-                CircleAvatar(
-                  backgroundColor: Color.fromARGB(221, 34, 34, 34),
-                  child: Icon(
-                    Icons.language_sharp,
-                    color: Colors.white,
-                  ),
-                ),
-                CircleAvatar(
-                  backgroundColor: Color.fromARGB(221, 34, 34, 34),
-                  child: Icon(
-                    Icons.compost,
-                    color: Colors.white,
-                  ),
-                ),
-                CircleAvatar(
-                  backgroundColor: Color.fromARGB(221, 34, 34, 34),
-                  child: Icon(
-                    Icons.recycling,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
       ),
     );
   }

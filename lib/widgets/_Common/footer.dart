@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../_constants.dart';
 
@@ -64,14 +65,18 @@ class Footer extends StatelessWidget {
             flex: 1,
             child: Column(
               children: [
+                SizedBox(height: 20),
                 Container(
                   color: Colors.amber,
                   child: Image.asset("/images/header/logo.png"),
                 ),
                 Row(
                   children: [
-                    // Icon(Icons.facebook),
-                    // FaIcon(FontAwesomeIcons.twitter),
+                    // Icon(
+                    //   FontAwesomeIcons.cartPlus,
+                    //   color: Colors.orange,
+                    //   semanticLabel: "asdfafsd",
+                    // ),
                   ],
                 )
               ],
@@ -89,7 +94,7 @@ class Footer extends StatelessWidget {
                       Container(
                         height: 15,
                         width: 2,
-                        color: Colors.amber,
+                        color: Colors.black,
                         margin: EdgeInsets.all(15),
                       ),
                       Text(
@@ -104,7 +109,7 @@ class Footer extends StatelessWidget {
                 Container(
                   height: 15,
                   width: 2,
-                  color: Colors.amber,
+                  color: Colors.black,
                   margin: EdgeInsets.all(15),
                 ),
               ],

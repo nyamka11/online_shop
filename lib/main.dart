@@ -13,7 +13,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => ShopingCart(),
+          create: (context) => ShopingCartProvider(),
         ),
       ],
       child: MyApp(),

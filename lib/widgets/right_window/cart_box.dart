@@ -10,7 +10,7 @@ class CartBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shopingCard = Provider.of<ShopingCart>(context);
+    final shopingCardProvider = Provider.of<ShopingCartProvider>(context);
 
     return Column(
       children: [
@@ -21,7 +21,7 @@ class CartBox extends StatelessWidget {
             color: Color.fromARGB(255, 99, 98, 98),
           ),
           child: Text(
-            "カート (${shopingCard.count})点",
+            "カート (${shopingCardProvider.count})点",
             style: const TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -42,7 +42,7 @@ class CartBox extends StatelessWidget {
           child: ListView(
             shrinkWrap: true,
             children: [
-              ...shopingCard.cartList.map(
+              ...shopingCardProvider.cartList.map(
                 (e) => Column(
                   children: [
                     Card(
@@ -55,7 +55,7 @@ class CartBox extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              e.title,
+                              e.product.title,
                               textAlign: TextAlign.right,
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -63,15 +63,23 @@ class CartBox extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 3),
-                            Text("会計: ${e.total}¥"),
+                            Text(
+                              "数量: ${e.quantity.toString()}",
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                            ),
+                            const SizedBox(height: 3),
+                            Text("会計: ${e.product.total}¥"),
                             const SizedBox(height: 3),
                             Text(
-                              "税金: ${e.tax}%",
+                              "税金: ${e.product.tax}%",
                               style: TextStyle(color: Colors.orange[900]),
                             ),
                             const SizedBox(height: 3),
                             Text(
-                              "税込合計: ${e.totalIncludingTax}¥ (税込)",
+                              "税込合計: ${e.product.totalIncludingTax}¥ (税込)",
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15,

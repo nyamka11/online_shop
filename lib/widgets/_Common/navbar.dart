@@ -109,7 +109,7 @@ class BigScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shopingCard = Provider.of<ShopingCart>(context);
+    final shopingCard = Provider.of<ShopingCartProvider>(context);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,

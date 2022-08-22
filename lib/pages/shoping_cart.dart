@@ -10,7 +10,7 @@ class ShopingCartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shopingCard = Provider.of<ShopingCart>(context);
+    final shopingCard = Provider.of<ShopingCartProvider>(context);
 
     return MainLayoutTemplate(
       body: LayoutBuilder(builder: (context, constraints) {
@@ -102,7 +102,7 @@ class ListRows extends StatelessWidget {
                   // width: double.infinity,
                   // height: double.infinity,
                   child: Image.network(
-                    shopingCartList[index].imageUrl,
+                    shopingCartList[index].product.imageUrl,
                     // fit: BoxFit.cover,
                   ),
                 ),
@@ -115,20 +115,20 @@ class ListRows extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.all(8),
                       child: Text(
-                        shopingCartList[index].title,
+                        shopingCartList[index].product.title,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Container(
                       padding: EdgeInsets.all(8),
                       // height: 40,
-                      child: Text(shopingCartList[index].description),
+                      child: Text(shopingCartList[index].product.description),
                     ),
                     Container(
                       // color: Colors.red,
                       padding: EdgeInsets.all(8),
                       child: Text(
-                        "¥${shopingCartList[index].total}",
+                        "¥${shopingCartList[index].product.total}",
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
