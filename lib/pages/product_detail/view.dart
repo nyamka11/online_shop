@@ -99,6 +99,9 @@ class ProductsDetailPage extends StatelessWidget {
                                         onPressed: () {
                                           // Close the dialog
                                           Navigator.of(context).pop();
+                                          Navigator.of(context).pushNamed(
+                                            Routes.shopingCartPage,
+                                          );
                                         },
                                         child: const Text('注文に進む'),
                                       )
@@ -115,7 +118,12 @@ class ProductsDetailPage extends StatelessWidget {
                           width: 300,
                           height: 35,
                           child: ElevatedButton.icon(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushNamed(Routes.shopingCartPage);
+
+                              shopingCardProvider.addItem(shopingCartItem);
+                            },
                             icon: const Icon(
                                 Icons.shopping_cart_checkout_outlined),
                             label: const Text('カートに入れて注文に進む'),

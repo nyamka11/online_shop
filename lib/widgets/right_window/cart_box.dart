@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../_routers.dart';
 import '../../provider/shoping_cart_provider.dart';
 
 class CartBox extends StatelessWidget {
@@ -45,48 +46,53 @@ class CartBox extends StatelessWidget {
               ...shopingCardProvider.cartList.map(
                 (e) => Column(
                   children: [
-                    Card(
-                      elevation: 3,
-                      child: Container(
-                        width: double.infinity,
-                        margin: const EdgeInsets.all(2),
-                        padding: const EdgeInsets.all(5),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              e.product.title,
-                              textAlign: TextAlign.right,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(Routes.shopingCartPage);
+                      },
+                      child: Card(
+                        elevation: 3,
+                        child: Container(
+                          width: double.infinity,
+                          margin: const EdgeInsets.all(2),
+                          padding: const EdgeInsets.all(5),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                e.product.title,
+                                textAlign: TextAlign.right,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 3),
-                            Text(
-                              "数量: ${e.quantity.toString()}",
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
+                              const SizedBox(height: 3),
+                              Text(
+                                "数量: ${e.quantity.toString()}",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 3),
-                            Text("会計: ${e.product.total}¥"),
-                            const SizedBox(height: 3),
-                            Text(
-                              "税金: ${e.product.tax}%",
-                              style: TextStyle(color: Colors.orange[900]),
-                            ),
-                            const SizedBox(height: 3),
-                            Text(
-                              "税込合計: ${e.product.totalIncludingTax}¥ (税込)",
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
+                              const SizedBox(height: 3),
+                              Text("会計: ${e.product.total}¥"),
+                              const SizedBox(height: 3),
+                              Text(
+                                "税金: ${e.product.tax}%",
+                                style: TextStyle(color: Colors.orange[900]),
                               ),
-                            ),
-                            const SizedBox(height: 3),
-                          ],
+                              const SizedBox(height: 3),
+                              Text(
+                                "税込合計: ${e.product.totalIncludingTax}¥ (税込)",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
+                              ),
+                              const SizedBox(height: 3),
+                            ],
+                          ),
                         ),
                       ),
                     ),

@@ -6,7 +6,9 @@ import 'package:provider/provider.dart';
 
 import '_routers.dart';
 import 'pages/product_list/view.dart';
-import 'pages/shoping_cart.dart';
+import 'pages/shoping_cart/view.dart';
+import 'pages/shoping_cart_payment/view.dart';
+// import 'pages/shoping_cart1.dart';
 
 void main() {
   runApp(
@@ -38,7 +40,8 @@ class MyApp extends StatelessWidget {
         Routes.homePage: (context) => const HomePage(),
         Routes.productDetailPage: (context) => ProductsDetailPage(),
         Routes.productListPage: (context) => ProductListPage(),
-        Routes.shopingCartPage: (context) => ShopingCartPage()
+        Routes.shopingCartPage: (context) => ShopingCartPage(),
+        Routes.shopingCartPayment: (context) => ShopingCartPayment()
       },
     );
   }

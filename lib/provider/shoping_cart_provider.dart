@@ -9,20 +9,19 @@ class ShopingCartProvider with ChangeNotifier {
   int get count => cartList.length;
 
   void addItem(ShopingCartModel item) {
-    // cartList.where((element) {
-    //   if (element.product.id == item.product.id) {
-    //     element.quantity += item.quantity;
-    //   }
-    // });
+    //以前カートに中入れたとかを確認します。
+    if (cartList.isNotEmpty) {
+      List filteredItems =
+          cartList.where((i) => i.product.id == item.product.id).toList();
 
-    ShopingCartModel filteredItem =
-        cartList.where((c) => c.product.id == item.product.id).toList().first;
-    print(filteredItem.id);
+      if (filteredItems.isNotEmpty) {
+        filteredItems.first.quantity += item.quantity;
+        notifyListeners();
+        return;
+      }
+    }
 
-    // itemaa.quantity += item.quantity;
-
-    // if (itemaa.id == "")
-    // cartList.add(item);
+    cartList.add(item);
     notifyListeners();
   }
 

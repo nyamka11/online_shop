@@ -5,11 +5,13 @@ import './navbar.dart';
 class MainLayoutTemplate extends StatelessWidget {
   final Widget body;
   final Color bgColor;
+  final double padding;
 
   const MainLayoutTemplate({
     super.key,
     required this.body,
     this.bgColor = const Color(0xFFecf6fa),
+    this.padding = 0,
   });
 
   @override
@@ -37,17 +39,20 @@ class MainLayoutTemplate extends StatelessWidget {
           color: Color(0xFFecf6fa),
           child: Column(
             children: [
-              Navbar(),
+              const Navbar(),
               Container(
                 color: const Color(0xFFecf6fa),
                 child: Container(
                   width: w,
                   // height: MediaQuery.of(context).size.height,
                   color: bgColor,
-                  child: Column(
-                    children: [
-                      body,
-                    ],
+                  child: Padding(
+                    padding: EdgeInsets.all(padding),
+                    child: Column(
+                      children: [
+                        body,
+                      ],
+                    ),
                   ),
                 ),
               ),
