@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        textTheme: GoogleFonts.sawarabiGothicTextTheme(
+        textTheme: GoogleFonts.notoSansJavaneseTextTheme(
           Theme.of(context).textTheme,
         ),
       ),

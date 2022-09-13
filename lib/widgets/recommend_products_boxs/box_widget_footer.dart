@@ -30,7 +30,6 @@ class BoxWidgetFooter extends StatelessWidget {
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 15,
-                  fontFamily: "OpenSans",
                 ),
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
@@ -47,7 +46,6 @@ class BoxWidgetFooter extends StatelessWidget {
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 13,
-                  fontFamily: "OpenSans",
                 ),
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
@@ -63,7 +61,6 @@ class BoxWidgetFooter extends StatelessWidget {
                     style: const TextStyle(
                       color: Colors.amber,
                       fontSize: 18,
-                      fontFamily: "OpenSans",
                     ),
                   ),
                 ],

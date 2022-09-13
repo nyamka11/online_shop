@@ -16,7 +16,7 @@ class Header extends StatelessWidget {
           margin: const EdgeInsets.only(top: 10),
           child: const Text(
             "XXXXXXXXXXXXXXXXXX  さんカートの内容で注文に進みます",
-            style: TextStyle(fontSize: 17, fontFamily: "OpenSans"),
+            style: TextStyle(fontSize: 17),
           ),
         ),
         Container(
@@ -29,7 +29,6 @@ class Header extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 17,
-                fontFamily: "OpenSans",
                 decoration: TextDecoration.underline,
               ),
             ),
