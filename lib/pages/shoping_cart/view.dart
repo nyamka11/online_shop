@@ -4,9 +4,10 @@ import 'package:provider/provider.dart';
 import '../../_routers.dart';
 import '../../provider/shoping_cart_provider.dart';
 import '../../widgets/_common/layout_template.dart';
+import '../../widgets/product_list_row.dart';
 import 'header.dart';
 import '../../widgets/_common/header_process_list.dart';
-import 'row_item.dart';
+// import 'row_item.dart';
 
 class ShopingCartPage extends StatefulWidget {
   const ShopingCartPage({super.key});
@@ -56,7 +57,7 @@ Widget contentBody(shopingCart, context) {
       ProcessList(stepIndex: 0),
       Container(
         width: double.infinity,
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         child: Text(
           "カートの中身 (${shopingCart.count})",
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -178,7 +179,9 @@ Widget footerButtons(context) {
     mainAxisAlignment: MainAxisAlignment.spaceAround,
     children: [
       ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pushNamed(Routes.productListPage);
+        },
         style: ElevatedButton.styleFrom(
           primary: Colors.grey,
           shape: RoundedRectangleBorder(

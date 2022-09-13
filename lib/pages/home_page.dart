@@ -1,3 +1,5 @@
+// ignore_for_file: sort_child_properties_last
+
 import 'package:flutter/material.dart';
 import 'package:online_shop/_constants.dart';
 import '../widgets/_common/layout_template.dart';
@@ -20,6 +22,41 @@ class HomePage extends StatelessWidget {
         children: [
           SlideBar(),
           const SizedBox(height: Common.lineHeightSpacer),
+          Container(
+            alignment: Alignment.center,
+            color: Color.fromARGB(255, 226, 226, 226),
+            width: double.infinity,
+            height: 130,
+            margin: EdgeInsets.only(bottom: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("こにちはｘｘｘｘｘｘｘｘｘｘｘｘさん。"),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {/* ボタンがタップされた時の処理 */},
+                  child: const Padding(
+                    padding: EdgeInsets.only(
+                      right: 80,
+                      left: 80,
+                      bottom: 10,
+                      top: 10,
+                    ),
+                    child: Text(
+                      'マイページ',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey, //ボタンの背景色
+                  ),
+                ),
+              ],
+            ),
+          ),
           const BoxView(),
           const SizedBox(height: Common.lineHeightSpacer),
           CategoriesView(),

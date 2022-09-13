@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:online_shop/data/shoping_cart_data.dart';
 import 'package:online_shop/widgets/check_box_custom.dart';
 import 'package:provider/provider.dart';
+import '../../_routers.dart';
 import '../../provider/shoping_cart_provider.dart';
 import '../../widgets/_common/layout_template.dart';
+import '../../widgets/product_list_row.dart';
 import 'header.dart';
 import '../../widgets/_common/header_process_list.dart';
-import 'row_item.dart';
+// import 'row_item.dart';
 
 class ShopingCartPayment extends StatefulWidget {
   const ShopingCartPayment({super.key});
@@ -67,7 +69,7 @@ Widget contentBody(shopingCart, context) {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(context).pushNamed(Routes.shopingCartPage);
             },
             style: ElevatedButton.styleFrom(
               primary: Colors.grey[600],
@@ -111,22 +113,8 @@ Widget contentBody(shopingCart, context) {
       ),
       totalPriceBox(),
       const SizedBox(height: 20),
-      anwserBox(),
-      const SizedBox(height: 20),
-      Container(
-        alignment: Alignment.center,
-        width: double.infinity,
-        child: const Text(
-          "「規約の同意してお支払いに進む」をクリックすると、エシカルマーケットのページを離れて、クレジット御支払代行会社のページに移動します。確認の上、ボタンを押してください。",
-          style: TextStyle(
-            color: Colors.red,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-      const SizedBox(height: 20),
-      footerButtons(),
-      const SizedBox(height: 200),
+      const ActionsWidget(),
+      const SizedBox(height: 100),
     ],
   );
 }
@@ -212,100 +200,142 @@ Widget totalPriceBox() {
   );
 }
 
-Widget anwserBox() {
-  return Container(
-    width: 600,
-    child: Column(
+class ActionsWidget extends StatefulWidget {
+  const ActionsWidget({super.key});
+
+  @override
+  State<ActionsWidget> createState() => _ActionsWidgetState();
+}
+
+class _ActionsWidgetState extends State<ActionsWidget> {
+  bool paymentIsVerifed = false;
+  bool serviceIsVerifed = false;
+  bool isErrorText = false;
+
+  void paymentIsVerifedFn(bool value) {
+    setState(() {
+      paymentIsVerifed = value;
+    });
+  }
+
+  void serviceIsVerifedFn(bool value) {
+    setState(() {
+      serviceIsVerifed = value;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-              flex: 2,
-              child: Container(
-                  alignment: Alignment.center,
-                  child: const Text(
-                    "御支払規約",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  )),
-            ),
-            Expanded(
-              flex: 2,
-              child: Row(
-                children: const [
-                  Text("御支払規約に同意する"),
-                  CheckBoxCustom(),
-                ],
+            Container(
+              alignment: Alignment.center,
+              child: const Text(
+                "御支払規約",
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
+            const SizedBox(width: 100),
+            Row(
+              children: [
+                const Text("御支払規約に同意する"),
+                CheckBoxCustom(paymentIsVerifedFn),
+              ],
+            )
           ],
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-              flex: 2,
-              child: Container(
-                  alignment: Alignment.center,
-                  child: const Text(
-                    "利用規約",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  )),
-            ),
-            Expanded(
-              flex: 2,
-              child: Row(
-                children: const [
-                  Text("利用規約に同意する"),
-                  CheckBoxCustom(),
-                ],
+            Container(
+              alignment: Alignment.center,
+              child: const Text(
+                "利用規約",
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
+            const SizedBox(width: 100),
+            Row(
+              children: [
+                const Text("利用規約に同意する"),
+                CheckBoxCustom(serviceIsVerifedFn),
+              ],
+            )
+          ],
+        ),
+        if (isErrorText)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Text(
+                "「規約の同意してお支払いに進む」をクリックすると、エシカルマーケットのページを離れて、クレジット御支払代行会社のページに移動します。確認の上、ボタンを押してください。",
+                style: TextStyle(
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        const SizedBox(height: 50),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(Routes.productListPage);
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.grey,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                elevation: 16,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 20,
+                  horizontal: 100,
+                ),
+              ),
+              child: const Text(
+                '他の商品を頼む',
+                style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (!paymentIsVerifed || !serviceIsVerifed) {
+                  setState(() {
+                    isErrorText = true;
+                  });
+                } else {
+                  setState(() {
+                    isErrorText = false;
+                  });
+
+                  Navigator.of(context).pushNamed(Routes.homePage);
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.pink[400],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                elevation: 16,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 20,
+                  horizontal: 100,
+                ),
+              ),
+              child: const Text(
+                '規約に同意して御支払に進む',
+                style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
+            )
           ],
         ),
       ],
-    ),
-  );
-}
-
-Widget footerButtons() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceAround,
-    children: [
-      ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          primary: Colors.grey,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6),
-          ),
-          elevation: 16,
-          padding: const EdgeInsets.symmetric(
-            vertical: 20,
-            horizontal: 100,
-          ),
-        ),
-        child: const Text(
-          '他の商品を頼む',
-          style: TextStyle(color: Colors.white, fontSize: 16),
-        ),
-      ),
-      ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          primary: Colors.pink[400],
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6),
-          ),
-          elevation: 16,
-          padding: const EdgeInsets.symmetric(
-            vertical: 20,
-            horizontal: 100,
-          ),
-        ),
-        child: const Text(
-          '規約に同意して御支払に進む',
-          style: TextStyle(color: Colors.white, fontSize: 16),
-        ),
-      )
-    ],
-  );
+    );
+  }
 }

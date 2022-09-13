@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/data/product_data.dart';
 import '../../widgets/_common/layout_template.dart';
+import '../../widgets/product_list_row.dart';
 import '../../widgets/right_window/view.dart';
-import 'row_item.dart';
+// import 'row_item.dart';
 import 'top_bar.dart';
 
 class ProductListPage extends StatefulWidget {

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CheckBoxCustom extends StatefulWidget {
-  const CheckBoxCustom({Key? key}) : super(key: key);
+  final void Function(bool) callback;
+  const CheckBoxCustom(this.callback, {super.key});
 
   @override
   State<CheckBoxCustom> createState() => _CheckBoxCustomState();
@@ -18,6 +19,7 @@ class _CheckBoxCustomState extends State<CheckBoxCustom> {
         onChanged: (value) {
           setState(() {
             _isChecked = value!;
+            widget.callback(_isChecked);
           });
         },
       ),
