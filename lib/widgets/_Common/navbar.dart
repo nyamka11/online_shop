@@ -122,7 +122,11 @@ class BigScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 30, left: 30),
                 ),
                 onPressed: () {
-                  Navigator.of(context).pushNamed(Routes.homePage);
+                  if (item == "会員ログイン") {
+                    Navigator.of(context).pushNamed(Routes.loginPage);
+                  } else {
+                    Navigator.of(context).pushNamed(Routes.homePage);
+                  }
                 },
                 child: Text(
                   item,

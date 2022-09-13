@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/pages/home_page.dart';
+import 'package:online_shop/pages/login/view.dart';
 import 'package:online_shop/pages/product_detail/view.dart';
 import 'package:online_shop/provider/shoping_cart_provider.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +9,7 @@ import '_routers.dart';
 import 'pages/product_list/view.dart';
 import 'pages/shoping_cart/view.dart';
 import 'pages/shoping_cart_payment/view.dart';
+import 'package:google_fonts/google_fonts.dart';
 // import 'pages/shoping_cart1.dart';
 
 void main() {
@@ -32,12 +34,15 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        textTheme: Theme.of(context).textTheme.apply(fontFamily: "Open Sans"),
+        textTheme: GoogleFonts.sawarabiGothicTextTheme(
+          Theme.of(context).textTheme,
+        ),
       ),
       // home: HomePage(),
       initialRoute: Routes.homePage,
       routes: {
         Routes.homePage: (context) => const HomePage(),
+        Routes.loginPage: (context) => const LoginPage(),
         Routes.productDetailPage: (context) => ProductsDetailPage(),
         Routes.productListPage: (context) => ProductListPage(),
         Routes.shopingCartPage: (context) => ShopingCartPage(),
