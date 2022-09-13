@@ -8,9 +8,11 @@ import 'package:provider/provider.dart';
 import '_routers.dart';
 import 'pages/product_list/view.dart';
 import 'pages/shoping_cart/view.dart';
-import 'pages/shoping_cart_payment/view.dart';
+import 'pages/shoping_cart_verify/view.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import 'pages/shoping_cart1.dart';
+
+import 'pages/shopnig_cart_finished/view.dart';
+import 'pages/shopnig_cart_payment/view.dart';
 
 void main() {
   runApp(
@@ -44,10 +46,12 @@ class MyApp extends StatelessWidget {
       routes: {
         Routes.homePage: (context) => const HomePage(),
         Routes.loginPage: (context) => const LoginPage(),
-        Routes.productDetailPage: (context) => ProductsDetailPage(),
-        Routes.productListPage: (context) => ProductListPage(),
-        Routes.shopingCartPage: (context) => ShopingCartPage(),
-        Routes.shopingCartPayment: (context) => ShopingCartPayment()
+        Routes.productDetailPage: (context) => const ProductsDetailPage(),
+        Routes.productListPage: (context) => const ProductListPage(),
+        Routes.shopingCartPage: (context) => const ShopingCartPage(),
+        Routes.shopingCartVerify: (context) => const ShopingCartVerify(),
+        Routes.shopingCartPayment: (context) => const ShopingCartPayment(),
+        Routes.shopingCartFinished: (context) => const ShopingCartFinished()
       },
     );
   }

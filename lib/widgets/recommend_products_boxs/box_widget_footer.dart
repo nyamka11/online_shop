@@ -24,7 +24,7 @@ class BoxWidgetFooter extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(5),
+              padding: const EdgeInsets.only(left: 6),
               child: Text(
                 product.title,
                 style: const TextStyle(
@@ -52,7 +52,7 @@ class BoxWidgetFooter extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.only(left: 6),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

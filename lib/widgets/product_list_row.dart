@@ -22,7 +22,7 @@ class ListRows extends StatelessWidget {
               .pushNamed(Routes.productDetailPage, arguments: products[index]);
         },
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(5),
           child: Row(
             children: [
               Expanded(
@@ -39,28 +39,29 @@ class ListRows extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(width: 10),
               Expanded(
                 flex: 7,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(5),
+                      padding: EdgeInsets.only(left: 5),
                       child: Text(
                         products[index].title,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(5),
+                      padding: EdgeInsets.only(left: 5),
                       child: Text(products[index].description),
                     ),
                     Container(
-                      padding: EdgeInsets.all(5),
+                      padding: EdgeInsets.only(left: 5),
                       child: const Text("1箱16袋入り"),
                     ),
                     Container(
-                      padding: EdgeInsets.all(5),
+                      padding: EdgeInsets.only(left: 5),
                       child: const Text("新着/お薦め"),
                     ),
                     Container(

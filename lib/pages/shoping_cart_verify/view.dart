@@ -6,18 +6,17 @@ import '../../_routers.dart';
 import '../../provider/shoping_cart_provider.dart';
 import '../../widgets/_common/layout_template.dart';
 import '../../widgets/product_list_row.dart';
-import 'header.dart';
-import '../../widgets/_common/header_process_list.dart';
-// import 'row_item.dart';
+import '../../widgets/shoping_cart_pages_process.dart';
+import '../../widgets/shoping_cart_pages_header.dart';
 
-class ShopingCartPayment extends StatefulWidget {
-  const ShopingCartPayment({super.key});
+class ShopingCartVerify extends StatefulWidget {
+  const ShopingCartVerify({super.key});
 
   @override
-  State<ShopingCartPayment> createState() => _ShopingCartPaymentState();
+  State<ShopingCartVerify> createState() => _ShopingCartVerifyState();
 }
 
-class _ShopingCartPaymentState extends State<ShopingCartPayment> {
+class _ShopingCartVerifyState extends State<ShopingCartVerify> {
   @override
   Widget build(BuildContext context) {
     final shopingCart = Provider.of<ShopingCartProvider>(context);
@@ -314,7 +313,7 @@ class _ActionsWidgetState extends State<ActionsWidget> {
                     isErrorText = false;
                   });
 
-                  Navigator.of(context).pushNamed(Routes.homePage);
+                  Navigator.of(context).pushNamed(Routes.shopingCartPayment);
                 }
               },
               style: ElevatedButton.styleFrom(
