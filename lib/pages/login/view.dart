@@ -3,6 +3,8 @@
 import 'dart:html' show Storage, window;
 
 import 'package:flutter/material.dart';
+import 'package:online_shop/_routers.dart';
+import 'package:online_shop/data/m_account_u_data.dart';
 import 'package:online_shop/widgets/_Common/layout_template.dart';
 
 class LoginPage extends StatefulWidget {
@@ -13,10 +15,39 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final loginIdController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  final FocusNode loginIdFocusNode = FocusNode();
+  final FocusNode passwordFocusNode = FocusNode();
+  Storage localStorage = window.localStorage;
+
   bool _isObscure = true;
+
+  String storageLoginId = "loginId";
+  String warningMsg = "";
+
+  @override
+  void initState() {
+    localStorage.removeWhere((key, value) => key == storageLoginId);
+    warningMsg = "";
+    _isObscure = true;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    loginIdController.dispose();
+    passwordController.dispose();
+    loginIdFocusNode.dispose();
+    passwordFocusNode.dispose();
+    warningMsg = "";
+    _isObscure = true;
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    var containerWidth = MediaQuery.of(context).size.width * 0.4;
     var textFieldHeight = 40.0;
     SizedBox dummySpaceBox(double height) {
       return SizedBox(
@@ -28,7 +59,20 @@ class _LoginPageState extends State<LoginPage> {
       bgColor: Colors.white,
       body: LayoutBuilder(
         builder: (context, constraints) {
+          var buttonStyle = ButtonStyle(
+            foregroundColor: MaterialStateProperty.all(Colors.black),
+            backgroundColor: MaterialStateProperty.all(Colors.blue[400]),
+            padding: MaterialStateProperty.all(const EdgeInsets.all(5)),
+            minimumSize: MaterialStateProperty.all(const Size(100, 30)),
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(32.0),
+              ),
+            ),
+          );
           return Container(
+            padding: const EdgeInsets.all(5),
             // color: Colors.amber,
             width: double.infinity,
             child: Column(
@@ -40,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "HOME＞ログイン",
+                    "HOME ＞ログイン",
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -48,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 dummySpaceBox(15),
-                Text(
+                const Text(
                   "ログイン",
                   textAlign: TextAlign.left,
                   style: TextStyle(
@@ -75,8 +119,10 @@ class _LoginPageState extends State<LoginPage> {
                   width: 350,
                   child: TextField(
                     keyboardType: TextInputType.text,
+                    controller: loginIdController,
+                    focusNode: loginIdFocusNode,
                     decoration: InputDecoration(
-                      hintText: 'Username',
+                      hintText: 'ログインID（メールアドレス）',
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 10.0, horizontal: 15.0),
                       border: OutlineInputBorder(
@@ -116,9 +162,11 @@ class _LoginPageState extends State<LoginPage> {
                   width: 350,
                   child: TextField(
                     keyboardType: TextInputType.visiblePassword,
+                    controller: passwordController,
+                    focusNode: passwordFocusNode,
                     obscureText: _isObscure,
                     decoration: InputDecoration(
-                      hintText: 'Password',
+                      hintText: 'パスワード',
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 10.0, horizontal: 15.0),
                       border: OutlineInputBorder(
@@ -140,46 +188,86 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: textFieldHeight,
                   width: 250,
-                  child: const Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "＞パスワードを忘れた方はこちら",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        Routes.forgetPasswordPage,
+                      );
+                    },
+                    child: const Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        "＞パスワードを忘れた方はこちら",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                        ),
                       ),
                     ),
                   ),
                 ),
-                dummySpaceBox(30),
-                TextButton(
-                  style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all(Colors.black),
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.blue[400]),
-                    padding: MaterialStateProperty.all(const EdgeInsets.all(5)),
-                    minimumSize: MaterialStateProperty.all(const Size(100, 30)),
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32.0),
-                      ),
+                if (warningMsg != "") dummySpaceBox(15),
+                if (warningMsg != "")
+                  Text(
+                    warningMsg,
+                    style: const TextStyle(
+                      color: Colors.red,
+                      // fontWeight: FontWeight.bold,
                     ),
                   ),
+                // if (warningMsg != "") dummySpaceBox(15),
+                dummySpaceBox(30),
+                TextButton(
+                  style: buttonStyle,
                   onPressed: () {
-                    Storage _localStorage = window.localStorage;
+                    if (loginIdController.text.isEmpty ||
+                        passwordController.text.isEmpty) {
+                      setState(() {
+                        warningMsg = "ログインID（メールアドレス）とパスワードを入力してください。";
+                      });
+                      return;
+                    }
 
-                    _localStorage['selected_id'] = "testasdfasdf";
+                    // if (loginIdController.text.isEmpty) {
+                    //   ShowAlertDialog(context, "ログインID（メールアドレス）を入力してください。");
+                    //   loginIdFocusNode.requestFocus();
+                    //   return;
+                    // }
 
-                    print(_localStorage['selected_id']);
+                    // if (passwordController.text.isEmpty) {
+                    //   ShowAlertDialog(context, "パスワードを入力してください。");
+                    //   passwordFocusNode.requestFocus();
+                    //   return;
+                    // }
 
-                    // User user = User('aaaa', 'bbbb');
-                    // print(user.toJson());
+                    if (accountUsers
+                        .where((element) =>
+                            element.mailAdd == loginIdController.text)
+                        .isEmpty) {
+                      setState(() {
+                        warningMsg = "ユーザーが登録されていません。ログインIDを確認してください。";
+                      });
+                      // ShowAlertDialog(
+                      //     context, "ユーザーが登録されていません。\nログインIDを確認してください。");
+                      return;
+                    }
 
-                    // Navigator.pushNamed(
-                    //   context,
-                    //   RoutePath.MainMenu,
-                    // );
+                    var user = accountUsers.firstWhere(
+                        (element) => element.mailAdd == loginIdController.text);
+
+                    if (user.pswd != passwordController.text) {
+                      setState(() {
+                        warningMsg = "パスワードが異なっています。パスワードを確認してください。";
+                      });
+                      // ShowAlertDialog(
+                      //     context, "パスワードが異なっています。\nパスワードを確認してください。");
+                      return;
+                    }
+
+                    localStorage[storageLoginId] = user.mailAdd;
+
+                    Navigator.of(context).pushNamed(Routes.homePage);
                   },
                   child: SizedBox(
                     // padding: const EdgeInsets.only(top: 15, bottom: 15),
@@ -193,7 +281,7 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.underline,
+                          // decoration: TextDecoration.underline,
                           fontSize: 18,
                         ),
                         textAlign: TextAlign.center,
@@ -205,13 +293,20 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: textFieldHeight,
                   width: 300,
-                  child: const Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "＞ログインID（メールアドレス）も不明となった方は、こちら",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
+                  child: InkWell(
+                    onTap: () {
+                      // Navigator.of(context).pushNamed(Routes.productDetailPage,
+                      //     arguments: productItem);
+                      print("Click: ＞ログインID（メールアドレス）も不明となった方は、こちら");
+                    },
+                    child: const Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        "＞ログインID（メールアドレス）も不明となった方は、こちら",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                        ),
                       ),
                     ),
                   ),
@@ -225,30 +320,26 @@ class _LoginPageState extends State<LoginPage> {
                     fontSize: 18,
                   ),
                 ),
-                const Text(
-                  "エシカルエーモンマーケット について！、\n利用環境条件、利用規約、プライバシーポリシー をご確認ください。",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: Colors.red,
-                    // fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
+                InkWell(
+                  onTap: () {
+                    // Navigator.of(context).pushNamed(Routes.productDetailPage,
+                    //     arguments: productItem);
+                    print(
+                        "Click: エシカルエーモンマーケット について！、\n利用環境条件、利用規約、プライバシーポリシー をご確認ください。");
+                  },
+                  child: const Text(
+                    "エシカルエーモンマーケット について！、\n利用環境条件、利用規約、プライバシーポリシー をご確認ください。",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.red,
+                      // fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
                 ),
                 dummySpaceBox(15),
                 TextButton(
-                  style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all(Colors.black),
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.blue[400]),
-                    padding: MaterialStateProperty.all(const EdgeInsets.all(5)),
-                    minimumSize: MaterialStateProperty.all(const Size(100, 30)),
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32.0),
-                      ),
-                    ),
-                  ),
+                  style: buttonStyle,
                   onPressed: () {
                     // Navigator.pushNamed(
                     //   context,
@@ -265,7 +356,7 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.underline,
+                          // decoration: TextDecoration.underline,
                           fontSize: 18,
                         ),
                         textAlign: TextAlign.center,
@@ -281,4 +372,24 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+}
+
+void ShowAlertDialog(BuildContext context, String message) {
+  showDialog(
+    context: context,
+    builder: (BuildContext ctx) {
+      return AlertDialog(
+        title: const Text('警告'),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      );
+    },
+  );
 }
