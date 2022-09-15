@@ -26,7 +26,6 @@ class BasicInfo extends StatelessWidget {
             shopingCartItem.product.title,
             softWrap: true,
             style: const TextStyle(
-              fontFamily: "OpenSans",
               fontSize: 25,
             ),
           ),
@@ -36,7 +35,6 @@ class BasicInfo extends StatelessWidget {
           Text(
             "単価 ${shopingCartItem.product.total}¥",
             style: const TextStyle(
-              fontFamily: "OpenSans",
               fontSize: 20,
             ),
           ),
@@ -44,7 +42,6 @@ class BasicInfo extends StatelessWidget {
           const Text(
             "税率 99%",
             style: TextStyle(
-              fontFamily: "OpenSans",
               fontSize: 16,
               color: Color.fromARGB(255, 255, 72, 0),
             ),
@@ -53,21 +50,18 @@ class BasicInfo extends StatelessWidget {
           const Text(
             "金額 999,999¥",
             style: TextStyle(
-              fontFamily: "OpenSans",
               fontSize: 17,
             ),
           ),
           const Text(
             "単価 999,999,999¥",
             style: TextStyle(
-              fontFamily: "OpenSans",
               fontSize: 17,
             ),
           ),
           const Text(
             "会計 999,999,999¥",
             style: TextStyle(
-              fontFamily: "OpenSans",
               fontWeight: FontWeight.bold,
               fontSize: 18,
             ),
@@ -78,7 +72,6 @@ class BasicInfo extends StatelessWidget {
               const Text(
                 "数量: ",
                 style: TextStyle(
-                  fontFamily: "OpenSans",
                   fontSize: 17,
                 ),
               ),

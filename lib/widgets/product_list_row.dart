@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../_routers.dart';
 import '../../data/product_data.dart';
+import '../data/shoping_cart_data.dart';
 
 class ListRows extends StatelessWidget {
   final int index;
@@ -18,11 +19,13 @@ class ListRows extends StatelessWidget {
       elevation: 3,
       child: InkWell(
         onTap: () {
-          Navigator.of(context)
-              .pushNamed(Routes.productDetailPage, arguments: products[index]);
+          Navigator.of(context).pushNamed(
+            Routes.productDetailPage,
+            arguments: products[index],
+          );
         },
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(5),
           child: Row(
             children: [
               Expanded(
@@ -39,52 +42,48 @@ class ListRows extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(width: 10),
               Expanded(
                 flex: 7,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(5),
-                      child: Text(
-                        products[index].title,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
+                    Text(
+                      products[index].title,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(5),
-                      child: Text(products[index].description),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(5),
-                      child: const Text("1箱16袋入り"),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(5),
-                      child: const Text("新着/お薦め"),
-                    ),
+                    Text(products[index].description),
                     Container(
                       padding: const EdgeInsets.all(5),
                       child: Row(
-                        children: const [
-                          SizedBox(width: 20),
-                          CircleAvatar(
+                        children: [
+                          Column(
+                            children: const [
+                              Text("1箱16袋入り"),
+                              Text("新着/お薦め"),
+                            ],
+                          ),
+                          const SizedBox(width: 20),
+                          const CircleAvatar(
+                            minRadius: 15,
                             backgroundColor: Color.fromARGB(221, 34, 34, 34),
                             child: Icon(
                               Icons.recycling,
                               color: Colors.white,
                             ),
                           ),
-                          SizedBox(width: 20),
-                          CircleAvatar(
+                          const SizedBox(width: 20),
+                          const CircleAvatar(
+                            minRadius: 15,
                             backgroundColor: Color.fromARGB(221, 34, 34, 34),
                             child: Icon(
                               Icons.language_sharp,
                               color: Colors.white,
                             ),
                           ),
-                          SizedBox(width: 20),
-                          CircleAvatar(
+                          const SizedBox(width: 20),
+                          const CircleAvatar(
+                            minRadius: 15,
                             backgroundColor: Color.fromARGB(221, 34, 34, 34),
                             child: Icon(
                               Icons.compost,
@@ -95,7 +94,7 @@ class ListRows extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
                       child: Text(
                         "¥${products[index].total}",
                         style: const TextStyle(

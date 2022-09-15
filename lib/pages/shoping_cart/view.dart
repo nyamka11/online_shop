@@ -5,18 +5,12 @@ import '../../_routers.dart';
 import '../../provider/shoping_cart_provider.dart';
 import '../../widgets/_common/layout_template.dart';
 import '../../widgets/product_list_row.dart';
-import 'header.dart';
-import '../../widgets/_common/header_process_list.dart';
-// import 'row_item.dart';
+import '../../widgets/shoping_cart_pages_process.dart';
+import '../../widgets/shoping_cart_pages_header.dart';
 
-class ShopingCartPage extends StatefulWidget {
+class ShopingCartPage extends StatelessWidget {
   const ShopingCartPage({super.key});
 
-  @override
-  State<ShopingCartPage> createState() => _ShopingCartPageState();
-}
-
-class _ShopingCartPageState extends State<ShopingCartPage> {
   @override
   Widget build(BuildContext context) {
     final shopingCart = Provider.of<ShopingCartProvider>(context);
@@ -200,7 +194,7 @@ Widget footerButtons(context) {
       ),
       ElevatedButton(
         onPressed: () {
-          Navigator.of(context).pushNamed(Routes.shopingCartPayment);
+          Navigator.of(context).pushNamed(Routes.shopingCartVerify);
         },
         style: ElevatedButton.styleFrom(
           primary: Colors.pink[400],

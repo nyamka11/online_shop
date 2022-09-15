@@ -21,6 +21,8 @@ class BoxWidget extends StatelessWidget {
           onTap: () {
             Navigator.of(context)
                 .pushNamed(Routes.productDetailPage, arguments: productItem);
+
+            // Navigator.pushNamed(context, Routes.productDetailPage);
           },
           child: BoxCustomWidget(
             child: Stack(
