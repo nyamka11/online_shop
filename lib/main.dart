@@ -14,6 +14,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'pages/shopnig_cart_finished/view.dart';
 import 'pages/shopnig_cart_payment/view.dart';
 
+import 'pages/shopnig_cart_payment_failed/view.dart';
+
 void main() {
   runApp(
     MultiProvider(
@@ -51,7 +53,8 @@ class MyApp extends StatelessWidget {
         Routes.shopingCartPage: (context) => const ShopingCartPage(),
         Routes.shopingCartVerify: (context) => const ShopingCartVerify(),
         Routes.shopingCartPayment: (context) => const ShopingCartPayment(),
-        Routes.shopingCartFinished: (context) => const ShopingCartFinished()
+        Routes.shopingCartFinished: (context) => const ShopingCartFinished(),
+        Routes.shopingCartFailed: (context) => const ShopingCartFailed(),
       },
     );
   }

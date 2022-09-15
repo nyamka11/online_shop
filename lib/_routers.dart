@@ -7,4 +7,5 @@ class Routes {
   static const String shopingCartVerify = "/shopingCartVerify";
   static const String shopingCartPayment = "/shopingCartPayment";
   static const String shopingCartFinished = "/shopingCartFinished";
+  static const String shopingCartFailed = "/shopingCartFailed";
 }

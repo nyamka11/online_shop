@@ -5,18 +5,12 @@ import '../../_routers.dart';
 import '../../provider/shoping_cart_provider.dart';
 import '../../widgets/_common/layout_template.dart';
 import '../../widgets/product_list_row.dart';
-// import 'header1.dart';
 import '../../widgets/shoping_cart_pages_process.dart';
 import '../../widgets/shoping_cart_pages_header.dart';
 
-class ShopingCartPage extends StatefulWidget {
+class ShopingCartPage extends StatelessWidget {
   const ShopingCartPage({super.key});
 
-  @override
-  State<ShopingCartPage> createState() => _ShopingCartPageState();
-}
-
-class _ShopingCartPageState extends State<ShopingCartPage> {
   @override
   Widget build(BuildContext context) {
     final shopingCart = Provider.of<ShopingCartProvider>(context);
