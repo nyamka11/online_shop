@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/pages/home_page.dart';
 import 'package:online_shop/pages/login/view.dart';
+import 'package:online_shop/pages/login/view_change_password.dart';
+import 'package:online_shop/pages/login/view_forget_password.dart';
+import 'package:online_shop/pages/login/view_password_changed.dart';
+import 'package:online_shop/pages/login/view_verification_number_confirm.dart';
 import 'package:online_shop/pages/product_detail/view.dart';
 import 'package:online_shop/provider/shoping_cart_provider.dart';
 import 'package:provider/provider.dart';
@@ -44,6 +48,11 @@ class MyApp extends StatelessWidget {
       routes: {
         Routes.homePage: (context) => const HomePage(),
         Routes.loginPage: (context) => const LoginPage(),
+        Routes.forgetPasswordPage: (context) => const ForgetPasswordPage(),
+        Routes.verificationNumberConfirmPage: (context) =>
+            const VerificationNumberConfirmPage(),
+        Routes.changePasswordPage: (context) => const ChangePasswordPage(),
+        Routes.passwordChanged: (context) => const PasswordChangedInfoPage(),
         Routes.productDetailPage: (context) => ProductsDetailPage(),
         Routes.productListPage: (context) => ProductListPage(),
         Routes.shopingCartPage: (context) => ShopingCartPage(),
