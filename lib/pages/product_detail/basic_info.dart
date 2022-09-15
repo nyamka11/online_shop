@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/shoping_cart.dart';
+import '../../models/shoping_cart_item.dart';
 import '../../widgets/number_input.dart';
 
 class BasicInfo extends StatelessWidget {
@@ -10,7 +10,7 @@ class BasicInfo extends StatelessWidget {
     required this.constWidth,
   }) : super(key: key);
 
-  final ShopingCartModel shopingCartItem;
+  final ShopingCartItemModel shopingCartItem;
   final double constWidth;
 
   @override

@@ -4,16 +4,13 @@ import 'package:online_shop/pages/login/view.dart';
 import 'package:online_shop/pages/product_detail/view.dart';
 import 'package:online_shop/provider/shoping_cart_provider.dart';
 import 'package:provider/provider.dart';
-
 import '_routers.dart';
 import 'pages/product_list/view.dart';
 import 'pages/shoping_cart/view.dart';
 import 'pages/shoping_cart_verify/view.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'pages/shopnig_cart_finished/view.dart';
 import 'pages/shopnig_cart_payment/view.dart';
-
 import 'pages/shopnig_cart_payment_failed/view.dart';
 
 void main() {

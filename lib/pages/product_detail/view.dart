@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:online_shop/models/shoping_cart.dart';
+import 'package:online_shop/data/product_data.dart';
+import 'package:online_shop/models/shoping_cart_item.dart';
 import 'package:online_shop/pages/product_detail/picture_layout.dart';
 import 'package:online_shop/widgets/right_window/view.dart';
 import 'package:provider/provider.dart';
 import '../../_routers.dart';
-import '../../models/product.dart';
 import '../../provider/shoping_cart_provider.dart';
 import '../../widgets/_common/layout_template.dart';
 import 'basic_info.dart';
@@ -22,10 +22,13 @@ class ProductsDetailPage extends StatelessWidget {
     }
 
     final shopingCardProvider = Provider.of<ShopingCartProvider>(context);
-    final productItem =
-        ModalRoute.of(context)!.settings.arguments as ProductModel;
+    final productId = ModalRoute.of(context)!.settings.arguments;
 
-    final shopingCartItem = ShopingCartModel(
+    final productItem =
+        products.firstWhere((element) => element.id == productId);
+
+    //Shineer cartruu nemehed
+    final shopingCartItem = ShopingCartItemModel(
       quantity: 1,
       product: productItem,
     );
@@ -102,6 +105,9 @@ class ProductsDetailPage extends StatelessWidget {
                                           Navigator.of(context).pushNamed(
                                             Routes.shopingCartPage,
                                           );
+                                          shopingCardProvider.addItem(
+                                            shopingCartItem,
+                                          );
                                         },
                                         child: const Text('注文に進む'),
                                       )
@@ -119,8 +125,9 @@ class ProductsDetailPage extends StatelessWidget {
                           height: 35,
                           child: ElevatedButton.icon(
                             onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed(Routes.shopingCartPage);
+                              Navigator.of(context).pushNamed(
+                                Routes.shopingCartPage,
+                              );
 
                               shopingCardProvider.addItem(shopingCartItem);
                             },

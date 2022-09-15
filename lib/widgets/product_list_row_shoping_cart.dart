@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:online_shop/models/product.dart';
-import '../../_routers.dart';
+import '../_routers.dart';
+import '../models/shoping_cart_item.dart';
 
-class ListRows extends StatelessWidget {
-  final ProductModel productItem;
+class ListRowShopingCart extends StatelessWidget {
+  final ShopingCartItemModel shopingCartProductItem;
 
-  const ListRows({
-    super.key,
-    required this.productItem,
-  });
+  const ListRowShopingCart(this.shopingCartProductItem, {super.key});
 
   @override
   Widget build(BuildContext context) {
+    double totolPrice =
+        shopingCartProductItem.product.total * shopingCartProductItem.quantity;
+
     return Card(
       elevation: 3,
       child: InkWell(
         onTap: () {
           Navigator.of(context).pushNamed(
             Routes.productDetailPage,
-            arguments: productItem.id,
+            arguments: shopingCartProductItem.product.id,
           );
         },
         child: Padding(
@@ -35,7 +35,7 @@ class ListRows extends StatelessWidget {
                   ),
                   height: 180,
                   child: Image.network(
-                    productItem.imageUrl,
+                    shopingCartProductItem.product.imageUrl,
                   ),
                 ),
               ),
@@ -46,10 +46,10 @@ class ListRows extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      productItem.title,
+                      shopingCartProductItem.product.title,
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    Text(productItem.description),
+                    Text(shopingCartProductItem.product.description),
                     Container(
                       padding: const EdgeInsets.all(5),
                       child: Row(
@@ -90,10 +90,15 @@ class ListRows extends StatelessWidget {
                         ],
                       ),
                     ),
+                    Text("数量: ${shopingCartProductItem.quantity}",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        )),
                     Container(
                       padding: const EdgeInsets.all(5),
                       child: Text(
-                        "¥${productItem.total}",
+                        "¥${totolPrice}",
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 17,

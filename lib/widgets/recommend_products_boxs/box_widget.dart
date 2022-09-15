@@ -20,9 +20,7 @@ class BoxWidget extends StatelessWidget {
         return InkWell(
           onTap: () {
             Navigator.of(context)
-                .pushNamed(Routes.productDetailPage, arguments: productItem);
-
-            // Navigator.pushNamed(context, Routes.productDetailPage);
+                .pushNamed(Routes.productDetailPage, arguments: productItem.id);
           },
           child: BoxCustomWidget(
             child: Stack(

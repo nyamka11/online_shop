@@ -43,7 +43,7 @@ class CartBox extends StatelessWidget {
           child: ListView(
             shrinkWrap: true,
             children: [
-              ...shopingCardProvider.cartList.map(
+              ...shopingCardProvider.cartListItems.map(
                 (e) => Column(
                   children: [
                     InkWell(

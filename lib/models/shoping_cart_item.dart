@@ -1,11 +1,11 @@
 import 'package:online_shop/models/product.dart';
 
-class ShopingCartModel {
+class ShopingCartItemModel {
   String id;
   int quantity;
   ProductModel product;
 
-  ShopingCartModel({
+  ShopingCartItemModel({
     this.id = "sc1",
     required this.quantity,
     required this.product,

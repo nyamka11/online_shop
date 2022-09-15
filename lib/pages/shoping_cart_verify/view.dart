@@ -5,9 +5,10 @@ import 'package:provider/provider.dart';
 import '../../_routers.dart';
 import '../../provider/shoping_cart_provider.dart';
 import '../../widgets/_common/layout_template.dart';
-import '../../widgets/product_list_row.dart';
+import '../../widgets/product_list_row_shoping_cart.dart';
 import '../../widgets/shoping_cart_pages_process.dart';
 import '../../widgets/shoping_cart_pages_header.dart';
+import '../../widgets/shoping_cart_price_box.dart';
 
 class ShopingCartVerify extends StatefulWidget {
   const ShopingCartVerify({super.key});
@@ -17,15 +18,29 @@ class ShopingCartVerify extends StatefulWidget {
 }
 
 class _ShopingCartVerifyState extends State<ShopingCartVerify> {
+  double totalPrice = 0;
+
   @override
   Widget build(BuildContext context) {
+    for (var item in shopingCartListItems) {
+      totalPrice += item.quantity * item.product.total;
+    }
+
     final shopingCart = Provider.of<ShopingCartProvider>(context);
     return MainLayoutTemplate(
       bgColor: Color.fromARGB(255, 250, 250, 250),
       padding: 20,
       body: shopingCart.count == 0
           ? emptyContentBody(context)
-          : contentBody(shopingCart, context),
+          : Column(
+              children: [
+                contentBody(shopingCart, context),
+                PriceBox(totalPrice),
+                const SizedBox(height: 20),
+                const ActionsWidget(),
+                const SizedBox(height: 100),
+              ],
+            ),
     );
   }
 }
@@ -99,103 +114,15 @@ Widget contentBody(shopingCart, context) {
               child: ListView.builder(
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
-                  return ListRows(
-                    index: index,
-                    ctx: context,
-                  );
+                  return ListRowShopingCart(shopingCartListItems[index]);
                 },
-                itemCount: shopingCartList.length,
+                itemCount: shopingCartListItems.length,
               ),
             ),
           ),
         ],
       ),
-      totalPriceBox(),
-      const SizedBox(height: 20),
-      const ActionsWidget(),
-      const SizedBox(height: 100),
     ],
-  );
-}
-
-Widget totalPriceBox() {
-  return Container(
-    width: 600,
-    decoration: BoxDecoration(
-        border: Border.all(color: Color.fromARGB(255, 199, 199, 199)),
-        color: Colors.white),
-    padding: const EdgeInsets.all(20),
-    margin: const EdgeInsets.symmetric(vertical: 10),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            Expanded(
-              flex: 1,
-              child: Text(
-                "商品会計（税抜き）会計",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-            Expanded(flex: 1, child: Text("9,999,999¥")),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 15),
-          child: Row(
-            children: const [
-              Expanded(flex: 1, child: Text("税率 ９９％ 会計")),
-              Expanded(flex: 1, child: Text("9,999,999¥")),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 15),
-          child: Row(
-            children: const [
-              Expanded(flex: 1, child: Text("税率 ９９％ 会計")),
-              Expanded(flex: 1, child: Text("9,999,999¥")),
-            ],
-          ),
-        ),
-        const SizedBox(height: 20),
-        Row(
-          children: const [
-            Expanded(flex: 1, child: Text("その他")),
-            Expanded(flex: 1, child: Text("")),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 15),
-          child: Row(
-            children: const [
-              Expanded(flex: 1, child: Text("税率 ９９％ 会計")),
-              Expanded(flex: 1, child: Text("9,999,999¥")),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 15),
-          child: Row(
-            children: const [
-              Expanded(flex: 1, child: Text("税率 ９９％ 会計")),
-              Expanded(flex: 1, child: Text("9,999,999¥")),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 15),
-          child: Row(
-            children: const [
-              Expanded(flex: 1, child: Text("税率 ９９％ 会計")),
-              Expanded(flex: 1, child: Text("9,999,999¥")),
-            ],
-          ),
-        )
-      ],
-    ),
   );
 }
 

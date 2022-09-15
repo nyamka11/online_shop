@@ -3,17 +3,11 @@ import 'package:online_shop/data/product_data.dart';
 import '../../widgets/_common/layout_template.dart';
 import '../../widgets/product_list_row.dart';
 import '../../widgets/right_window/view.dart';
-// import 'row_item.dart';
 import 'top_bar.dart';
 
-class ProductListPage extends StatefulWidget {
+class ProductListPage extends StatelessWidget {
   const ProductListPage({super.key});
 
-  @override
-  State<ProductListPage> createState() => _ProductListPageState();
-}
-
-class _ProductListPageState extends State<ProductListPage> {
   @override
   Widget build(BuildContext context) {
     return MainLayoutTemplate(
@@ -31,10 +25,7 @@ class _ProductListPageState extends State<ProductListPage> {
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemBuilder: (BuildContext context, int index) {
-                        return ListRows(
-                          index: index,
-                          ctx: context,
-                        );
+                        return ListRows(productItem: products[index]);
                       },
                       itemCount: products.length,
                     ),
