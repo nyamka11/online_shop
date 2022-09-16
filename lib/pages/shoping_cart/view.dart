@@ -4,10 +4,10 @@ import 'package:provider/provider.dart';
 import '../../_routers.dart';
 import '../../provider/shoping_cart_provider.dart';
 import '../../widgets/_common/layout_template.dart';
-import '../../widgets/product_list_row_shoping_cart.dart';
-import '../../widgets/shoping_cart_pages_process.dart';
-import '../../widgets/shoping_cart_pages_header.dart';
-import '../../widgets/shoping_cart_price_box.dart';
+import '../../widgets/product_list_row/product_list_row_shoping_cart.dart';
+import '../../widgets/shoping_cart_widgets/shoping_cart_pages_header.dart';
+import '../../widgets/shoping_cart_widgets/shoping_cart_pages_process.dart';
+import '../../widgets/shoping_cart_widgets/shoping_cart_price_box.dart';
 
 class ShopingCartPage extends StatelessWidget {
   const ShopingCartPage({super.key});

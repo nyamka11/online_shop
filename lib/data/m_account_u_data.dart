@@ -20,7 +20,7 @@ final List<MAccountUModel> accountUsers = [
     cmpCd: 2,
     userName: '二ム',
     mailAdd: 'unyamka@gmail.com',
-    pswd: 'Nyamka123',
+    pswd: '123',
     userExpDate: DateTime.now().add(const Duration(days: 365)),
     level: 0,
     pswLastUpdate: DateTime.now(),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/_routers.dart';
-import '../../widgets/shoping_cart_pages_process.dart';
 import '../../widgets/_common/layout_template.dart';
-import '../../widgets/shoping_cart_pages_header.dart';
+import '../../widgets/shoping_cart_widgets/shoping_cart_pages_header.dart';
+import '../../widgets/shoping_cart_widgets/shoping_cart_pages_process.dart';
 
 class ShopingCartFinished extends StatelessWidget {
   const ShopingCartFinished({super.key});

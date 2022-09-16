@@ -20,6 +20,7 @@ final List<ShopingCartItemModel> shopingCartListItems = [
       total: 2000,
       tax: 10,
       totalIncludingTax: 2020,
+      badgeFlag: "100101",
     ),
   ),
   ShopingCartItemModel(
@@ -39,6 +40,7 @@ final List<ShopingCartItemModel> shopingCartListItems = [
       total: 2000,
       tax: 10,
       totalIncludingTax: 2020,
+      badgeFlag: "100101",
     ),
   ),
 ];

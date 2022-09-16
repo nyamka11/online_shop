@@ -14,6 +14,7 @@ final List<ProductModel> recommentProducts = [
     total: 2000,
     tax: 10,
     totalIncludingTax: 2020,
+    badgeFlag: "100101",
   ),
   ProductModel(
     id: 'p2',
@@ -28,6 +29,7 @@ final List<ProductModel> recommentProducts = [
     total: 2000,
     tax: 10,
     totalIncludingTax: 2020,
+    badgeFlag: "100101",
   ),
   ProductModel(
     id: 'p3',
@@ -43,6 +45,7 @@ final List<ProductModel> recommentProducts = [
     total: 2000,
     tax: 10,
     totalIncludingTax: 2020,
+    badgeFlag: "100101",
   ),
   ProductModel(
     id: 'p4',
@@ -57,5 +60,6 @@ final List<ProductModel> recommentProducts = [
     total: 2000,
     tax: 10,
     totalIncludingTax: 2020,
+    badgeFlag: "100101",
   ),
 ];

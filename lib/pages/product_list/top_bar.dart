@@ -17,22 +17,40 @@ class _TopBarState extends State<TopBar> {
 
     return Column(
       children: [
-        Padding(
-          padding: EdgeInsets.all(15),
-          child: Text("以下の高品は、正会員の登録をすると購入できます。"),
+        Container(
+          alignment: Alignment.center,
+          width: double.infinity,
+          color: Colors.white,
+          padding: const EdgeInsets.only(
+            top: 20,
+            bottom: 15,
+          ),
+          child: const Text(
+            "以下の高品は、正会員の登録をすると購入できます。",
+            style: TextStyle(
+              fontSize: 17,
+              decoration: TextDecoration.underline,
+            ),
+          ),
         ),
         Container(
-          margin: const EdgeInsets.all(6),
-          padding: const EdgeInsets.all(6),
+          // margin: const EdgeInsets.all(6),
+          padding: const EdgeInsets.symmetric(vertical: 10),
           color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
                 const SizedBox(width: 20),
-                const Text("カテゴリ"),
+                const Text(
+                  "カテゴリ",
+                  style: TextStyle(fontSize: 16),
+                ),
                 const SizedBox(width: 20),
-                const Text("条件 : "),
+                const Text(
+                  "条件 : ",
+                  style: TextStyle(fontSize: 16),
+                ),
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
@@ -61,7 +79,10 @@ class _TopBarState extends State<TopBar> {
                   ),
                 ),
                 const SizedBox(width: 20),
-                const Text("バッチ : "),
+                const Text(
+                  "バッチ : ",
+                  style: TextStyle(fontSize: 16),
+                ),
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),

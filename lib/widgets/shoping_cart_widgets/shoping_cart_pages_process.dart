@@ -1,9 +1,4 @@
-import 'dart:async';
-import 'dart:js';
-
 import 'package:flutter/material.dart';
-
-import '../_routers.dart';
 
 class ProcessList extends StatelessWidget {
   final int stepIndex;
@@ -13,7 +8,7 @@ class ProcessList extends StatelessWidget {
     required this.stepIndex,
   }) : super(key: key);
 
-  final List<String> steps = ["カートの中の確認 >>", "注文確定 >>", " お支払い >>", " 終了 "];
+  final List<String> steps = [" カートの中の確認 ", " 注文確定 ", "  お支払い ", " 終了 "];
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +22,8 @@ class ProcessList extends StatelessWidget {
                 ? Container(
                     margin: const EdgeInsets.only(top: 10, bottom: 10),
                     padding: const EdgeInsets.only(
-                      top: 14,
-                      bottom: 8,
+                      top: 10,
+                      bottom: 4,
                       left: 20,
                       right: 20,
                     ),

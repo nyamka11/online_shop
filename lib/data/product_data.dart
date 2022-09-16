@@ -14,6 +14,7 @@ final List<ProductModel> products = [
     total: 2132,
     tax: 10,
     totalIncludingTax: 2020,
+    badgeFlag: "100101",
   ),
   ProductModel(
     id: 'p2',
@@ -28,6 +29,7 @@ final List<ProductModel> products = [
     total: 651,
     tax: 10,
     totalIncludingTax: 2020,
+    badgeFlag: "100101",
   ),
   ProductModel(
     id: 'p3',
@@ -43,6 +45,7 @@ final List<ProductModel> products = [
     total: 986,
     tax: 10,
     totalIncludingTax: 2020,
+    badgeFlag: "100101",
   ),
   ProductModel(
     id: 'p4',
@@ -57,6 +60,7 @@ final List<ProductModel> products = [
     total: 2315,
     tax: 10,
     totalIncludingTax: 2020,
+    badgeFlag: "100101",
   ),
   ProductModel(
     id: 'p5',
@@ -72,6 +76,7 @@ final List<ProductModel> products = [
     total: 987,
     tax: 10,
     totalIncludingTax: 2020,
+    badgeFlag: "100101",
   ),
   ProductModel(
     id: 'p6',
@@ -88,6 +93,7 @@ final List<ProductModel> products = [
     total: 1235,
     tax: 10,
     totalIncludingTax: 2020,
+    badgeFlag: "100101",
   ),
   ProductModel(
     id: 'p6',
@@ -104,5 +110,6 @@ final List<ProductModel> products = [
     total: 1234,
     tax: 10,
     totalIncludingTax: 2020,
+    badgeFlag: "100101",
   ),
 ];

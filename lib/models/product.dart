@@ -7,6 +7,7 @@ class ProductModel {
   final double total;
   final double tax;
   final double totalIncludingTax;
+  final String badgeFlag;
 
   ProductModel({
     required this.id,
@@ -17,5 +18,6 @@ class ProductModel {
     required this.total,
     required this.tax,
     required this.totalIncludingTax,
+    required this.badgeFlag,
   });
 }

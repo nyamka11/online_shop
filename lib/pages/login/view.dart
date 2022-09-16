@@ -3,6 +3,7 @@
 import 'dart:html' show Storage, window;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:online_shop/_routers.dart';
 import 'package:online_shop/data/m_account_u_data.dart';
 import 'package:online_shop/widgets/_Common/layout_template.dart';
@@ -28,11 +29,15 @@ class _LoginPageState extends State<LoginPage> {
   String warningMsg = "";
 
   @override
-  void initState() {
+  initState() {
     localStorage.removeWhere((key, value) => key == storageLoginId);
     warningMsg = "";
     _isObscure = true;
     super.initState();
+  }
+
+  Future _getSession() async {
+    await SessionManager().destroy();
   }
 
   @override
@@ -48,6 +53,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    _getSession();
     var textFieldHeight = 40.0;
     SizedBox dummySpaceBox(double height) {
       return SizedBox(
@@ -220,7 +226,7 @@ class _LoginPageState extends State<LoginPage> {
                 dummySpaceBox(30),
                 TextButton(
                   style: buttonStyle,
-                  onPressed: () {
+                  onPressed: () async {
                     if (loginIdController.text.isEmpty ||
                         passwordController.text.isEmpty) {
                       setState(() {
@@ -265,13 +271,13 @@ class _LoginPageState extends State<LoginPage> {
                       return;
                     }
 
-                    localStorage[storageLoginId] = user.mailAdd;
+                    var sessionManager = SessionManager();
+                    await sessionManager.set("isLogged", true);
+                    await sessionManager.set("loggedUserName", user.userName);
 
                     Navigator.of(context).pushNamed(Routes.homePage);
                   },
                   child: SizedBox(
-                    // padding: const EdgeInsets.only(top: 15, bottom: 15),
-                    // width: double.infinity,
                     height: textFieldHeight,
                     width: 300,
                     child: const Align(
