@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/pages/home_page.dart';
+import 'package:online_shop/pages/invitation/view%20invitation_result.dart';
+import 'package:online_shop/pages/invitation/view.dart';
 import 'package:online_shop/pages/login/view.dart';
 import 'package:online_shop/pages/login/view_change_password.dart';
 import 'package:online_shop/pages/login/view_forget_password.dart';
@@ -64,6 +66,8 @@ class MyApp extends StatelessWidget {
         Routes.shopingCartPayment: (context) => const ShopingCartPayment(),
         Routes.shopingCartFinished: (context) => const ShopingCartFinished(),
         Routes.shopingCartFailed: (context) => const ShopingCartFailed(),
+        Routes.invitationPage: (context) => const InvitationPage(),
+        Routes.invitationResultPage: (context) => const InvitationResultPage(),
       },
     );
   }
