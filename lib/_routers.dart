@@ -13,4 +13,6 @@ class Routes {
   static const String shopingCartPayment = "/shopingCartPayment";
   static const String shopingCartFinished = "/shopingCartFinished";
   static const String shopingCartFailed = "/shopingCartFailed";
+  static const String invitationPage = "/invitation";
+  static const String invitationResultPage = "/invitationResult";
 }
