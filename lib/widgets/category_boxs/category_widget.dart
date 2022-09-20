@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:online_shop/_routers.dart';
 import 'package:online_shop/widgets/_common/box_custom.dart';
 
+import '../../data/categories_data.dart';
+
 class CatBoxWidget extends StatelessWidget {
-  final Color color;
-  final String name;
-  final String imageUrl;
+  final int index;
 
   const CatBoxWidget({
     super.key,
-    required this.color,
-    required this.name,
-    required this.imageUrl,
+    required this.index,
   });
 
   @override
@@ -31,7 +29,7 @@ class CatBoxWidget extends StatelessWidget {
                   padding: const EdgeInsets.all(20),
                   // height: 600,
                   child: Image.network(
-                    imageUrl,
+                    "https://m.media-amazon.com/images/I/61BUt5ZErdL._AC_SL1500_.jpg",
                     fit: BoxFit.scaleDown,
                   ),
                 ),
@@ -41,9 +39,9 @@ class CatBoxWidget extends StatelessWidget {
                     padding: const EdgeInsets.all(17),
                     height: 60,
                     width: w,
-                    color: color,
+                    color: Colors.blue[300],
                     child: Text(
-                      name,
+                      categories[index].catName,
                       style: const TextStyle(
                         fontSize: 17,
                         color: Colors.white,

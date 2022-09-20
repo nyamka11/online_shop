@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 
 import '../../_routers.dart';
+import '../../data/param_data.dart';
 import '../../models/shoping_cart_item.dart';
 
 class ListRowShopingCart extends StatelessWidget {
   final ShopingCartItemModel shopingCartProductItem;
 
   const ListRowShopingCart(this.shopingCartProductItem, {super.key});
+
+  getParam(paramId) {
+    var par = paramData.where((element) => element.paramId == paramId);
+    return par.isNotEmpty ? par.first.paranName : "noParam";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +62,10 @@ class ListRowShopingCart extends StatelessWidget {
                       child: Row(
                         children: [
                           Column(
-                            children: const [
-                              Text("1箱16袋入り"),
-                              Text("新着/お薦め"),
+                            children: [
+                              const Text("1箱16袋入り"),
+                              Text(getParam(
+                                  shopingCartProductItem.product.paramId)),
                             ],
                           ),
                           const SizedBox(width: 20),

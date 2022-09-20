@@ -8,6 +8,10 @@ final List<ShopingCartItemModel> shopingCartListItems = [
     quantity: 2,
     product: ProductModel(
       id: 'p2',
+      cat_1: 1,
+      cat_2: 2,
+      cat_3: 3,
+      paramId: 1,
       title: 'Flutter State Management 1111111',
       description: 'Everything you should know about Flutter State.',
       imageUrl:
@@ -28,6 +32,10 @@ final List<ShopingCartItemModel> shopingCartListItems = [
     quantity: 5,
     product: ProductModel(
       id: 'p1',
+      cat_1: 1,
+      cat_2: 2,
+      cat_3: 3,
+      paramId: 2,
       title: 'Flutter State Management　ｄｄｄｄｄｄｄｄｄｄｄｄｄ',
       description: 'Everything you should know about Flutter State.',
       imageUrl:

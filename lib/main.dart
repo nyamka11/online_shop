@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
         Routes.changePasswordPage: (context) => const ChangePasswordPage(),
         Routes.passwordChanged: (context) => const PasswordChangedInfoPage(),
         Routes.productDetailPage: (context) => const ProductsDetailPage(),
-        Routes.productListPage: (context) => const ProductListPage(),
+        Routes.productListPage: (context) => ProductListPage(),
         Routes.shopingCartPage: (context) => const ShopingCartPage(),
         Routes.shopingCartVerify: (context) => const ShopingCartVerify(),
         Routes.shopingCartPayment: (context) => const ShopingCartPayment(),

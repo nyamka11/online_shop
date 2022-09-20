@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:online_shop/models/badge.dart';
+
+import '../../data/badge.dart';
+import '../../data/categories_data.dart';
+import '../../models/category.dart';
 
 class TopBar extends StatefulWidget {
-  const TopBar({
-    Key? key,
-  }) : super(key: key);
+  Function onClickSearchButton;
+
+  TopBar(this.onClickSearchButton, {super.key});
 
   @override
   State<TopBar> createState() => _TopBarState();
 }
 
 class _TopBarState extends State<TopBar> {
+  int selectedCatId = categories.first.id;
+  int selectedBadgeId = badgeData.first.id;
+
+  final List<CategoryModel> categoryList = categories;
+  final List<BadgeModel> bagdeList = badgeData;
+
   @override
   Widget build(BuildContext context) {
-    String dropdownValue = 'One';
-    final List<String> list = ['One', 'Two', 'Free', 'Four'];
-
     return Column(
       children: [
         Container(
@@ -34,7 +42,6 @@ class _TopBarState extends State<TopBar> {
           ),
         ),
         Container(
-          // margin: const EdgeInsets.all(6),
           padding: const EdgeInsets.symmetric(vertical: 10),
           color: Colors.white,
           child: Padding(
@@ -43,7 +50,7 @@ class _TopBarState extends State<TopBar> {
               children: [
                 const SizedBox(width: 20),
                 const Text(
-                  "カテゴリ",
+                  " カテゴリ",
                   style: TextStyle(fontSize: 16),
                 ),
                 const SizedBox(width: 20),
@@ -56,23 +63,23 @@ class _TopBarState extends State<TopBar> {
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  padding: EdgeInsets.only(left: 8, right: 8),
+                  padding: const EdgeInsets.only(left: 8, right: 8),
                   width: 200,
                   height: 35,
                   child: DropdownButton(
-                    underline: SizedBox(),
-                    value: dropdownValue,
-                    items: list
+                    underline: const SizedBox(),
+                    value: selectedCatId,
+                    items: categoryList
                         .map(
                           (value) => DropdownMenuItem(
-                            value: value,
-                            child: Text(value),
+                            value: value.id,
+                            child: Text(value.catName),
                           ),
                         )
                         .toList(),
-                    onChanged: (String? newValue) {
+                    onChanged: (id) {
                       setState(() {
-                        dropdownValue = newValue!;
+                        selectedCatId = id!;
                       });
                     },
                     isExpanded: true,
@@ -88,28 +95,60 @@ class _TopBarState extends State<TopBar> {
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  padding: EdgeInsets.only(left: 8, right: 8),
+                  padding: const EdgeInsets.only(left: 8, right: 8),
                   width: 200,
                   height: 35,
                   child: DropdownButton(
-                    underline: SizedBox(),
-                    value: dropdownValue,
-                    items: list
+                    underline: const SizedBox(),
+                    value: selectedBadgeId,
+                    items: bagdeList
                         .map(
                           (value) => DropdownMenuItem(
-                            value: value,
-                            child: Text(value),
+                            value: value.id,
+                            child: Text(value.badgeName),
                           ),
                         )
                         .toList(),
-                    onChanged: (String? newValue) {
+                    onChanged: (id) {
                       setState(() {
-                        dropdownValue = newValue!;
+                        selectedBadgeId = id!;
                       });
                     },
                     isExpanded: true,
                   ),
                 ),
+                const SizedBox(width: 20),
+                ElevatedButton(
+                  onPressed: (() => widget.onClickSearchButton(
+                      selectedCatId, selectedBadgeId)),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.black87, //ボタンの背景色
+                  ),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 6),
+                    child: Text(
+                      '検査',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 20),
+                const Text(
+                  "新 着 順",
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+                const SizedBox(width: 20),
+                const Text(
+                  " あいうえお順",
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                  ),
+                )
               ],
             ),
           ),

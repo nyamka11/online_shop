@@ -19,11 +19,7 @@ class CategoriesView extends StatelessWidget {
             crossAxisCount: 3,
             children: List.generate(
               categories.length,
-              (index) => CatBoxWidget(
-                color: categories[index].color,
-                name: categories[index].name,
-                imageUrl: categories[index].imageUrl,
-              ),
+              (index) => CatBoxWidget(index: index),
             ),
           )
         : GridView.builder(
@@ -37,11 +33,7 @@ class CategoriesView extends StatelessWidget {
             ),
             itemCount: categories.length,
             itemBuilder: (BuildContext ctx, index) {
-              return CatBoxWidget(
-                color: categories[index].color,
-                name: categories[index].name,
-                imageUrl: categories[index].imageUrl,
-              );
+              return CatBoxWidget(index: index);
             },
           );
   }

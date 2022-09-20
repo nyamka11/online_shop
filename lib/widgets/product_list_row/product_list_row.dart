@@ -1,4 +1,7 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
+import 'package:online_shop/data/param_data.dart';
 import 'package:online_shop/models/product.dart';
 import '../../_routers.dart';
 
@@ -9,6 +12,11 @@ class ListRows extends StatelessWidget {
     super.key,
     required this.productItem,
   });
+
+  getParam(paramId) {
+    var par = paramData.where((element) => element.paramId == paramId);
+    return par.isNotEmpty ? par.first.paranName : "noParam";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +63,9 @@ class ListRows extends StatelessWidget {
                       child: Row(
                         children: [
                           Column(
-                            children: const [
-                              Text("1箱16袋入り"),
-                              Text("新着/お薦め"),
+                            children: [
+                              const Text("1箱16袋入り"),
+                              Text(getParam(productItem.paramId)),
                             ],
                           ),
                           const SizedBox(width: 20),
