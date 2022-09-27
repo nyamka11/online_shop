@@ -47,7 +47,7 @@ class DrawarCustom extends StatelessWidget {
         margin: const EdgeInsets.only(top: 100, left: 20, right: 20),
         child: ListView(
           children: [
-            ...Common.pageNemas
+            ...Common.topPageNames
                 .map(
                   (item) => Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -114,7 +114,7 @@ class BigScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        ...Common.pageNemas
+        ...Common.topPageNames
             .map(
               (item) => TextButton(
                 style: TextButton.styleFrom(

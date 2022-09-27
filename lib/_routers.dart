@@ -15,4 +15,6 @@ class Routes {
   static const String shopingCartFailed = "/shopingCartFailed";
   static const String invitationPage = "/invitation";
   static const String invitationResultPage = "/invitationResult";
+  static const String privacyPolicyPdf = "/privacyPolicyPdf";
+  static const String commercialTransactionPdf = "/commercialTransactionPdf";
 }

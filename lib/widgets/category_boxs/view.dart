@@ -18,7 +18,7 @@ class CategoriesView extends StatelessWidget {
             mainAxisSpacing: 10,
             crossAxisCount: 3,
             children: List.generate(
-              categories.length,
+              categoriesData.length,
               (index) => CatBoxWidget(index: index),
             ),
           )
@@ -31,7 +31,7 @@ class CategoriesView extends StatelessWidget {
               crossAxisSpacing: 20,
               mainAxisSpacing: 20,
             ),
-            itemCount: categories.length,
+            itemCount: categoriesData.length,
             itemBuilder: (BuildContext ctx, index) {
               return CatBoxWidget(index: index);
             },

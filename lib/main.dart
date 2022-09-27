@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '_routers.dart';
 import 'package:online_shop/pages/home_page.dart';
 import 'package:online_shop/pages/invitation/view%20invitation_result.dart';
 import 'package:online_shop/pages/invitation/view.dart';
@@ -10,7 +11,8 @@ import 'package:online_shop/pages/login/view_verification_number_confirm.dart';
 import 'package:online_shop/pages/product_detail/view.dart';
 import 'package:online_shop/provider/shoping_cart_provider.dart';
 import 'package:provider/provider.dart';
-import '_routers.dart';
+import 'pages/commercial_transaction/view.dart';
+import 'pages/privacy_policy/view.dart';
 import 'pages/product_list/view.dart';
 import 'pages/shoping_cart/view.dart';
 import 'pages/shoping_cart_verify/view.dart';
@@ -46,7 +48,6 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      // home: HomePage(),
       initialRoute: Routes.homePage,
       routes: {
         Routes.homePage: (context) => HomePage(),
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
         Routes.changePasswordPage: (context) => const ChangePasswordPage(),
         Routes.passwordChanged: (context) => const PasswordChangedInfoPage(),
         Routes.productDetailPage: (context) => const ProductsDetailPage(),
-        Routes.productListPage: (context) => ProductListPage(),
+        Routes.productListPage: (context) => const ProductListPage(),
         Routes.shopingCartPage: (context) => const ShopingCartPage(),
         Routes.shopingCartVerify: (context) => const ShopingCartVerify(),
         Routes.shopingCartPayment: (context) => const ShopingCartPayment(),
@@ -65,6 +66,9 @@ class MyApp extends StatelessWidget {
         Routes.shopingCartFailed: (context) => const ShopingCartFailed(),
         Routes.invitationPage: (context) => const InvitationPage(),
         Routes.invitationResultPage: (context) => const InvitationResultPage(),
+        Routes.privacyPolicyPdf: (context) => PrivacyPolicyPdf(),
+        Routes.commercialTransactionPdf: (context) =>
+            const CommercialTransactionPdf(),
       },
     );
   }
