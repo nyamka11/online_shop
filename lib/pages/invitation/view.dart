@@ -1,13 +1,12 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
-
+import 'dart:html' as html;
 import 'dart:html' show Storage, window;
 
 import 'package:flutter/material.dart';
-import 'package:online_shop/widgets/_Common/layout_template.dart';
+import '../../widgets/_Common/layout_template.dart';
 import '../../_routers.dart';
 import '../../widgets/check_box_custom.dart';
-import '../../widgets/input_controls/input_invitation_info.dart';
-import '../../widgets/input_controls/verify_number_input.dart';
+import 'dart:js' as js;
 
 class InvitationPage extends StatefulWidget {
   const InvitationPage({super.key});
@@ -17,29 +16,21 @@ class InvitationPage extends StatefulWidget {
 }
 
 class _InvitationPageState extends State<InvitationPage> {
-  final addMsgController = TextEditingController();
+  final msgController = TextEditingController();
   List<TextEditingController> inputNameController = [];
   List<TextEditingController> inputEmailController = [];
-  List<TextEditingController> inputCodeController = [];
 
   Storage localStorage = window.localStorage;
 
-  String storageLoginId = "loginId";
+  String storageLoginId = "loggedUserName";
   String warningMsg = "";
+  String code = "";
   bool inviteRuleVerifed = false;
 
   @override
   void initState() {
-    localStorage.removeWhere((key, value) => key == storageLoginId);
+    code = "123456";
     warningMsg = "";
-    addMsgController.text =
-        " ${localStorage[storageLoginId]} です。\nEmon Market の商品を紹介します。";
-
-    inputCodeController.clear();
-    for (int i = 0; i < 6; i++) {
-      inputCodeController.add(TextEditingController());
-    }
-
     inputNameController.clear();
     for (int i = 0; i < 10; i++) {
       inputNameController.add(TextEditingController());
@@ -50,17 +41,27 @@ class _InvitationPageState extends State<InvitationPage> {
       inputEmailController.add(TextEditingController());
     }
 
+    String msg = """                      さん\n""".padLeft(40);
+    msg = "$msg${"${localStorage[storageLoginId] ?? ""} ".padRight(38)}です。\n";
+    // msg = "$msg ${localStorage[storageLoginId]} です。\n";
+    msg = "$msg Emon Market の商品を紹介します。\n";
+    msg = "$msg \nホームページのＵＲＬ　です。\n";
+    msg = "$msg http://18.222.230.119/webpage\n";
+    msg = "$msg \n会員登録の時に、下記の招待コードを入力していただけると\n私が招待した会員として登録されます。\n";
+    msg = "$msg \n招待コード：$code\n";
+    msg = "$msg \nこのサイトでは招待した会員がこのサイトで商品を購入すると、\n招待した人にポイントがつく仕組みがあります。\n";
+    msg = "$msg \nエシカル商品を購入して、お友達を紹介してお得に買い物ができます。\n";
+    msg = "$msg \n安心なエシカル商品を生活に取り入れる良い機会になると思います。\n";
+    msg = "$msg 一度おとずれてみてください。\n";
+
+    msgController.text = msg;
+
     super.initState();
   }
 
   @override
   void dispose() {
     warningMsg = "";
-
-    for (int i = 0; i < 6; i++) {
-      inputCodeController[i].dispose();
-    }
-    inputCodeController.clear();
 
     for (int i = 0; i < 10; i++) {
       inputNameController[i].dispose();
@@ -81,31 +82,12 @@ class _InvitationPageState extends State<InvitationPage> {
     });
   }
 
-  void checkValidNumber() {
-    // String inputNumber = "";
-    // for (var e in inputCodeController) {
-    //   if (e.text.isEmpty) break;
-    //   inputNumber = inputNumber + e.text.trim();
-    // }
-    // if (inputNumber == "123456") {
-    //   print("OKKK");
-    // } else if (inputNumber.length == 6) {
-    //   print("Message haruulnaa");
-    // }
-  }
-
   @override
   Widget build(BuildContext context) {
     var textFieldHeight = 40.0;
     SizedBox dummySpaceBoxVer(double height) {
       return SizedBox(
         height: height,
-      );
-    }
-
-    SizedBox dummySpaceBoxHor(double width) {
-      return SizedBox(
-        width: width,
       );
     }
 
@@ -137,7 +119,7 @@ class _InvitationPageState extends State<InvitationPage> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "${localStorage[storageLoginId]}  さん      お友達を招待しましょう。",
+                    "${"${localStorage[storageLoginId] ?? ""} ".padRight(38)}さん。      お友達を招待しましょう。",
                     textAlign: TextAlign.left,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
@@ -210,78 +192,58 @@ class _InvitationPageState extends State<InvitationPage> {
                           fontSize: 10,
                         ),
                       ),
-                      dummySpaceBoxVer(5),
-                      Container(
-                        constraints: const BoxConstraints(
-                          // minHeight: 50,
-                          // maxHeight: 200,
-                          minWidth: 500,
-                          maxWidth: 500,
+                      dummySpaceBoxVer(25),
+                      const Text(
+                        "招待コード６桁を振り出しました。",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          // fontWeight: FontWeight.bold,
+                          fontSize: 12,
                         ),
-                        // color: Colors.amber,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                        ),
-                        padding: const EdgeInsets.only(
-                          left: 5,
-                          right: 5,
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "＿＿＿＿＿＿様 始めまして Ｅmon Market です。",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              "Emon Market 会員の ${localStorage[storageLoginId]} さん が",
-                              textAlign: TextAlign.left,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const Text(
-                              "Emon Market 商品をご案内します。",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const Text(
-                              "下記サイトで、会員しか購入できない商品を購入できます。",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const Text(
-                              "会員登録をして購入しましょう。",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
+                      ),
+                      dummySpaceBoxVer(15),
+                      Text(
+                        code,
+                        textAlign: TextAlign.left,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline,
+                          // fontSize: 10,
                         ),
                       ),
                       dummySpaceBoxVer(15),
                       const Text(
-                        "追加のメッセージを編集してください。",
+                        "注文控えのメールの他に、お友達の招待情報のメールを送付します。\n確認してください。",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          // fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      ),
+                      dummySpaceBoxVer(15),
+                      const Text(
+                        "招待例文と、招待コードを使ってお友達を招待してください。",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          // fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      ),
+                      dummySpaceBoxVer(15),
+                      const Text(
+                        "お友達を招待するボタンを押すまでは招待コードは有効になりません。",
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          // fontSize: 10,
+                          color: Colors.red,
+                          fontSize: 12,
                         ),
                       ),
-                      dummySpaceBoxVer(10),
+                      dummySpaceBoxVer(15),
                       Container(
                         constraints: const BoxConstraints(
-                          minHeight: 100,
-                          maxHeight: 100,
+                          minHeight: 420,
+                          maxHeight: 420,
                           minWidth: 500,
                           maxWidth: 500,
                         ),
@@ -294,7 +256,7 @@ class _InvitationPageState extends State<InvitationPage> {
                           border: Border.all(color: Colors.black),
                         ),
                         child: TextField(
-                          controller: addMsgController,
+                          controller: msgController,
                           textInputAction: TextInputAction.newline,
                           keyboardType: TextInputType.multiline,
                           expands: true,
@@ -315,166 +277,9 @@ class _InvitationPageState extends State<InvitationPage> {
                           ),
                         ),
                       ),
+                      dummySpaceBoxVer(30),
                       const Text(
-                        """
-※必ずメールだけではなく、招待したことをお友達に連絡をしてください。
-迷惑メールにならないように、招待を受けてくださるお友達であることを確認してからお客様の責任で招待を送ってください。
-最大１０名まで招待できます。""",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
-                        ),
-                      ),
-                      dummySpaceBoxVer(15),
-                      Container(
-                        constraints: const BoxConstraints(
-                          // minHeight: 50,
-                          // maxHeight: 200,
-                          minWidth: 500,
-                          maxWidth: 500,
-                        ),
-                        // color: Colors.amber,
-                        // decoration: BoxDecoration(
-                        //   border: Border.all(color: Colors.black),
-                        // ),
-                        // padding: const EdgeInsets.only(
-                        //   left: 5,
-                        //   right: 5,
-                        // ),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  constraints: const BoxConstraints(
-                                    minHeight: 20,
-                                    maxHeight: 20,
-                                    minWidth: 40,
-                                    maxWidth: 40,
-                                  ),
-                                  // color: Color.fromARGB(255, 255, 178, 114),
-                                  decoration: BoxDecoration(
-                                      color: const Color.fromARGB(
-                                          255, 255, 209, 171),
-                                      border: Border.all(
-                                        color: Colors.black,
-                                        width: 1,
-                                      )),
-                                  child: const Text(
-                                    "№",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      height: 1.2,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  constraints: const BoxConstraints(
-                                    minHeight: 20,
-                                    maxHeight: 20,
-                                    minWidth: 230,
-                                    maxWidth: 230,
-                                  ),
-                                  // color: Color.fromARGB(255, 255, 178, 114),
-                                  decoration: const BoxDecoration(
-                                    color: Color.fromARGB(255, 255, 209, 171),
-                                    border: Border(
-                                      top: BorderSide(
-                                          color: Colors.black, width: 1),
-                                      bottom: BorderSide(
-                                          color: Colors.black, width: 1),
-                                      right: BorderSide(
-                                          color: Colors.black, width: 1),
-                                    ),
-                                  ),
-                                  child: const Align(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      "表示送付先名",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        height: 1.2,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  constraints: const BoxConstraints(
-                                    minHeight: 20,
-                                    maxHeight: 20,
-                                    minWidth: 230,
-                                    maxWidth: 230,
-                                  ),
-                                  // color: Color.fromARGB(255, 255, 178, 114),
-                                  decoration: const BoxDecoration(
-                                    color: Color.fromARGB(255, 255, 209, 171),
-                                    border: Border(
-                                      top: BorderSide(
-                                          color: Colors.black, width: 1),
-                                      bottom: BorderSide(
-                                          color: Colors.black, width: 1),
-                                      right: BorderSide(
-                                          color: Colors.black, width: 1),
-                                    ),
-                                  ),
-                                  child: const Text(
-                                    "メールアドレス",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      height: 1.2,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            ...[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(
-                              (e) => InputInvitationInfo(
-                                  rowNo: e,
-                                  readOnly: false,
-                                  inputNameController:
-                                      inputNameController[e - 1],
-                                  inputEmailController:
-                                      inputEmailController[e - 1]),
-                            ),
-                          ],
-                        ),
-                      ),
-                      dummySpaceBoxVer(15),
-                      const Text(
-                        "※招待者の認証コード６桁を設定してください。",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
-                        ),
-                      ),
-                      dummySpaceBoxVer(15),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          ...[0, -1, 1, -1, 2, -1, 3, -1, 4, -1, 5].map(
-                            (e) => e == -1
-                                ? dummySpaceBoxHor(13)
-                                : VerifyNumberInput(
-                                    controller: inputCodeController[e],
-                                    checkValidNumberCallBack: checkValidNumber,
-                                  ),
-                          ),
-                        ],
-                      ),
-                      dummySpaceBoxVer(15),
-                      const Text(
-                        """
-※送る前にメールアドレスが間違っていないか、よく確認してから
-「お友達を招待する」ボタンを押してください。
-押すと直ちにメールが送信されます。
-※「お友達の招待ルール」をお読みいただき同意できる場合は、「同意する」をチェックしてください。""",
+                        "※「お友達の招待ルール」をお読みいただき,\n　 同意できる場合は、「同意する」をチェックしてください。",
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           color: Colors.red,
@@ -488,11 +293,15 @@ class _InvitationPageState extends State<InvitationPage> {
                         children: [
                           InkWell(
                             onTap: () {
-                              print("Click... お友達の招待ルール ");
-                              // Navigator.pushNamed(
-                              //   context,
-                              //   Routes.forgetPasswordPage,
-                              // );
+                              html.window.open(
+                                  Uri.base.origin + Routes.loginPage, "_blank");
+
+                              // html.window.open(
+                              //     'https://www.fluttercampus.com', "_self");
+                              // html.window.open('https://www.fluttercampus.com',
+                              //     "_blank", 'location=no');
+                              // js.context.callMethod('open',
+                              //     ['https://stackoverflow.com/questions/ask']);
                             },
                             child: const Align(
                               alignment: Alignment.bottomLeft,
@@ -526,17 +335,31 @@ class _InvitationPageState extends State<InvitationPage> {
                     ],
                   ),
                 ),
+                if (warningMsg != "")
+                  Text(
+                    warningMsg,
+                    style: const TextStyle(
+                      color: Colors.red,
+                      // fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                if (warningMsg != "") dummySpaceBoxVer(15),
                 TextButton(
                   style: buttonStyle,
                   onPressed: () {
+                    if (!inviteRuleVerifed) {
+                      setState(() {
+                        warningMsg = "お友達の招待ルールを確認し同意してください。";
+                      });
+                      return;
+                    }
                     Navigator.pushNamed(
                       context,
                       Routes.invitationResultPage,
                       arguments: {
-                        'addMsgController': addMsgController,
+                        'msgController': msgController,
                         'inputNameController': inputNameController,
                         'inputEmailController': inputEmailController,
-                        'inputCodeController': inputCodeController,
                       },
                     );
                   },
@@ -546,12 +369,12 @@ class _InvitationPageState extends State<InvitationPage> {
                     child: const Align(
                       alignment: Alignment.center,
                       child: Text(
-                        '社員登録',
+                        'お友達を招待する。',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           // decoration: TextDecoration.underline,
-                          fontSize: 18,
+                          fontSize: 16,
                         ),
                         textAlign: TextAlign.center,
                       ),

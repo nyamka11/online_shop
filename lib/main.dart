@@ -20,8 +20,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'pages/shopnig_cart_finished/view.dart';
 import 'pages/shopnig_cart_payment/view.dart';
 import 'pages/shopnig_cart_payment_failed/view.dart';
+// ignore: depend_on_referenced_packages
+import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
 
 void main() {
+  usePathUrlStrategy();
   runApp(
     MultiProvider(
       providers: [
