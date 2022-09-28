@@ -20,11 +20,11 @@ class _DropDownState extends State<DropDown> {
         border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.circular(5),
       ),
-      padding: EdgeInsets.only(left: 8, right: 8),
+      padding: const EdgeInsets.only(left: 8, right: 8),
       width: 200,
       height: 35,
       child: DropdownButton(
-        underline: SizedBox(),
+        underline: const SizedBox(),
         value: dropdownValue,
         items: list
             .map(

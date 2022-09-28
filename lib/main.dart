@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:online_shop/pages/member/view_register.dart';
 import '_routers.dart';
 import 'pages/home_page.dart';
 import 'pages/invitation/view%20invitation_result.dart';
@@ -75,10 +76,11 @@ class MyApp extends StatelessWidget {
         Routes.privacyPolicyPdf: (context) => PrivacyPolicyPdf(),
         Routes.commercialTransactionPdf: (context) =>
             const CommercialTransactionPdf(),
-        Routes.memberRegisterPage: (context) => const MemberRegisterPage(),
-        Routes.memberRegisteredPage: (context) => const TempRegisteredPage(),
-        Routes.memberRegisterConfirmPage: (context) =>
+        Routes.tempRegisterPage: (context) => const TempRegisterPage(),
+        Routes.tempRegisteredPage: (context) => const TempRegisteredPage(),
+        Routes.tempRegisterConfirmPage: (context) =>
             const TempRegisterConfirmPage(),
+        Routes.memberRegisterPage: (context) => const MemberRegister(),
       },
     );
   }

@@ -127,7 +127,7 @@ class BigScreen extends StatelessWidget {
                   } else if (item == "お問い合わせ") {
                     Navigator.of(context).pushNamed(Routes.invitationPage);
                   } else if (item == "会員登録") {
-                    Navigator.of(context).pushNamed(Routes.memberRegisterPage);
+                    Navigator.of(context).pushNamed(Routes.tempRegisterPage);
                   } else {
                     Navigator.of(context).pushNamed(Routes.homePage);
                   }
