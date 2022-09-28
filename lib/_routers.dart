@@ -17,4 +17,7 @@ class Routes {
   static const String invitationResultPage = "/invitationResult";
   static const String privacyPolicyPdf = "/privacyPolicyPdf";
   static const String commercialTransactionPdf = "/commercialTransactionPdf";
+  static const String memberRegisterPage = "/memberRegister";
+  static const String memberRegisteredPage = "/memberRegistered";
+  static const String memberRegisterConfirmPage = "/memberRegisterConfirm";
 }
