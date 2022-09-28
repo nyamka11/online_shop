@@ -250,7 +250,7 @@ class _TempRegisterConfirmPageState extends State<TempRegisterConfirmPage> {
 
                     Navigator.pushNamed(
                       context,
-                      Routes.memberRegisteredPage,
+                      Routes.tempRegisteredPage,
                     );
                   },
                   child: const SizedBox(

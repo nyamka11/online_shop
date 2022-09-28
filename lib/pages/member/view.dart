@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import '../../_routers.dart';
 import '../../widgets/_Common/layout_template.dart';
 
-class MemberRegisterPage extends StatefulWidget {
-  const MemberRegisterPage({super.key});
+class TempRegisterPage extends StatefulWidget {
+  const TempRegisterPage({super.key});
 
   @override
-  State<MemberRegisterPage> createState() => _MemberRegisterPageState();
+  State<TempRegisterPage> createState() => _TempRegisterPageState();
 }
 
-class _MemberRegisterPageState extends State<MemberRegisterPage> {
+class _TempRegisterPageState extends State<TempRegisterPage> {
   final loginIdController = TextEditingController();
 
   final FocusNode loginIdFocusNode = FocusNode();
