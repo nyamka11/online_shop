@@ -6,20 +6,32 @@ import '../../data/categories_data.dart';
 import '../../models/category.dart';
 
 class TopBar extends StatefulWidget {
-  Function onClickSearchButton;
+  Function changeSearchContitionEvent;
+  int forgetChosedCategoryId;
 
-  TopBar(this.onClickSearchButton, {super.key});
+  TopBar({
+    super.key,
+    required this.changeSearchContitionEvent,
+    required this.forgetChosedCategoryId,
+  });
 
   @override
   State<TopBar> createState() => _TopBarState();
 }
 
 class _TopBarState extends State<TopBar> {
-  int selectedCatId = categories.first.id;
-  int selectedBadgeId = badgeData.first.id;
+  int selectedCatId = 0;
+  int selectedBadgeId = 0;
 
   final List<CategoryModel> categoryList = categories;
   final List<BadgeModel> bagdeList = badgeData;
+
+  @override
+  void initState() {
+    selectedCatId = widget.forgetChosedCategoryId;
+    selectedBadgeId = badgeData.first.id;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +131,7 @@ class _TopBarState extends State<TopBar> {
                 ),
                 const SizedBox(width: 20),
                 ElevatedButton(
-                  onPressed: (() => widget.onClickSearchButton(
+                  onPressed: (() => widget.changeSearchContitionEvent(
                       selectedCatId, selectedBadgeId)),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.black87, //ボタンの背景色

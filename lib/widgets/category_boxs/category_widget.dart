@@ -6,10 +6,12 @@ import '../../data/categories_data.dart';
 
 class CatBoxWidget extends StatelessWidget {
   final int index;
+  final int catId;
 
   const CatBoxWidget({
     super.key,
     required this.index,
+    required this.catId,
   });
 
   @override
@@ -19,7 +21,10 @@ class CatBoxWidget extends StatelessWidget {
         double w = costraints.maxWidth;
         return InkWell(
           onTap: () {
-            Navigator.of(context).pushNamed(Routes.productListPage);
+            Navigator.of(context).pushNamed(
+              Routes.productListPage,
+              arguments: catId,
+            );
           },
           child: BoxCustomWidget(
             child: Stack(

@@ -22,17 +22,26 @@ class _ProductListPageState extends State<ProductListPage> {
   List<BadgeModel> badgetList = badgeData;
   List<BadgeModel> bagdeDataListWhere = [];
 
+  bool isInit = false;
+  int searchCatId = 0;
+  int searchBadgeId = 0;
+
   _badgeWhere(badgeStr, badgeId) {
     var str = badgeStr.split('');
     if (str[badgeId - 1] == "1") {
-      print(str.join(""));
-      print("------------");
       return str.join();
     }
     return "";
   }
 
-  void onClickSearchButton(categroyId, bagdeId) {
+  void changeSearchContitionEvent(categroyId, bagdeId) {
+    setState(() {
+      searchCatId = categroyId;
+      searchBadgeId = bagdeId;
+    });
+  }
+
+  List<ProductModel> getData(categroyId, bagdeId) {
     if (categroyId == 0 && bagdeId == 0) {
       productListWhere = products;
     } else if (categroyId == 0 && bagdeId > 0) {
@@ -54,18 +63,31 @@ class _ProductListPageState extends State<ProductListPage> {
       }).toList();
     }
 
-    setState(() {
-      productList = productListWhere;
-    });
+    return productListWhere;
   }
 
   @override
   Widget build(BuildContext context) {
+    var chosedCatId = ModalRoute.of(context)!.settings.arguments;
+    int forgetChosedCategoryId = chosedCatId == null ? 0 : chosedCatId as int;
+
+    List<ProductModel> data = [];
+
+    if (!isInit) {
+      data = getData(forgetChosedCategoryId, 0);
+      isInit = true;
+    } else {
+      data = getData(searchCatId, searchBadgeId);
+    }
+
     return MainLayoutTemplate(
       body: LayoutBuilder(builder: (context, constraints) {
         return Column(
           children: [
-            TopBar(onClickSearchButton),
+            TopBar(
+              changeSearchContitionEvent: changeSearchContitionEvent,
+              forgetChosedCategoryId: forgetChosedCategoryId,
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -76,9 +98,9 @@ class _ProductListPageState extends State<ProductListPage> {
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemBuilder: (BuildContext context, int index) {
-                        return ListRows(productItem: productList[index]);
+                        return ListRows(productItem: data[index]);
                       },
-                      itemCount: productList.length,
+                      itemCount: data.length,
                     ),
                   ),
                 ),
