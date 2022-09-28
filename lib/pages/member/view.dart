@@ -264,7 +264,7 @@ class _MemberRegisterPageState extends State<MemberRegisterPage> {
 
                     Navigator.pushNamed(
                       context,
-                      Routes.memberRegisteredPage,
+                      Routes.tempRegisteredPage,
                     );
                   },
                   child: SizedBox(

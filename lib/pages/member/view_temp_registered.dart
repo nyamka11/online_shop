@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
 
 import 'package:flutter/material.dart';
-import 'package:online_shop/_routers.dart';
-import 'package:online_shop/widgets/_Common/layout_template.dart';
+import '../../_routers.dart';
+import '../../widgets/_Common/layout_template.dart';
 
 class TempRegisteredPage extends StatelessWidget {
   const TempRegisteredPage({super.key});
