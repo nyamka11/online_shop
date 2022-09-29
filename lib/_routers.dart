@@ -21,4 +21,5 @@ class Routes {
   static const String tempRegisteredPage = "/tempRegistered";
   static const String tempRegisterConfirmPage = "/tempRegisterConfirmPage";
   static const String memberRegisterPage = "/memberRegisterPage";
+  static const String memberRegisterVerifyPage = "/memberRegisterVerify";
 }

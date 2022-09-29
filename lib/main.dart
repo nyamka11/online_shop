@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/pages/member/view_register.dart';
+import 'package:online_shop/pages/member/view_register_verify.dart';
 import '_routers.dart';
 import 'pages/home_page.dart';
 import 'pages/invitation/view%20invitation_result.dart';
@@ -81,6 +82,8 @@ class MyApp extends StatelessWidget {
         Routes.tempRegisterConfirmPage: (context) =>
             const TempRegisterConfirmPage(),
         Routes.memberRegisterPage: (context) => const MemberRegister(),
+        Routes.memberRegisterVerifyPage: (context) =>
+            const MemberRegisterVerify(),
       },
     );
   }

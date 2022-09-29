@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class CheckBoxCustom extends StatefulWidget {
   final void Function(bool) callback;
+
   const CheckBoxCustom(this.callback, {super.key});
 
   @override
