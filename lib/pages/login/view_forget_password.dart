@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/_routers.dart';
 import 'package:online_shop/widgets/_Common/layout_template.dart';
+import 'package:online_shop/widgets/input_controls/my_text_field.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
   const ForgetPasswordPage({super.key});
@@ -105,21 +106,12 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                     ),
                   ),
                 ),
-                SizedBox(
+                MyTextField(
                   height: textFieldHeight,
-                  width: 350,
-                  child: TextField(
-                    keyboardType: TextInputType.text,
-                    controller: loginIdController,
-                    focusNode: loginIdFocusNode,
-                    decoration: InputDecoration(
-                      hintText: 'メールアドレス',
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 15.0),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(32.0)),
-                    ),
-                  ),
+                  width: 360,
+                  controller: loginIdController,
+                  focusNode: loginIdFocusNode,
+                  hintText: 'メールアドレス',
                 ),
                 if (warningMsg != "") dummySpaceBox(15),
                 if (warningMsg != "")

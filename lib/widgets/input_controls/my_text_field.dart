@@ -5,7 +5,12 @@ class MyTextField extends StatefulWidget {
   final double width;
   final TextEditingController? controller;
   final String? hintText;
+  final Color bgColor;
   final bool isReadOny;
+  final TextInputType keyboardType;
+  final bool obscureText;
+  final IconButton? suffixIcon;
+  final FocusNode? focusNode;
 
   const MyTextField({
     super.key,
@@ -13,7 +18,12 @@ class MyTextField extends StatefulWidget {
     required this.width,
     this.controller,
     this.hintText,
+    this.bgColor = Colors.white,
     this.isReadOny = false,
+    this.keyboardType = TextInputType.text,
+    this.obscureText = false,
+    this.suffixIcon,
+    this.focusNode,
   });
 
   @override
@@ -24,19 +34,21 @@ class _MyTextFieldState extends State<MyTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: widget.bgColor,
       width: widget.width,
       height: widget.height,
       child: TextField(
         readOnly: widget.isReadOny,
         autofocus: false,
-        keyboardType: TextInputType.text,
+        keyboardType: widget.keyboardType,
+        obscureText: widget.obscureText,
         controller: widget.controller,
+        focusNode: widget.focusNode,
         decoration: InputDecoration(
+          suffixIcon: widget.suffixIcon,
           hintText: widget.hintText,
           hintStyle: const TextStyle(
-            // color: Colors.redAccent,
-            fontSize: 13,
+            fontSize: 14,
           ),
           contentPadding:
               const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),

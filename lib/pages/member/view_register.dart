@@ -1,7 +1,8 @@
-import 'dart:convert';
+import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
 import 'package:online_shop/_routers.dart';
+import 'package:online_shop/widgets/buttons/my_button.dart';
 import 'package:online_shop/widgets/input_controls/my_text_field.dart';
 
 import '../../widgets/_Common/layout_template.dart';
@@ -48,14 +49,6 @@ class _MemberRegisterState extends State<MemberRegister> {
   double h = 10;
   double w = 25;
 
-  bool isCheckBagde1 = false;
-  bool isCheckBagde2 = false;
-  bool isCheckBagde3 = false;
-  bool isCheckBagde4 = false;
-  bool isCheckBagde5 = false;
-  bool isCheckBagde6 = false;
-  bool isAgree = false;
-
   final userNameContorller = TextEditingController();
   final passwordContorller = TextEditingController();
   final repasswordContorller = TextEditingController();
@@ -73,10 +66,15 @@ class _MemberRegisterState extends State<MemberRegister> {
   final inviteCodeContorller = TextEditingController();
   final keyWordContorller = TextEditingController();
 
-  List<String> errorMsg = [];
+  bool isCheckBagde1 = false;
+  bool isCheckBagde2 = false;
+  bool isCheckBagde3 = false;
+  bool isCheckBagde4 = false;
+  bool isCheckBagde5 = false;
+  bool isCheckBagde6 = false;
+  bool isAgree = false;
 
-  // List<String> errorMsg = [];
-  bool errorMsgShow = false;
+  List<String> errorMsg = [];
 
   void isAgreeFn(bool value) {
     isAgree = value;
@@ -108,6 +106,11 @@ class _MemberRegisterState extends State<MemberRegister> {
 
   @override
   Widget build(BuildContext context) {
+    String pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[.,#?!@$%^&*-]).{8,}$';
+    RegExp regex = RegExp(pattern);
+    var ignoreChars = ["@", ",", "."];
+
     var datas = {
       'userNameContorller': userNameContorller,
       'passwordContorller': passwordContorller,
@@ -636,7 +639,7 @@ class _MemberRegisterState extends State<MemberRegister> {
                           children: [
                             CircleAvatar(
                               backgroundColor: Colors.brown.shade800,
-                              child: const Text('logo'),
+                              child: const Text('1'),
                             ),
                             CheckBoxCustom(isCheckBagde1Fn),
                           ],
@@ -646,7 +649,7 @@ class _MemberRegisterState extends State<MemberRegister> {
                           children: [
                             CircleAvatar(
                               backgroundColor: Colors.brown.shade800,
-                              child: const Text('logo'),
+                              child: const Text('2'),
                             ),
                             CheckBoxCustom(isCheckBagde2Fn),
                           ],
@@ -656,7 +659,7 @@ class _MemberRegisterState extends State<MemberRegister> {
                           children: [
                             CircleAvatar(
                               backgroundColor: Colors.brown.shade800,
-                              child: const Text('logo'),
+                              child: const Text('3'),
                             ),
                             CheckBoxCustom(isCheckBagde3Fn),
                           ],
@@ -666,7 +669,7 @@ class _MemberRegisterState extends State<MemberRegister> {
                           children: [
                             CircleAvatar(
                               backgroundColor: Colors.brown.shade800,
-                              child: const Text('logo'),
+                              child: const Text('4'),
                             ),
                             CheckBoxCustom(isCheckBagde4Fn),
                           ],
@@ -676,7 +679,7 @@ class _MemberRegisterState extends State<MemberRegister> {
                           children: [
                             CircleAvatar(
                               backgroundColor: Colors.brown.shade800,
-                              child: const Text('logo'),
+                              child: const Text('5'),
                             ),
                             CheckBoxCustom(isCheckBagde5Fn),
                           ],
@@ -686,7 +689,7 @@ class _MemberRegisterState extends State<MemberRegister> {
                           children: [
                             CircleAvatar(
                               backgroundColor: Colors.brown.shade800,
-                              child: const Text('logo'),
+                              child: const Text('6'),
                             ),
                             CheckBoxCustom(isCheckBagde6Fn),
                           ],
@@ -737,23 +740,30 @@ class _MemberRegisterState extends State<MemberRegister> {
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             "●利用環境条件",
                             style: TextStyle(
                               decoration: TextDecoration.underline,
                             ),
                           ),
-                          Text(
+                          const Text(
                             "●会員利用規約",
                             style: TextStyle(
                               decoration: TextDecoration.underline,
                             ),
                           ),
-                          Text(
-                            "●プライバシーポリシー",
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
+                          InkWell(
+                            onTap: () async {
+                              html.window.open(
+                                  Uri.base.origin + Routes.privacyPolicyPdf,
+                                  "_blank");
+                            },
+                            child: const Text(
+                              "●プライバシーポリシー",
+                              style: TextStyle(
+                                decoration: TextDecoration.underline,
+                              ),
                             ),
                           ),
                         ],
@@ -770,9 +780,9 @@ class _MemberRegisterState extends State<MemberRegister> {
                       ],
                     ),
                     heightSpace(30),
-                    if (errorMsgShow)
-                      SizedBox(
-                        width: 400,
+                    if (errorMsg.isNotEmpty)
+                      Container(
+                        width: 600,
                         child: Column(
                           children: [
                             ...errorMsg.map((e) {
@@ -791,8 +801,12 @@ class _MemberRegisterState extends State<MemberRegister> {
                         ),
                       ),
                     heightSpace(30),
-                    ElevatedButton(
-                      onPressed: () {
+                    MyButton(
+                      h: 50,
+                      w: 300,
+                      color: Colors.blue,
+                      text: "申し込み内容を確認する",
+                      onClick: () {
                         List<String> errorMsgTmp = [];
                         if (userNameContorller.text == "") {
                           errorMsgTmp.add("・ユーザー名を入力してください。");
@@ -803,6 +817,40 @@ class _MemberRegisterState extends State<MemberRegister> {
                         if (repasswordContorller.text == "") {
                           errorMsgTmp.add("・パスワードの再入力（確認用）を入力してください。");
                         }
+
+                        if (passwordContorller.text != "" &&
+                            repasswordContorller.text != "" &&
+                            passwordContorller.text !=
+                                repasswordContorller.text) {
+                          errorMsgTmp.add("・確認入力の内容とはじめに指定したパスワードが違います。");
+                        } else if (passwordContorller.text != "" &&
+                            repasswordContorller.text != "" &&
+                            passwordContorller.text ==
+                                repasswordContorller.text) {
+                          if (passwordContorller.text.length < 8) {
+                            errorMsgTmp.add("・パスワードの桁数が足りません。　８桁以上で指定してください。");
+                          } else if (!regex.hasMatch(passwordContorller.text)) {
+                            errorMsgTmp.add(
+                                "・パスワードの形式が違います。必ず数字・英文字（大小）・記号　を全て使ってください。");
+                          }
+
+                          String lastChar = "";
+                          for (int i = 0;
+                              i < passwordContorller.text.length - 1;
+                              i++) {
+                            if (lastChar == passwordContorller.text[i]) {
+                              errorMsgTmp.add("・同じ文字が繰り返し指定されています。");
+                            }
+                            lastChar = passwordContorller.text[i];
+                          }
+                        }
+
+                        for (var element in ignoreChars) {
+                          if (passwordContorller.text.contains(element)) {
+                            errorMsgTmp.add("・パスワードがが禁止文字　（@ / , . ）が使われています。");
+                          }
+                        }
+
                         if (firstNameController.text == "") {
                           errorMsgTmp.add("・お名前（氏）を入力してください。");
                         }
@@ -830,9 +878,12 @@ class _MemberRegisterState extends State<MemberRegister> {
                         if (phoneNumberContorller.text == "") {
                           errorMsgTmp.add("・電話番号を入力してください。");
                         }
+                        if (!isAgree) {
+                          errorMsgTmp
+                              .add("・利用環境条件、利用規約、プライバシーポリシー、に同意をチェックしてください。");
+                        }
 
                         setState(() {
-                          errorMsgShow = true;
                           errorMsg = errorMsgTmp;
                         });
 
@@ -843,23 +894,6 @@ class _MemberRegisterState extends State<MemberRegister> {
                           );
                         }
                       },
-                      style: ElevatedButton.styleFrom(
-                        primary:
-                            const Color.fromARGB(255, 102, 102, 102), //ボタンの背景色
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 12,
-                          horizontal: 30,
-                        ),
-                        child: Text(
-                          '申し込み内容を確認する',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
                     ),
                     heightSpace(100),
                   ],

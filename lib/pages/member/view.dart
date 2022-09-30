@@ -2,6 +2,8 @@
 
 import 'dart:html' as html;
 import 'package:flutter/material.dart';
+import 'package:online_shop/widgets/buttons/my_button.dart';
+import 'package:online_shop/widgets/input_controls/my_text_field.dart';
 import '../../_routers.dart';
 import '../../widgets/_Common/layout_template.dart';
 
@@ -109,22 +111,12 @@ class _TempRegisterPageState extends State<TempRegisterPage> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      MyTextField(
                         height: textFieldHeight,
                         width: 350,
-                        child: TextField(
-                          keyboardType: TextInputType.text,
-                          controller: loginIdController,
-                          focusNode: loginIdFocusNode,
-                          decoration: InputDecoration(
-                            hintText: 'メールアドレス',
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 15.0),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(32.0)),
-                          ),
-                        ),
-                      ),
+                        hintText: "メールアドレス",
+                        controller: loginIdController,
+                      )
                     ],
                   ),
                 ),
@@ -241,9 +233,13 @@ class _TempRegisterPageState extends State<TempRegisterPage> {
                   ),
                 ),
                 dummySpaceBox(45),
-                TextButton(
-                  style: buttonStyle,
-                  onPressed: () {
+
+                MyButton(
+                  h: 50,
+                  w: 300,
+                  text: "登録用メールを送信する",
+                  color: Colors.blue,
+                  onClick: () {
                     if (loginIdController.text.isEmpty) {
                       setState(() {
                         warningMsg = "メールアドレスを入力してください。";
@@ -267,23 +263,6 @@ class _TempRegisterPageState extends State<TempRegisterPage> {
                       Routes.tempRegisteredPage,
                     );
                   },
-                  child: SizedBox(
-                    height: textFieldHeight,
-                    width: 300,
-                    child: const Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        '登録用メールを送信する',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          // decoration: TextDecoration.underline,
-                          fontSize: 18,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
                 ),
                 dummySpaceBox(30),
                 const Text(

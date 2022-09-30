@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'A-MON Market',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: GoogleFonts.notoSansJavaneseTextTheme(

@@ -102,7 +102,7 @@ class TempRegisteredPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                dummySpaceBoxVer(45),
+                dummySpaceBoxVer(220),
               ],
             ),
           );

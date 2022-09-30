@@ -1,7 +1,8 @@
 import "package:flutter/material.dart";
 
+import '../../_routers.dart';
 import '../../widgets/_Common/layout_template.dart';
-import '../../widgets/check_box_custom.dart';
+import '../../widgets/buttons/my_button.dart';
 import '../../widgets/input_controls/my_text_field.dart';
 
 class MemberRegisterVerify extends StatelessWidget {
@@ -443,6 +444,7 @@ class MemberRegisterVerify extends StatelessWidget {
                                   MyTextField(
                                     height: 40,
                                     width: 250,
+                                    bgColor: Colors.yellowAccent,
                                     controller: TextEditingController(
                                       text: inviteMailContorller.text,
                                     ),
@@ -462,6 +464,7 @@ class MemberRegisterVerify extends StatelessWidget {
                                   MyTextField(
                                     height: 40,
                                     width: 100,
+                                    bgColor: Colors.yellowAccent,
                                     controller: TextEditingController(
                                       text: inviteCodeContorller.text,
                                     ),
@@ -502,59 +505,65 @@ class MemberRegisterVerify extends StatelessWidget {
                     heightSpace(20),
                     Row(
                       children: [
-                        Column(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.brown.shade800,
-                              child: const Text('logo'),
-                            ),
-                          ],
-                        ),
-                        widthSpace(11),
-                        Column(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.brown.shade800,
-                              child: const Text('logo'),
-                            ),
-                          ],
-                        ),
-                        widthSpace(11),
-                        Column(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.brown.shade800,
-                              child: const Text('logo'),
-                            ),
-                          ],
-                        ),
-                        widthSpace(11),
-                        Column(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.brown.shade800,
-                              child: const Text('logo'),
-                            ),
-                          ],
-                        ),
-                        widthSpace(11),
-                        Column(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.brown.shade800,
-                              child: const Text('logo'),
-                            ),
-                          ],
-                        ),
-                        widthSpace(11),
-                        Column(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.brown.shade800,
-                              child: const Text('logo'),
-                            ),
-                          ],
-                        ),
+                        if (isCheckBagde1)
+                          Column(
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: Colors.brown.shade800,
+                                child: const Text('1'),
+                              ),
+                            ],
+                          ),
+                        if (isCheckBagde2) widthSpace(11),
+                        if (isCheckBagde2)
+                          Column(
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: Colors.brown.shade800,
+                                child: const Text('2'),
+                              ),
+                            ],
+                          ),
+                        if (isCheckBagde3) widthSpace(11),
+                        if (isCheckBagde3)
+                          Column(
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: Colors.brown.shade800,
+                                child: const Text('3'),
+                              ),
+                            ],
+                          ),
+                        if (isCheckBagde4) widthSpace(11),
+                        if (isCheckBagde4)
+                          Column(
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: Colors.brown.shade800,
+                                child: const Text('4'),
+                              ),
+                            ],
+                          ),
+                        if (isCheckBagde5) widthSpace(11),
+                        if (isCheckBagde5)
+                          Column(
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: Colors.brown.shade800,
+                                child: const Text('5'),
+                              ),
+                            ],
+                          ),
+                        if (isCheckBagde6) widthSpace(11),
+                        if (isCheckBagde6)
+                          Column(
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: Colors.brown.shade800,
+                                child: const Text('6'),
+                              ),
+                            ],
+                          ),
                         widthSpace(11),
                       ],
                     ),
@@ -593,7 +602,9 @@ class MemberRegisterVerify extends StatelessWidget {
                         ),
                         widthSpace(w),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
                           style: ElevatedButton.styleFrom(
                             primary: const Color.fromARGB(
                                 255, 102, 102, 102), //ボタンの背景色
@@ -621,23 +632,15 @@ class MemberRegisterVerify extends StatelessWidget {
                       ],
                     ),
                     heightSpace(30),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style:
-                          ElevatedButton.styleFrom(primary: Colors.pinkAccent),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 12,
-                          horizontal: 30,
-                        ),
-                        child: Text(
-                          '申し込み内容を確認して登録する',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+                    MyButton(
+                      h: 50,
+                      w: 300,
+                      color: Colors.pinkAccent,
+                      onClick: () {
+                        Navigator.of(context)
+                            .pushNamed(Routes.memberRegisteredPage);
+                      },
+                      text: '申し込み内容を確認して登録する',
                     ),
                     heightSpace(100),
                   ],

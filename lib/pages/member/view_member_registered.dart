@@ -104,7 +104,7 @@ class MemberRegisteredPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                dummySpaceBoxVer(90),
+                dummySpaceBoxVer(330),
               ],
             ),
           );

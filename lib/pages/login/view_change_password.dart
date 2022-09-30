@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:online_shop/_routers.dart';
 import 'package:online_shop/widgets/_Common/layout_template.dart';
 
+import '../../widgets/input_controls/my_text_field.dart';
+
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({super.key});
 
@@ -130,35 +132,24 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   ),
                 ),
                 // dummySpaceBox(15),
-                SizedBox(
+                MyTextField(
                   height: textFieldHeight,
-                  width: 350,
-                  child: TextField(
-                    keyboardType: TextInputType.text,
-                    controller: newPassController,
-                    focusNode: newPassFocusNode,
-                    obscureText: _isObscure,
-                    decoration: InputDecoration(
-                      hintText: '新しいパスワード',
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 15.0),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(32.0),
-                      ),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _isObscure ? Icons.visibility : Icons.visibility_off,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _isObscure = !_isObscure;
-                          });
-                        },
-                      ),
+                  width: 360,
+                  controller: newPassController,
+                  focusNode: newPassFocusNode,
+                  hintText: '新しいパスワード',
+                  obscureText: _isObscure,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isObscure ? Icons.visibility : Icons.visibility_off,
                     ),
+                    onPressed: () {
+                      setState(() {
+                        _isObscure = !_isObscure;
+                      });
+                    },
                   ),
                 ),
-                // dummySpaceBox(5),
                 SizedBox(
                   height: textFieldHeight,
                   width: 350,
@@ -188,35 +179,23 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     ),
                   ),
                 ),
-                SizedBox(
+                MyTextField(
                   height: textFieldHeight,
-                  width: 350,
-                  child: TextField(
-                    keyboardType: TextInputType.text,
-                    controller: checkPassController,
-                    // focusNode: newPassFocusNode,
-                    obscureText: _isObscure,
-                    decoration: InputDecoration(
-                      hintText: 'パスワードの再入力（確認用）',
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 15.0),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(32.0),
-                      ),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _isObscure ? Icons.visibility : Icons.visibility_off,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _isObscure = !_isObscure;
-                          });
-                        },
-                      ),
+                  width: 360,
+                  controller: checkPassController,
+                  hintText: 'パスワードの再入力（確認用）',
+                  obscureText: _isObscure,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isObscure ? Icons.visibility : Icons.visibility_off,
                     ),
+                    onPressed: () {
+                      setState(() {
+                        _isObscure = !_isObscure;
+                      });
+                    },
                   ),
                 ),
-
                 if (warningMsg != "") dummySpaceBox(15),
                 if (warningMsg != "")
                   Text(

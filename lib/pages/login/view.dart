@@ -7,6 +7,9 @@ import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:online_shop/_routers.dart';
 import 'package:online_shop/data/m_account_u_data.dart';
 import 'package:online_shop/widgets/_Common/layout_template.dart';
+import 'package:online_shop/widgets/input_controls/my_text_field.dart';
+
+import '../../widgets/buttons/my_button.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -77,14 +80,12 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           );
+
           return Container(
             padding: const EdgeInsets.all(5),
-            // color: Colors.amber,
             width: double.infinity,
             child: Column(
-              //crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
-
               children: [
                 dummySpaceBox(5),
                 const Align(
@@ -120,21 +121,12 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: textFieldHeight,
+                MyTextField(
+                  height: 40,
                   width: 350,
-                  child: TextField(
-                    keyboardType: TextInputType.text,
-                    controller: loginIdController,
-                    focusNode: loginIdFocusNode,
-                    decoration: InputDecoration(
-                      hintText: 'ログインID（メールアドレス）',
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 15.0),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(32.0)),
-                    ),
-                  ),
+                  hintText: 'ログインID（メールアドレス）',
+                  controller: loginIdController,
+                  focusNode: loginIdFocusNode,
                 ),
                 dummySpaceBox(5),
                 SizedBox(
@@ -163,32 +155,22 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: textFieldHeight,
+                MyTextField(
+                  height: 40,
                   width: 350,
-                  child: TextField(
-                    keyboardType: TextInputType.visiblePassword,
-                    controller: passwordController,
-                    focusNode: passwordFocusNode,
-                    obscureText: _isObscure,
-                    decoration: InputDecoration(
-                      hintText: 'パスワード',
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 15.0),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(32.0),
-                      ),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _isObscure ? Icons.visibility : Icons.visibility_off,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _isObscure = !_isObscure;
-                          });
-                        },
-                      ),
+                  hintText: 'パスワード',
+                  controller: passwordController,
+                  keyboardType: TextInputType.visiblePassword,
+                  obscureText: _isObscure,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isObscure ? Icons.visibility : Icons.visibility_off,
                     ),
+                    onPressed: () {
+                      setState(() {
+                        _isObscure = !_isObscure;
+                      });
+                    },
                   ),
                 ),
                 SizedBox(
@@ -222,11 +204,13 @@ class _LoginPageState extends State<LoginPage> {
                       // fontWeight: FontWeight.bold,
                     ),
                   ),
-                // if (warningMsg != "") dummySpaceBox(15),
                 dummySpaceBox(30),
-                TextButton(
-                  style: buttonStyle,
-                  onPressed: () async {
+                MyButton(
+                  h: 40,
+                  w: 300,
+                  text: "ログイン",
+                  color: Colors.blue,
+                  onClick: () async {
                     if (loginIdController.text.isEmpty ||
                         passwordController.text.isEmpty) {
                       setState(() {
@@ -235,18 +219,6 @@ class _LoginPageState extends State<LoginPage> {
                       return;
                     }
 
-                    // if (loginIdController.text.isEmpty) {
-                    //   ShowAlertDialog(context, "ログインID（メールアドレス）を入力してください。");
-                    //   loginIdFocusNode.requestFocus();
-                    //   return;
-                    // }
-
-                    // if (passwordController.text.isEmpty) {
-                    //   ShowAlertDialog(context, "パスワードを入力してください。");
-                    //   passwordFocusNode.requestFocus();
-                    //   return;
-                    // }
-
                     if (accountUsers
                         .where((element) =>
                             element.mailAdd == loginIdController.text)
@@ -254,8 +226,6 @@ class _LoginPageState extends State<LoginPage> {
                       setState(() {
                         warningMsg = "ユーザーが登録されていません。ログインIDを確認してください。";
                       });
-                      // ShowAlertDialog(
-                      //     context, "ユーザーが登録されていません。\nログインIDを確認してください。");
                       return;
                     }
 
@@ -266,8 +236,6 @@ class _LoginPageState extends State<LoginPage> {
                       setState(() {
                         warningMsg = "パスワードが異なっています。パスワードを確認してください。";
                       });
-                      // ShowAlertDialog(
-                      //     context, "パスワードが異なっています。\nパスワードを確認してください。");
                       return;
                     }
 
@@ -277,25 +245,8 @@ class _LoginPageState extends State<LoginPage> {
 
                     Navigator.of(context).pushNamed(Routes.homePage);
                   },
-                  child: SizedBox(
-                    height: textFieldHeight,
-                    width: 300,
-                    child: const Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'ログイン',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          // decoration: TextDecoration.underline,
-                          fontSize: 18,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
                 ),
-                dummySpaceBox(5),
+                dummySpaceBox(15),
                 SizedBox(
                   height: textFieldHeight,
                   width: 300,
@@ -344,31 +295,14 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 dummySpaceBox(15),
-                TextButton(
-                  style: buttonStyle,
-                  onPressed: () {
-                    // Navigator.pushNamed(
-                    //   context,
-                    //   RoutePath.MainMenu,
-                    // );
+                MyButton(
+                  h: 40,
+                  w: 300,
+                  text: "社員登録",
+                  color: Colors.blue,
+                  onClick: () {
+                    Navigator.of(context).pushNamed(Routes.tempRegisterPage);
                   },
-                  child: SizedBox(
-                    height: textFieldHeight,
-                    width: 300,
-                    child: const Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        '社員登録',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          // decoration: TextDecoration.underline,
-                          fontSize: 18,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
                 ),
                 dummySpaceBox(45),
               ],
@@ -378,24 +312,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-}
-
-void ShowAlertDialog(BuildContext context, String message) {
-  showDialog(
-    context: context,
-    builder: (BuildContext ctx) {
-      return AlertDialog(
-        title: const Text('警告'),
-        content: Text(message),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text('OK'),
-          ),
-        ],
-      );
-    },
-  );
 }
