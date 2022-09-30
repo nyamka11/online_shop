@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/_routers.dart';
 import 'package:online_shop/widgets/_Common/layout_template.dart';
+import 'package:online_shop/widgets/buttons/my_button.dart';
 
 import '../../widgets/input_controls/my_text_field.dart';
 
@@ -57,18 +58,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       bgColor: Colors.white,
       body: LayoutBuilder(
         builder: (context, constraints) {
-          var buttonStyle = ButtonStyle(
-            foregroundColor: MaterialStateProperty.all(Colors.black),
-            backgroundColor: MaterialStateProperty.all(Colors.blue[400]),
-            padding: MaterialStateProperty.all(const EdgeInsets.all(5)),
-            minimumSize: MaterialStateProperty.all(const Size(100, 30)),
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(32.0),
-              ),
-            ),
-          );
           return Container(
             padding: const EdgeInsets.all(5),
             child: Column(
@@ -100,7 +89,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    // fontSize: 20,
                   ),
                 ),
                 dummySpaceBox(15),
@@ -131,7 +119,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     ),
                   ),
                 ),
-                // dummySpaceBox(15),
                 MyTextField(
                   height: textFieldHeight,
                   width: 360,
@@ -164,7 +151,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     ),
                   ),
                 ),
-                // dummySpaceBox(15),
                 SizedBox(
                   height: textFieldHeight,
                   width: 350,
@@ -206,9 +192,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     ),
                   ),
                 dummySpaceBox(45),
-                TextButton(
-                  style: buttonStyle,
-                  onPressed: () {
+                MyButton(
+                  h: 40,
+                  w: 300,
+                  color: Colors.blue,
+                  text: "パスワードを変更する",
+                  onClick: () {
                     if (newPassController.text.length < 8) {
                       setState(() {
                         warningMsg = "パスワードの桁数が足りません。　８桁以上で指定してください。";
@@ -266,25 +255,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       Routes.passwordChanged,
                     );
                   },
-                  child: SizedBox(
-                    height: textFieldHeight,
-                    width: 300,
-                    child: const Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'パスワードを変更する',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          // decoration: TextDecoration.underline,
-                          fontSize: 18,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
                 ),
-                dummySpaceBox(45),
+                dummySpaceBox(120),
               ],
             ),
           );

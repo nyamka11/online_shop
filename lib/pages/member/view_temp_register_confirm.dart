@@ -1,6 +1,8 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
 
 import 'package:flutter/material.dart';
+import 'package:online_shop/widgets/buttons/my_button.dart';
+import 'package:online_shop/widgets/input_controls/my_text_field.dart';
 import '../../_routers.dart';
 import '../../widgets/_Common/layout_template.dart';
 
@@ -75,18 +77,6 @@ class _TempRegisterConfirmPageState extends State<TempRegisterConfirmPage> {
       bgColor: Colors.white,
       body: LayoutBuilder(
         builder: (context, constraints) {
-          var buttonStyle = ButtonStyle(
-            foregroundColor: MaterialStateProperty.all(Colors.black),
-            backgroundColor: MaterialStateProperty.all(Colors.blue[400]),
-            padding: MaterialStateProperty.all(const EdgeInsets.all(5)),
-            minimumSize: MaterialStateProperty.all(const Size(100, 30)),
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(32.0),
-              ),
-            ),
-          );
           return Container(
             padding: const EdgeInsets.all(5),
             child: Column(
@@ -155,20 +145,11 @@ class _TempRegisterConfirmPageState extends State<TempRegisterConfirmPage> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      MyTextField(
                         height: 40,
                         width: 350,
-                        child: TextField(
-                          keyboardType: TextInputType.text,
-                          controller: loginIdController,
-                          decoration: InputDecoration(
-                            hintText: 'メールアドレス',
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 15.0),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(32.0)),
-                          ),
-                        ),
+                        controller: loginIdController,
+                        hintText: "メールアドレス",
                       ),
                     ],
                   ),
@@ -229,9 +210,12 @@ class _TempRegisterConfirmPageState extends State<TempRegisterConfirmPage> {
                     ),
                   ),
                 dummySpaceBoxVer(45),
-                TextButton(
-                  style: buttonStyle,
-                  onPressed: () {
+                MyButton(
+                  h: 40,
+                  w: 300,
+                  color: Colors.blue,
+                  text: "登録用メールを送信する",
+                  onClick: () {
                     if (loginIdController.text.isEmpty) {
                       setState(() {
                         warningMsg = "メールアドレスを入力してください。";
@@ -253,24 +237,8 @@ class _TempRegisterConfirmPageState extends State<TempRegisterConfirmPage> {
                       Routes.tempRegisteredPage,
                     );
                   },
-                  child: const SizedBox(
-                    height: 40,
-                    width: 300,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        '登録用メールを送信する',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          // decoration: TextDecoration.underline,
-                          fontSize: 18,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
                 ),
+
                 dummySpaceBoxVer(45),
               ],
             ),

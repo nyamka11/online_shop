@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/_routers.dart';
 import 'package:online_shop/widgets/_Common/layout_template.dart';
+import 'package:online_shop/widgets/buttons/my_button.dart';
 import 'package:online_shop/widgets/input_controls/my_text_field.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
@@ -45,18 +46,6 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
       bgColor: Colors.white,
       body: LayoutBuilder(
         builder: (context, constraints) {
-          var buttonStyle = ButtonStyle(
-            foregroundColor: MaterialStateProperty.all(Colors.black),
-            backgroundColor: MaterialStateProperty.all(Colors.blue[400]),
-            padding: MaterialStateProperty.all(const EdgeInsets.all(5)),
-            minimumSize: MaterialStateProperty.all(const Size(100, 30)),
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(32.0),
-              ),
-            ),
-          );
           return Container(
             padding: const EdgeInsets.all(5),
             child: Column(
@@ -136,9 +125,12 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                   ),
                 ),
                 dummySpaceBox(30),
-                TextButton(
-                  style: buttonStyle,
-                  onPressed: () {
+                MyButton(
+                  h: 40,
+                  w: 300,
+                  text: "送信する",
+                  color: Colors.blue,
+                  onClick: () {
                     if (loginIdController.text.isEmpty) {
                       setState(() {
                         warningMsg = "メールアドレスを入力してください。";
@@ -152,25 +144,9 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                       Routes.verificationNumberConfirmPage,
                     );
                   },
-                  child: SizedBox(
-                    height: textFieldHeight,
-                    width: 300,
-                    child: const Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        '送信する',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          // decoration: TextDecoration.underline,
-                          fontSize: 18,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
                 ),
-                dummySpaceBox(45),
+
+                dummySpaceBox(250),
               ],
             ),
           );

@@ -3,6 +3,7 @@ import 'dart:html' as html;
 import 'dart:html' show Storage, window;
 
 import 'package:flutter/material.dart';
+import 'package:online_shop/widgets/buttons/my_button.dart';
 import '../../widgets/_Common/layout_template.dart';
 import '../../_routers.dart';
 import '../../widgets/check_box_custom.dart';
@@ -95,18 +96,6 @@ class _InvitationPageState extends State<InvitationPage> {
       bgColor: Colors.white,
       body: LayoutBuilder(
         builder: (context, constraints) {
-          var buttonStyle = ButtonStyle(
-            foregroundColor: MaterialStateProperty.all(Colors.black),
-            backgroundColor: MaterialStateProperty.all(Colors.blue[400]),
-            padding: MaterialStateProperty.all(const EdgeInsets.all(5)),
-            minimumSize: MaterialStateProperty.all(const Size(100, 30)),
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(32.0),
-              ),
-            ),
-          );
           return Container(
             padding: const EdgeInsets.all(5),
             // color: Colors.amber,
@@ -344,9 +333,12 @@ class _InvitationPageState extends State<InvitationPage> {
                     ),
                   ),
                 if (warningMsg != "") dummySpaceBoxVer(15),
-                TextButton(
-                  style: buttonStyle,
-                  onPressed: () {
+                MyButton(
+                  h: 40,
+                  w: 320,
+                  color: Colors.blue,
+                  text: "お友達を招待する。",
+                  onClick: () {
                     if (!inviteRuleVerifed) {
                       setState(() {
                         warningMsg = "お友達の招待ルールを確認し同意してください。";
@@ -363,23 +355,6 @@ class _InvitationPageState extends State<InvitationPage> {
                       },
                     );
                   },
-                  child: SizedBox(
-                    height: textFieldHeight,
-                    width: 300,
-                    child: const Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'お友達を招待する。',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          // decoration: TextDecoration.underline,
-                          fontSize: 16,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
                 ),
                 dummySpaceBoxVer(45),
               ],

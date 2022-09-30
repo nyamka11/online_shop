@@ -47,18 +47,6 @@ class _TempRegisterPageState extends State<TempRegisterPage> {
       bgColor: Colors.white,
       body: LayoutBuilder(
         builder: (context, constraints) {
-          var buttonStyle = ButtonStyle(
-            foregroundColor: MaterialStateProperty.all(Colors.black),
-            backgroundColor: MaterialStateProperty.all(Colors.blue[400]),
-            padding: MaterialStateProperty.all(const EdgeInsets.all(5)),
-            minimumSize: MaterialStateProperty.all(const Size(100, 30)),
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(32.0),
-              ),
-            ),
-          );
           return Container(
             padding: const EdgeInsets.all(5),
             child: Column(
