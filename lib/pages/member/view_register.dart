@@ -106,18 +106,8 @@ class _MemberRegisterState extends State<MemberRegister> {
     isCheckBagde6 = value;
   }
 
-  Future<List> getJson() async {
-    String api = "https://jsonplaceholder.typicode.com/posts";
-
-    http.Response response = await http.get(Uri.parse(api));
-
-    return json.decode(response.body);
-  }
-
   @override
   Widget build(BuildContext context) {
-    print(getJson());
-
     var datas = {
       'userNameContorller': userNameContorller,
       'passwordContorller': passwordContorller,

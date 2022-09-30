@@ -25,6 +25,7 @@ import 'pages/shopnig_cart_payment/view.dart';
 import 'pages/shopnig_cart_payment_failed/view.dart';
 import 'pages/member/view_temp_registered.dart';
 import 'pages/member/view_temp_register_confirm.dart';
+import 'pages/member/view_member_registered.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
 
@@ -84,6 +85,7 @@ class MyApp extends StatelessWidget {
         Routes.memberRegisterPage: (context) => const MemberRegister(),
         Routes.memberRegisterVerifyPage: (context) =>
             const MemberRegisterVerify(),
+        Routes.memberRegisteredPage: (context) => const MemberRegisteredPage(),
       },
     );
   }

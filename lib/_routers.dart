@@ -19,7 +19,10 @@ class Routes {
   static const String commercialTransactionPdf = "/commercialTransactionPdf";
   static const String tempRegisterPage = "/tempRegister";
   static const String tempRegisteredPage = "/tempRegistered";
-  static const String tempRegisterConfirmPage = "/tempRegisterConfirmPage";
-  static const String memberRegisterPage = "/memberRegisterPage";
+
+  static const String tempRegisterConfirmPage = "/tempRegisterConfirm";
+  static const String memberRegisterPage = "/memberRegister";
   static const String memberRegisterVerifyPage = "/memberRegisterVerify";
+
+  static const String memberRegisteredPage = "/memberRegistered";
 }
