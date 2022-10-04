@@ -2,8 +2,9 @@
 
 import 'dart:html' as html;
 import 'package:flutter/material.dart';
-import 'package:online_shop/widgets/buttons/my_button.dart';
-import 'package:online_shop/widgets/input_controls/my_text_field.dart';
+import 'package:http/http.dart' as http;
+import '../../widgets/buttons/my_button.dart';
+import '../../widgets/input_controls/my_text_field.dart';
 import '../../_routers.dart';
 import '../../widgets/_Common/layout_template.dart';
 
@@ -245,7 +246,10 @@ class _TempRegisterPageState extends State<TempRegisterPage> {
                       });
                       return;
                     }
-
+                    // ignore: unrelated_type_equality_checks
+                    if (sendEmail(
+                            loginIdController.text, "Test", "Test Email") ==
+                        false) return;
                     Navigator.pushNamed(
                       context,
                       Routes.tempRegisteredPage,
@@ -278,4 +282,41 @@ class _TempRegisterPageState extends State<TempRegisterPage> {
       ),
     );
   }
+}
+
+Future<bool> sendEmail(String email, String subject, String text) async {
+  final uri = Uri.parse('http://localhost:6060/email/sendEmail');
+  final headers = {'Content-Type': 'charset=UTF-8'};
+  Map<String, String> body = {
+    'to': email,
+    'cc_to': email,
+    'subject': subject,
+    'body': text
+  };
+  // String jsonBody = json.encode(body);
+  // final encoding = Encoding.getByName('utf-8');
+
+  http.Response response = await http.post(
+    uri,
+    // headers: headers,
+    headers: {},
+    body: body,
+    // encoding: encoding,
+  );
+  if (response.statusCode != 200) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+Future<void> getTest() async {
+  final uri = Uri.parse('http://localhost:6060/email/getTest');
+
+  http.Response response = await http.get(uri);
+
+  int statusCode = response.statusCode;
+  print(statusCode);
+  String responseBody = response.body;
+  print(responseBody);
 }
