@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
 import 'package:online_shop/_routers.dart';
+import 'package:online_shop/widgets/_common/ajax.dart';
 import 'package:online_shop/widgets/buttons/my_button.dart';
 import 'package:online_shop/widgets/input_controls/my_text_field.dart';
 
@@ -111,23 +113,23 @@ class _MemberRegisterState extends State<MemberRegister> {
     RegExp regex = RegExp(pattern);
     var ignoreChars = ["@", ",", "."];
 
-    var datas = {
-      'userNameContorller': userNameContorller,
-      'passwordContorller': passwordContorller,
-      'repasswordContorller': repasswordContorller,
-      'firstNameController': firstNameController,
-      'lastNameContorller': lastNameContorller,
-      'firstNameKataController': firstNameKataController,
-      'lastNameKataController': lastNameKataController,
-      'postCodeContorller': postCodeContorller,
-      'address1Contorller': address1Contorller,
-      'address2Contorller': address2Contorller,
-      'address3Contorller': address3Contorller,
-      'phoneNumberContorller': phoneNumberContorller,
-      "otherPhoneNumberContorller": otherPhoneNumberContorller,
-      'inviteMailContorller': inviteMailContorller,
-      'inviteCodeContorller': inviteCodeContorller,
-      'keyWordContorller': keyWordContorller,
+    Map<String, dynamic> datas = {
+      'userName': userNameContorller,
+      'password': passwordContorller,
+      'repassword': repasswordContorller,
+      'firstName': firstNameController.text,
+      'lastName': lastNameContorller,
+      'firstNameKata': firstNameKataController.text,
+      'lastNameKata': lastNameKataController.text,
+      'postCode': postCodeContorller,
+      'address1': address1Contorller,
+      'address2': address2Contorller,
+      'address3': address3Contorller,
+      'phoneNumber': phoneNumberContorller,
+      "otherPhoneNumber": otherPhoneNumberContorller,
+      'inviteMail': inviteMailContorller,
+      'inviteCode': inviteCodeContorller,
+      'keyWord': keyWordContorller,
       'isAgree': isAgree,
       'isCheckBagde1': isCheckBagde1,
       'isCheckBagde2': isCheckBagde2,
@@ -400,7 +402,7 @@ class _MemberRegisterState extends State<MemberRegister> {
                         ),
                         widthSpace(w),
                         ElevatedButton(
-                          onPressed: () {/* ボタンがタップされた時の処理 */},
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
                             primary: const Color.fromARGB(
                                 255, 102, 102, 102), //ボタンの背景色
@@ -807,6 +809,40 @@ class _MemberRegisterState extends State<MemberRegister> {
                       color: Colors.blue,
                       text: "申し込み内容を確認する",
                       onClick: () {
+                        String url = "http://localhost:6060/user/add";
+
+                        Map<String, dynamic> sendDatas = {
+                          "account": {
+                            'userName': userNameContorller.text,
+                            'password': passwordContorller.text,
+                          },
+                          "user": {
+                            'firstName': firstNameController.text,
+                            'lastName': lastNameContorller.text,
+                            'firstNameKata': firstNameKataController.text,
+                            'lastNameKata': lastNameKataController.text,
+                            'postCode': postCodeContorller.text,
+                            'address1': address1Contorller.text,
+                            'address2': address2Contorller.text,
+                            'address3': address3Contorller.text,
+                            'phoneNumber': phoneNumberContorller.text,
+                            "otherPhoneNumber": otherPhoneNumberContorller.text,
+                            'inviteMail': inviteMailContorller.text,
+                            'inviteCode': inviteCodeContorller.text,
+                            'keyWord': keyWordContorller.text,
+                            'isAgree': isAgree.toString(),
+                            'isCheckBagde1': isCheckBagde1.toString(),
+                            'isCheckBagde2': isCheckBagde2.toString(),
+                            'isCheckBagde3': isCheckBagde3.toString(),
+                            'isCheckBagde4': isCheckBagde4.toString(),
+                            'isCheckBagde5': isCheckBagde5.toString(),
+                            'isCheckBagde6': isCheckBagde6.toString(),
+                          }
+                        };
+
+                        print(sendDatas);
+                        Ajax.post(url, sendDatas);
+                        //----------------------------------------------------
                         List<String> errorMsgTmp = [];
                         if (userNameContorller.text == "") {
                           errorMsgTmp.add("・ユーザー名を入力してください。");

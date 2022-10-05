@@ -3,6 +3,7 @@
 import 'dart:html' as html;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import '../../widgets/_common/ajax.dart';
 import '../../widgets/buttons/my_button.dart';
 import '../../widgets/input_controls/my_text_field.dart';
 import '../../_routers.dart';
@@ -284,30 +285,16 @@ class _TempRegisterPageState extends State<TempRegisterPage> {
   }
 }
 
-Future<bool> sendEmail(String email, String subject, String text) async {
-  final uri = Uri.parse('http://localhost:6060/email/sendEmail');
-  final headers = {'Content-Type': 'charset=UTF-8'};
+sendEmail(String email, String subject, String text) async {
   Map<String, String> body = {
     'to': email,
     'cc_to': email,
     'subject': subject,
     'body': text
   };
-  // String jsonBody = json.encode(body);
-  // final encoding = Encoding.getByName('utf-8');
 
-  http.Response response = await http.post(
-    uri,
-    // headers: headers,
-    headers: {},
-    body: body,
-    // encoding: encoding,
-  );
-  if (response.statusCode != 200) {
-    return true;
-  } else {
-    return false;
-  }
+  String url = 'http://localhost:6060/email/sendEmail';
+  Ajax.post(url, body);
 }
 
 Future<void> getTest() async {
