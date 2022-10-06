@@ -7,19 +7,15 @@ class Ajax {
     final uri = Uri.parse(url);
     final headers = {'Content-Type': 'charset=UTF-8'};
 
-    http.Response response = await http.post(
-      uri,
-      // headers: headers,
-      headers: {},
-      body: body,
-      // encoding: encoding,
-    );
+    http.Response response = await http.post(uri,
+        // headers: headers,
+        headers: {},
+        body: body
+        // encoding: encoding,
+        );
 
-    if (response.statusCode == 200) {
-      print('${response.body}');
-    } else {
-      throw Exception('Failed to load data!');
-    }
+    Map map = jsonDecode(response.body);
+    return map;
   }
 
   static get(url) async {

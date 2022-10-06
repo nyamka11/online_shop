@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:html' as html;
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:online_shop/_routers.dart';
@@ -8,7 +9,10 @@ import 'package:online_shop/widgets/buttons/my_button.dart';
 import 'package:online_shop/widgets/input_controls/my_text_field.dart';
 
 import '../../widgets/_Common/layout_template.dart';
+import '../../widgets/_common/ajax.dart';
 import '../../widgets/check_box_custom.dart';
+
+import 'package:http/http.dart' as http;
 
 class MemberRegister extends StatefulWidget {
   const MemberRegister({super.key});
@@ -808,10 +812,10 @@ class _MemberRegisterState extends State<MemberRegister> {
                       w: 300,
                       color: Colors.blue,
                       text: "申し込み内容を確認する",
-                      onClick: () {
+                      onClick: () async {
                         String url = "http://localhost:6060/user/add";
 
-                        Map<String, dynamic> sendDatas = {
+                        Object sendDatas = {
                           "account": {
                             'userName': userNameContorller.text,
                             'password': passwordContorller.text,
@@ -840,9 +844,11 @@ class _MemberRegisterState extends State<MemberRegister> {
                           }
                         };
 
-                        print(sendDatas);
-                        Ajax.post(url, sendDatas);
-                        //----------------------------------------------------
+                        var response = await Ajax.post(
+                            url, {"data": jsonEncode(sendDatas).toString()});
+
+                        print(response["message"]);
+
                         List<String> errorMsgTmp = [];
                         if (userNameContorller.text == "") {
                           errorMsgTmp.add("・ユーザー名を入力してください。");

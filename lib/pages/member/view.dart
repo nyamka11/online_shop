@@ -294,7 +294,7 @@ sendEmail(String email, String subject, String text) async {
   };
 
   String url = 'http://localhost:6060/email/sendEmail';
-  Ajax.post(url, body);
+  // Ajax.post(url, body);
 }
 
 Future<void> getTest() async {
