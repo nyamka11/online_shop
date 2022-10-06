@@ -1,9 +1,12 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:online_shop/widgets/buttons/my_button.dart';
 import 'package:online_shop/widgets/input_controls/my_text_field.dart';
 import '../../_routers.dart';
+import '../../widgets/_Common/ajax.dart';
 import '../../widgets/_Common/layout_template.dart';
 
 import '../../widgets/input_controls/verify_number_input.dart';
@@ -48,15 +51,15 @@ class _TempRegisterConfirmPageState extends State<TempRegisterConfirmPage> {
       if (e.text.isEmpty) break;
       inputNumber = inputNumber + e.text.trim();
     }
-    if (inputNumber == "123456") {
-      print("OKKK");
-      Navigator.pushNamed(
-        context,
-        Routes.changePasswordPage,
-      );
-    } else if (inputNumber.length == 6) {
-      print("Message haruulnaa");
-    }
+    // if (inputNumber == "123456") {
+    //   print("OKKK");
+    //   Navigator.pushNamed(
+    //     context,
+    //     Routes.changePasswordPage,
+    //   );
+    // } else if (inputNumber.length == 6) {
+    //   print("Message haruulnaa");
+    // }
   }
 
   @override
@@ -214,8 +217,8 @@ class _TempRegisterConfirmPageState extends State<TempRegisterConfirmPage> {
                   h: 40,
                   w: 300,
                   color: Colors.blue,
-                  text: "登録用メールを送信する",
-                  onClick: () {
+                  text: "会員登録を開始する",
+                  onClick: () async {
                     if (loginIdController.text.isEmpty) {
                       setState(() {
                         warningMsg = "メールアドレスを入力してください。";
@@ -231,11 +234,47 @@ class _TempRegisterConfirmPageState extends State<TempRegisterConfirmPage> {
                       });
                       return;
                     }
+                    String inputNumber = "";
+                    for (var e in inputController) {
+                      if (e.text.isEmpty) break;
+                      inputNumber = inputNumber + e.text.trim();
+                    }
 
-                    Navigator.pushNamed(
-                      context,
-                      Routes.tempRegisteredPage,
-                    );
+                    Map<String, dynamic> data = {
+                      "mailAdd": loginIdController.text,
+                      "userName": inputNumber,
+                    };
+
+                    Map<String, dynamic> body = {
+                      "url": Uri.base.origin + Routes.memberRegisterPage,
+                      "data": jsonEncode(data).toString(),
+                    };
+
+                    String url =
+                        'http://localhost:6060/mAccountTemp/confirmRegister';
+                    Map res = await Ajax.post(url, body);
+
+                    print(res["success"]);
+                    if (res["success"] == false) {
+                      print(res["message"]);
+                      setState(() {
+                        warningMsg = "メールアドレス または 認証番号が違います。";
+                        // warningMsg = resObj["message"];
+                      });
+                      return;
+                    } else {
+                      Navigator.pushNamed(
+                        context,
+                        Routes.memberRegisterPage,
+                      );
+                    }
+                    // if (sendEmail(
+                    //         loginIdController.text, "Test", "Test Email") ==
+                    //     false) return;
+                    // Navigator.pushNamed(
+                    //   context,
+                    //   Routes.tempRegisteredPage,
+                    // );
                   },
                 ),
 
@@ -248,3 +287,43 @@ class _TempRegisterConfirmPageState extends State<TempRegisterConfirmPage> {
     );
   }
 }
+
+Future<bool> sendEmail(String email, String subject, String text) async {
+  final uri = Uri.parse('http://localhost:6060/email/sendEmail');
+  final headers = {'Content-Type': 'charset=UTF-8'};
+  Map<String, String> body = {
+    'to': email,
+    'cc_to': email,
+    'subject': subject,
+    'body': text
+  };
+  // String jsonBody = json.encode(body);
+  // final encoding = Encoding.getByName('utf-8');
+
+  http.Response response = await http.post(
+    uri,
+    // headers: headers,
+    headers: {},
+    body: body,
+    // encoding: encoding,
+  );
+  print(response.statusCode);
+  print(response.body);
+  if (response.statusCode != 200) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// Future<String> apiRequest(String url, Map jsonMap) async {
+//   HttpClient httpClient = new HttpClient();
+//   HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
+//   request.headers.set('content-type', 'application/json');
+//   request.add(utf8.encode(json.encode(jsonMap)));
+//   HttpClientResponse response = await request.close();
+//   // todo - you should check the response.statusCode
+//   String reply = await response.transform(utf8.decoder).join();
+//   httpClient.close();
+//   return reply;
+// }

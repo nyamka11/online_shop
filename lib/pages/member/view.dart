@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
 
+import 'dart:convert';
 import 'dart:html' as html;
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import '../../widgets/_common/ajax.dart';
 import '../../widgets/buttons/my_button.dart';
 import '../../widgets/input_controls/my_text_field.dart';
@@ -248,9 +248,7 @@ class _TempRegisterPageState extends State<TempRegisterPage> {
                       return;
                     }
                     // ignore: unrelated_type_equality_checks
-                    if (sendEmail(
-                            loginIdController.text, "Test", "Test Email") ==
-                        false) return;
+                    if (register(loginIdController.text) == false) return;
                     Navigator.pushNamed(
                       context,
                       Routes.tempRegisteredPage,
@@ -285,25 +283,14 @@ class _TempRegisterPageState extends State<TempRegisterPage> {
   }
 }
 
-sendEmail(String email, String subject, String text) async {
-  Map<String, String> body = {
-    'to': email,
-    'cc_to': email,
-    'subject': subject,
-    'body': text
+register(String email) async {
+  Map<String, dynamic> data = {"mailAdd": email};
+  // Map<String, dynamic> body = {'mailAdd': email};
+  Map<String, dynamic> body = {
+    "url": Uri.base.origin + Routes.tempRegisterConfirmPage,
+    "data": jsonEncode(data).toString(),
   };
 
-  String url = 'http://localhost:6060/email/sendEmail';
-  // Ajax.post(url, body);
-}
-
-Future<void> getTest() async {
-  final uri = Uri.parse('http://localhost:6060/email/getTest');
-
-  http.Response response = await http.get(uri);
-
-  int statusCode = response.statusCode;
-  print(statusCode);
-  String responseBody = response.body;
-  print(responseBody);
+  String url = 'http://localhost:6060/mAccountTemp/add';
+  Ajax.post(url, body);
 }
