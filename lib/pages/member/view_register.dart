@@ -112,6 +112,8 @@ class _MemberRegisterState extends State<MemberRegister> {
 
   @override
   Widget build(BuildContext context) {
+    String email = Uri.base.queryParameters["email"] ?? "xxxx";
+
     String pattern =
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[.,#?!@$%^&*-]).{8,}$';
     RegExp regex = RegExp(pattern);
@@ -193,8 +195,8 @@ class _MemberRegisterState extends State<MemberRegister> {
                     line(),
                     heightSpace(10),
                     Row(
-                      children: const [
-                        Text(
+                      children: [
+                        const Text(
                           "ログインID（メールアドレス）",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -202,7 +204,7 @@ class _MemberRegisterState extends State<MemberRegister> {
                           ),
                         ),
                         Text(
-                          "xxxxxxxxxxxx@xxxxxxxxx.com",
+                          email,
                           style: TextStyle(
                             color: Colors.red,
                           ),
