@@ -112,7 +112,7 @@ class _MemberRegisterState extends State<MemberRegister> {
 
   @override
   Widget build(BuildContext context) {
-    String email = Uri.base.queryParameters["email"] ?? "xxxx";
+    String email = Uri.base.queryParameters["param1"] ?? "xxxxxxxx@xxxx.com";
 
     String pattern =
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[.,#?!@$%^&*-]).{8,}$';
