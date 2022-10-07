@@ -4,18 +4,18 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:online_shop/_routers.dart';
-import 'package:online_shop/widgets/_common/ajax.dart';
 import 'package:online_shop/widgets/buttons/my_button.dart';
 import 'package:online_shop/widgets/input_controls/my_text_field.dart';
 
 import '../../widgets/_Common/layout_template.dart';
-import '../../widgets/_common/ajax.dart';
 import '../../widgets/check_box_custom.dart';
 
 import 'package:http/http.dart' as http;
 
 class MemberRegister extends StatefulWidget {
-  const MemberRegister({super.key});
+  final String param1;
+
+  const MemberRegister({super.key, required this.param1});
 
   @override
   State<MemberRegister> createState() => _MemberRegisterState();
@@ -112,7 +112,7 @@ class _MemberRegisterState extends State<MemberRegister> {
 
   @override
   Widget build(BuildContext context) {
-    String email = Uri.base.queryParameters["param1"] ?? "xxxx";
+    String email = widget.param1;
 
     String pattern =
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[.,#?!@$%^&*-]).{8,}$';
