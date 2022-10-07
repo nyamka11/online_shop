@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import "package:flutter/material.dart";
 
 import '../../_routers.dart';
@@ -24,6 +26,13 @@ class MemberRegisterVerify extends StatelessWidget {
     );
   }
 
+  bool toBoolean(String str, [bool strict = false]) {
+    if (strict == true) {
+      return str == '1' || str == 'true';
+    }
+    return str != '0' && str != 'false' && str != '';
+  }
+
   @override
   Widget build(BuildContext context) {
     double h = 10;
@@ -39,60 +48,15 @@ class MemberRegisterVerify extends StatelessWidget {
     final arguments = (ModalRoute.of(context)?.settings.arguments ??
         <String, dynamic>{}) as Map;
 
-    TextEditingController userNameContorller =
-        arguments['userNameContorller'] as TextEditingController;
+    final account = arguments["account"] as Map;
+    final user = arguments["user"] as Map;
 
-    TextEditingController passwordContorller =
-        arguments['passwordContorller'] as TextEditingController;
-
-    TextEditingController repasswordContorller =
-        arguments['repasswordContorller'] as TextEditingController;
-
-    TextEditingController firstNameController =
-        arguments['firstNameController'] as TextEditingController;
-
-    TextEditingController lastNameContorller =
-        arguments['lastNameContorller'] as TextEditingController;
-
-    TextEditingController firstNameKataController =
-        arguments['firstNameKataController'] as TextEditingController;
-
-    TextEditingController lastNameKataController =
-        arguments['lastNameKataController'] as TextEditingController;
-
-    TextEditingController postCodeContorller =
-        arguments['postCodeContorller'] as TextEditingController;
-
-    TextEditingController address1Contorller =
-        arguments['address1Contorller'] as TextEditingController;
-
-    TextEditingController address2Contorller =
-        arguments['address2Contorller'] as TextEditingController;
-
-    TextEditingController address3Contorller =
-        arguments['address3Contorller'] as TextEditingController;
-
-    TextEditingController phoneNumberContorller =
-        arguments['phoneNumberContorller'] as TextEditingController;
-
-    TextEditingController otherPhoneNumberContorller =
-        arguments['otherPhoneNumberContorller'] as TextEditingController;
-
-    TextEditingController inviteMailContorller =
-        arguments['inviteMailContorller'] as TextEditingController;
-
-    TextEditingController inviteCodeContorller =
-        arguments['inviteCodeContorller'] as TextEditingController;
-
-    TextEditingController keyWordContorller =
-        arguments['keyWordContorller'] as TextEditingController;
-
-    bool isCheckBagde1 = arguments['isCheckBagde1'] as bool;
-    bool isCheckBagde2 = arguments['isCheckBagde2'] as bool;
-    bool isCheckBagde3 = arguments['isCheckBagde3'] as bool;
-    bool isCheckBagde4 = arguments['isCheckBagde4'] as bool;
-    bool isCheckBagde5 = arguments['isCheckBagde5'] as bool;
-    bool isCheckBagde6 = arguments['isCheckBagde6'] as bool;
+    bool isCheckBagde1 = toBoolean(user['isCheckBagde1']);
+    bool isCheckBagde2 = toBoolean(user['isCheckBagde2']);
+    bool isCheckBagde3 = toBoolean(user['isCheckBagde3']);
+    bool isCheckBagde4 = toBoolean(user['isCheckBagde4']);
+    bool isCheckBagde5 = toBoolean(user['isCheckBagde5']);
+    bool isCheckBagde6 = toBoolean(user['isCheckBagde6']);
 
     return MainLayoutTemplate(
       bgColor: Colors.white,
@@ -144,8 +108,8 @@ class MemberRegisterVerify extends StatelessWidget {
                     line(),
                     heightSpace(10),
                     Row(
-                      children: const [
-                        Text(
+                      children: [
+                        const Text(
                           "ログインID（メールアドレス）",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -153,8 +117,8 @@ class MemberRegisterVerify extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "xxxxxxxxxxxx@xxxxxxxxx.com",
-                          style: TextStyle(
+                          account["email"],
+                          style: const TextStyle(
                             color: Colors.red,
                           ),
                         ),
@@ -174,7 +138,7 @@ class MemberRegisterVerify extends StatelessWidget {
                           height: 40,
                           width: 500,
                           controller: TextEditingController(
-                            text: userNameContorller.text,
+                            text: account["userName"],
                           ),
                           isReadOny: true,
                         ),
@@ -218,7 +182,7 @@ class MemberRegisterVerify extends StatelessWidget {
                           height: 40,
                           width: 480,
                           controller: TextEditingController(
-                            text: firstNameController.text,
+                            text: user["firstName"],
                           ),
                           isReadOny: true,
                         ),
@@ -236,7 +200,7 @@ class MemberRegisterVerify extends StatelessWidget {
                           height: 40,
                           width: 480,
                           controller: TextEditingController(
-                            text: lastNameContorller.text,
+                            text: user["lastName"],
                           ),
                           isReadOny: true,
                         ),
@@ -255,7 +219,7 @@ class MemberRegisterVerify extends StatelessWidget {
                           height: 40,
                           width: 480,
                           controller: TextEditingController(
-                            text: firstNameKataController.text,
+                            text: user["firstNameKata"],
                           ),
                           isReadOny: true,
                         ),
@@ -274,7 +238,7 @@ class MemberRegisterVerify extends StatelessWidget {
                           height: 40,
                           width: 480,
                           controller: TextEditingController(
-                            text: lastNameKataController.text,
+                            text: user["lastNameKata"],
                           ),
                           isReadOny: true,
                         ),
@@ -293,7 +257,7 @@ class MemberRegisterVerify extends StatelessWidget {
                           height: 40,
                           width: 100,
                           controller: TextEditingController(
-                            text: postCodeContorller.text,
+                            text: user["postCode"],
                           ),
                           isReadOny: true,
                         ),
@@ -318,7 +282,7 @@ class MemberRegisterVerify extends StatelessWidget {
                           height: 40,
                           width: 680,
                           controller: TextEditingController(
-                            text: address1Contorller.text,
+                            text: user["address1"],
                           ),
                           isReadOny: true,
                         ),
@@ -342,7 +306,7 @@ class MemberRegisterVerify extends StatelessWidget {
                           height: 40,
                           width: 680,
                           controller: TextEditingController(
-                            text: address2Contorller.text,
+                            text: user["address2"],
                           ),
                           isReadOny: true,
                         ),
@@ -366,7 +330,7 @@ class MemberRegisterVerify extends StatelessWidget {
                           height: 40,
                           width: 680,
                           controller: TextEditingController(
-                            text: address3Contorller.text,
+                            text: user["address3"],
                           ),
                           isReadOny: true,
                         ),
@@ -384,7 +348,7 @@ class MemberRegisterVerify extends StatelessWidget {
                           height: 40,
                           width: 200,
                           controller: TextEditingController(
-                            text: phoneNumberContorller.text,
+                            text: user["phoneNumber"],
                           ),
                           isReadOny: true,
                         ),
@@ -402,7 +366,7 @@ class MemberRegisterVerify extends StatelessWidget {
                           height: 40,
                           width: 200,
                           controller: TextEditingController(
-                            text: otherPhoneNumberContorller.text,
+                            text: user["otherPhoneNumber"],
                           ),
                           isReadOny: true,
                         ),
@@ -446,7 +410,7 @@ class MemberRegisterVerify extends StatelessWidget {
                                     width: 250,
                                     bgColor: Colors.yellowAccent,
                                     controller: TextEditingController(
-                                      text: inviteMailContorller.text,
+                                      text: user["inviteMail"],
                                     ),
                                     isReadOny: true,
                                   ),
@@ -466,7 +430,7 @@ class MemberRegisterVerify extends StatelessWidget {
                                     width: 100,
                                     bgColor: Colors.yellowAccent,
                                     controller: TextEditingController(
-                                      text: inviteCodeContorller.text,
+                                      text: user["inviteCode"],
                                     ),
                                     isReadOny: true,
                                   ),
@@ -583,7 +547,7 @@ class MemberRegisterVerify extends StatelessWidget {
                           height: 40,
                           width: 690,
                           controller: TextEditingController(
-                            text: keyWordContorller.text,
+                            text: user["keyWord"],
                           ),
                           isReadOny: true,
                         ),

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:online_shop/pages/member/view_register.dart';
 import 'package:online_shop/pages/member/view_register_verify.dart';
@@ -34,10 +36,6 @@ main() async {
   // await DotEnv.load(fileName: ".env.development");
   await dotenv.load(fileName: ".env");
 
-  String? para1 = Uri.base.queryParameters["email"];
-
-  print(para1);
-
   usePathUrlStrategy();
   runApp(
     MultiProvider(
@@ -56,6 +54,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // String email = Uri.base.queryParameters["email"] ?? "xxxx";
+    // print(email);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'A-MON Market',
@@ -65,7 +66,7 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      initialRoute: Routes.homePage,
+      // initialRoute: Routes.homePage,
       routes: {
         Routes.homePage: (context) => HomePage(),
         Routes.loginPage: (context) => const LoginPage(),
@@ -90,7 +91,7 @@ class MyApp extends StatelessWidget {
         Routes.tempRegisteredPage: (context) => const TempRegisteredPage(),
         Routes.tempRegisterConfirmPage: (context) =>
             const TempRegisterConfirmPage(),
-        // Routes.memberRegisterPage: (context) => const MemberRegister(),
+        Routes.memberRegisterPage: (context) => const MemberRegister(),
         Routes.memberRegisterVerifyPage: (context) =>
             const MemberRegisterVerify(),
         Routes.memberRegisteredPage: (context) => const MemberRegisteredPage(),

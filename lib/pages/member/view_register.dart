@@ -818,6 +818,7 @@ class _MemberRegisterState extends State<MemberRegister> {
                         Object sendDatas = {
                           "account": {
                             'userName': userNameContorller.text,
+                            'email': email,
                             'password': passwordContorller.text,
                           },
                           "user": {
@@ -844,10 +845,9 @@ class _MemberRegisterState extends State<MemberRegister> {
                           }
                         };
 
-                        var response = await Ajax.post("/user/add",
-                            {"data": jsonEncode(sendDatas).toString()});
-
-                        print(response["message"]);
+                        // var response = await Ajax.post("/user/add",
+                        //     {"data": jsonEncode(sendDatas).toString()});
+                        // print(response["message"]);
 
                         List<String> errorMsgTmp = [];
                         if (userNameContorller.text == "") {
@@ -932,7 +932,7 @@ class _MemberRegisterState extends State<MemberRegister> {
                         if (errorMsg.isEmpty) {
                           Navigator.of(context).pushNamed(
                             Routes.memberRegisterVerifyPage,
-                            arguments: datas,
+                            arguments: sendDatas,
                           );
                         }
                       },
