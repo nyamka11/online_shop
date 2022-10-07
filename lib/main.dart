@@ -34,10 +34,6 @@ main() async {
   // await DotEnv.load(fileName: ".env.development");
   await dotenv.load(fileName: ".env");
 
-  String? para1 = Uri.base.queryParameters["email"];
-
-  print(para1);
-
   usePathUrlStrategy();
   runApp(
     MultiProvider(
@@ -96,11 +92,18 @@ class MyApp extends StatelessWidget {
         Routes.memberRegisteredPage: (context) => const MemberRegisteredPage(),
       },
       onGenerateRoute: (settings) {
-        if (settings.name == Routes.memberRegisterPage) {
-          return MaterialPageRoute(builder: (context) {
-            return const MemberRegister();
-          });
+        var uriData = Uri.parse(settings.name.toString());
+        // print(
+        //     'queryParameters: ${uriData.queryParameters} path: ${uriData.path}');
+        if (uriData.path == Routes.memberRegisterPage) {
+          return MaterialPageRoute(
+            builder: (context) {
+              return const MemberRegister();
+            },
+            // settings: (RouteSettings(name: settings.name)),
+          );
         }
+        return null;
       },
     );
   }
