@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:html';
 
 import "package:flutter/material.dart";
 
 import '../../_routers.dart';
 import '../../widgets/_Common/layout_template.dart';
+import '../../widgets/_common/ajax.dart';
 import '../../widgets/buttons/my_button.dart';
 import '../../widgets/input_controls/my_text_field.dart';
 
@@ -600,9 +602,15 @@ class MemberRegisterVerify extends StatelessWidget {
                       h: 50,
                       w: 300,
                       color: Colors.pinkAccent,
-                      onClick: () {
-                        Navigator.of(context)
-                            .pushNamed(Routes.memberRegisteredPage);
+                      onClick: () async {
+                        var response = await Ajax.post("/user/add",
+                            {"data": jsonEncode(arguments).toString()});
+
+                        if (response["success"]) {
+                          print(response["message"]);
+                          Navigator.of(context)
+                              .pushNamed(Routes.memberRegisteredPage);
+                        }
                       },
                       text: '申し込み内容を確認して登録する',
                     ),

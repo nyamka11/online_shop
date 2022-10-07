@@ -112,38 +112,12 @@ class _MemberRegisterState extends State<MemberRegister> {
 
   @override
   Widget build(BuildContext context) {
-    String email = Uri.base.queryParameters["param1"] ?? "xxxxxxxx@xxxx.com";
+    String email = Uri.base.queryParameters["param1"] ?? "xxxx";
 
     String pattern =
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[.,#?!@$%^&*-]).{8,}$';
     RegExp regex = RegExp(pattern);
     var ignoreChars = ["@", ",", "."];
-
-    Map<String, dynamic> datas = {
-      'userName': userNameContorller,
-      'password': passwordContorller,
-      'repassword': repasswordContorller,
-      'firstName': firstNameController.text,
-      'lastName': lastNameContorller,
-      'firstNameKata': firstNameKataController.text,
-      'lastNameKata': lastNameKataController.text,
-      'postCode': postCodeContorller,
-      'address1': address1Contorller,
-      'address2': address2Contorller,
-      'address3': address3Contorller,
-      'phoneNumber': phoneNumberContorller,
-      "otherPhoneNumber": otherPhoneNumberContorller,
-      'inviteMail': inviteMailContorller,
-      'inviteCode': inviteCodeContorller,
-      'keyWord': keyWordContorller,
-      'isAgree': isAgree,
-      'isCheckBagde1': isCheckBagde1,
-      'isCheckBagde2': isCheckBagde2,
-      'isCheckBagde3': isCheckBagde3,
-      'isCheckBagde4': isCheckBagde4,
-      'isCheckBagde5': isCheckBagde5,
-      'isCheckBagde6': isCheckBagde6,
-    };
 
     return MainLayoutTemplate(
       bgColor: Colors.white,
@@ -205,7 +179,7 @@ class _MemberRegisterState extends State<MemberRegister> {
                         ),
                         Text(
                           email,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.red,
                           ),
                         ),
@@ -410,6 +384,7 @@ class _MemberRegisterState extends State<MemberRegister> {
                         ElevatedButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
+                            // ignore: deprecated_member_use
                             primary: const Color.fromARGB(
                                 255, 102, 102, 102), //ボタンの背景色
                           ),
@@ -844,10 +819,6 @@ class _MemberRegisterState extends State<MemberRegister> {
                             'isCheckBagde6': isCheckBagde6.toString(),
                           }
                         };
-
-                        // var response = await Ajax.post("/user/add",
-                        //     {"data": jsonEncode(sendDatas).toString()});
-                        // print(response["message"]);
 
                         List<String> errorMsgTmp = [];
                         if (userNameContorller.text == "") {

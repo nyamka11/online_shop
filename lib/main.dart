@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      // initialRoute: Routes.homePage,
+      initialRoute: Routes.homePage,
       routes: {
         Routes.homePage: (context) => HomePage(),
         Routes.loginPage: (context) => const LoginPage(),
@@ -91,13 +91,15 @@ class MyApp extends StatelessWidget {
         Routes.tempRegisteredPage: (context) => const TempRegisteredPage(),
         Routes.tempRegisterConfirmPage: (context) =>
             const TempRegisterConfirmPage(),
-        Routes.memberRegisterPage: (context) => const MemberRegister(),
+        // Routes.memberRegisterPage: (context) => const MemberRegister(),
         Routes.memberRegisterVerifyPage: (context) =>
             const MemberRegisterVerify(),
         Routes.memberRegisteredPage: (context) => const MemberRegisteredPage(),
       },
       onGenerateRoute: (settings) {
         var uriData = Uri.parse(settings.name.toString());
+
+        print(uriData);
         // print(
         //     'queryParameters: ${uriData.queryParameters} path: ${uriData.path}');
         if (uriData.path == Routes.memberRegisterPage) {
