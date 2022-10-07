@@ -813,8 +813,6 @@ class _MemberRegisterState extends State<MemberRegister> {
                       color: Colors.blue,
                       text: "申し込み内容を確認する",
                       onClick: () async {
-                        String url = "http://localhost:6060/user/add";
-
                         Object sendDatas = {
                           "account": {
                             'userName': userNameContorller.text,
@@ -844,8 +842,8 @@ class _MemberRegisterState extends State<MemberRegister> {
                           }
                         };
 
-                        var response = await Ajax.post(
-                            url, {"data": jsonEncode(sendDatas).toString()});
+                        var response = await Ajax.post("/user/add",
+                            {"data": jsonEncode(sendDatas).toString()});
 
                         print(response["message"]);
 

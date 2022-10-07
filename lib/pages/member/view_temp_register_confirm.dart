@@ -250,9 +250,8 @@ class _TempRegisterConfirmPageState extends State<TempRegisterConfirmPage> {
                       "data": jsonEncode(data).toString(),
                     };
 
-                    String url =
-                        'http://localhost:6060/mAccountTemp/confirmRegister';
-                    Map res = await Ajax.post(url, body);
+                    Map res =
+                        await Ajax.post("/mAccountTemp/confirmRegister", body);
 
                     print(res["success"]);
                     if (res["success"] == false) {

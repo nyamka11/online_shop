@@ -1,13 +1,15 @@
 import 'dart:convert';
 import 'dart:html';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Ajax {
   static post(String url, Map<String, dynamic> body) async {
-    final uri = Uri.parse(url);
-    final headers = {'Content-Type': 'charset=UTF-8'};
+    String apiHost = dotenv.get("API_HOST", fallback: "");
 
-    http.Response response = await http.post(uri,
+    final urlParsed = Uri.parse(apiHost + url);
+    final headers = {'Content-Type': 'charset=UTF-8'};
+    http.Response response = await http.post(urlParsed,
         // headers: headers,
         headers: {},
         body: body

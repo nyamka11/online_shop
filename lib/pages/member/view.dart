@@ -291,6 +291,5 @@ register(String email) async {
     "data": jsonEncode(data).toString(),
   };
 
-  String url = 'http://localhost:6060/mAccountTemp/add';
-  Ajax.post(url, body);
+  Ajax.post("/mAccountTemp/add", body);
 }

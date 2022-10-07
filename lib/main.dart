@@ -26,10 +26,14 @@ import 'pages/shopnig_cart_payment_failed/view.dart';
 import 'pages/member/view_temp_registered.dart';
 import 'pages/member/view_temp_register_confirm.dart';
 import 'pages/member/view_member_registered.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
 
-void main() {
+main() async {
+  // await DotEnv.load(fileName: ".env.development");
+  await dotenv.load(fileName: ".env");
+
   usePathUrlStrategy();
   runApp(
     MultiProvider(
