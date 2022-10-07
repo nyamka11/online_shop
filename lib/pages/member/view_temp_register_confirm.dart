@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
 import 'package:http/http.dart' as http;
+import 'dart:html' as html;
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -246,7 +247,8 @@ class _TempRegisterConfirmPageState extends State<TempRegisterConfirmPage> {
                     };
 
                     Map<String, dynamic> body = {
-                      "url": Uri.base.origin + Routes.memberRegisterPage,
+                      "url":
+                          "${Uri.base.origin}${Routes.memberRegisterPage}?param1=${loginIdController.text}",
                       "data": jsonEncode(data).toString(),
                     };
 
@@ -262,10 +264,26 @@ class _TempRegisterConfirmPageState extends State<TempRegisterConfirmPage> {
                       });
                       return;
                     } else {
-                      Navigator.pushNamed(
-                        context,
-                        Routes.memberRegisterPage,
-                      );
+                      Map<String, String> queryParams = {
+                        "param1": loginIdController.text
+                      };
+
+                      // ignore: use_build_context_synchronously
+                      // Navigator.pushNamed(
+                      //   context,
+                      //   Uri(
+                      //           path: Routes.memberRegisterPage,
+                      //           queryParameters: queryParams)
+                      //       .toString(),
+                      // );
+
+                      var url = Uri.base.origin +
+                          Uri(
+                                  path: Routes.memberRegisterPage,
+                                  queryParameters: queryParams)
+                              .toString();
+
+                      html.window.open(url, "_self");
                     }
                     // if (sendEmail(
                     //         loginIdController.text, "Test", "Test Email") ==

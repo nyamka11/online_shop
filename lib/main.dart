@@ -99,7 +99,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: (settings) {
         var uriData = Uri.parse(settings.name.toString());
 
-        print(uriData);
+        // print(uriData);
         // print(
         //     'queryParameters: ${uriData.queryParameters} path: ${uriData.path}');
         if (uriData.path == Routes.memberRegisterPage) {
