@@ -1,8 +1,8 @@
-import 'dart:math';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:online_shop/pages/member/view_register.dart';
-import 'package:online_shop/pages/member/view_register_verify.dart';
+import 'pages/member/view_register.dart';
+import 'pages/member/view_register_verify.dart';
 import '_routers.dart';
 import 'pages/home_page.dart';
 import 'pages/invitation/view%20invitation_result.dart';
@@ -108,6 +108,7 @@ class MyApp extends StatelessWidget {
             );
           }
 
+          param1 = utf8.fuse(base64).decode(param1);
           return MaterialPageRoute(
             settings: settings,
             builder: (context) => MemberRegister(param1: param1.toString()),
