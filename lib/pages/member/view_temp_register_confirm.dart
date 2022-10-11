@@ -1,11 +1,12 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
+// ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
 import 'dart:html' as html;
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:online_shop/widgets/buttons/my_button.dart';
-import 'package:online_shop/widgets/input_controls/my_text_field.dart';
+import '../../widgets/buttons/my_button.dart';
+import '../../widgets/input_controls/my_text_field.dart';
 import '../../_routers.dart';
 import '../../widgets/_Common/ajax.dart';
 import '../../widgets/_Common/layout_template.dart';
@@ -246,9 +247,14 @@ class _TempRegisterConfirmPageState extends State<TempRegisterConfirmPage> {
                       "userName": inputNumber,
                     };
 
+                    Codec<String, String> stringToBase64 = utf8.fuse(base64);
+                    String encodedParam1 =
+                        stringToBase64.encode(loginIdController.text);
+                    // String decoded = stringToBase64.decode(encoded);
+
                     Map<String, dynamic> body = {
                       "url":
-                          "${Uri.base.origin}${Routes.memberRegisterPage}?param1=${loginIdController.text}",
+                          "${Uri.base.origin}${Routes.memberRegisterPage}?param1=$encodedParam1",
                       "data": jsonEncode(data).toString(),
                     };
 
@@ -265,7 +271,7 @@ class _TempRegisterConfirmPageState extends State<TempRegisterConfirmPage> {
                       return;
                     } else {
                       Map<String, String> queryParams = {
-                        "param1": loginIdController.text
+                        "param1": encodedParam1
                       };
 
                       // ignore: use_build_context_synchronously
@@ -305,33 +311,33 @@ class _TempRegisterConfirmPageState extends State<TempRegisterConfirmPage> {
   }
 }
 
-Future<bool> sendEmail(String email, String subject, String text) async {
-  final uri = Uri.parse('http://localhost:6060/email/sendEmail');
-  final headers = {'Content-Type': 'charset=UTF-8'};
-  Map<String, String> body = {
-    'to': email,
-    'cc_to': email,
-    'subject': subject,
-    'body': text
-  };
-  // String jsonBody = json.encode(body);
-  // final encoding = Encoding.getByName('utf-8');
+// Future<bool> sendEmail(String email, String subject, String text) async {
+//   final uri = Uri.parse('http://localhost:6060/email/sendEmail');
+//   final headers = {'Content-Type': 'charset=UTF-8'};
+//   Map<String, String> body = {
+//     'to': email,
+//     'cc_to': email,
+//     'subject': subject,
+//     'body': text
+//   };
+//   // String jsonBody = json.encode(body);
+//   // final encoding = Encoding.getByName('utf-8');
 
-  http.Response response = await http.post(
-    uri,
-    // headers: headers,
-    headers: {},
-    body: body,
-    // encoding: encoding,
-  );
-  print(response.statusCode);
-  print(response.body);
-  if (response.statusCode != 200) {
-    return true;
-  } else {
-    return false;
-  }
-}
+//   http.Response response = await http.post(
+//     uri,
+//     // headers: headers,
+//     headers: {},
+//     body: body,
+//     // encoding: encoding,
+//   );
+//   print(response.statusCode);
+//   print(response.body);
+//   if (response.statusCode != 200) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }
 
 // Future<String> apiRequest(String url, Map jsonMap) async {
 //   HttpClient httpClient = new HttpClient();
