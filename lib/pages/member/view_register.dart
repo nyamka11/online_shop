@@ -8,6 +8,7 @@ import 'package:online_shop/widgets/buttons/my_button.dart';
 import 'package:online_shop/widgets/input_controls/my_text_field.dart';
 
 import '../../widgets/_Common/layout_template.dart';
+import '../../widgets/_common/HTTPHelper.dart';
 import '../../widgets/check_box_custom.dart';
 
 import 'package:http/http.dart' as http;
@@ -382,7 +383,7 @@ class _MemberRegisterState extends State<MemberRegister> {
                         ),
                         widthSpace(w),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async {},
                           style: ElevatedButton.styleFrom(
                             // ignore: deprecated_member_use
                             primary: const Color.fromARGB(

@@ -98,19 +98,21 @@ class MyApp extends StatelessWidget {
       },
       onGenerateRoute: (settings) {
         var uriData = Uri.parse(settings.name.toString());
-        var param1 = uriData.queryParameters["param1"];
 
-        if (param1 == null) {
+        if (Routes.memberRegisterPage == uriData.path) {
+          var param1 = uriData.queryParameters["param1"];
+          if (param1 == null) {
+            return MaterialPageRoute(
+              settings: settings,
+              builder: (context) => HomePage(),
+            );
+          }
+
           return MaterialPageRoute(
             settings: settings,
-            builder: (context) => HomePage(),
+            builder: (context) => MemberRegister(param1: param1.toString()),
           );
         }
-
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (context) => MemberRegister(param1: param1.toString()),
-        );
       },
     );
   }

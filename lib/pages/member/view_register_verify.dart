@@ -5,6 +5,7 @@ import "package:flutter/material.dart";
 
 import '../../_routers.dart';
 import '../../widgets/_Common/layout_template.dart';
+import '../../widgets/_common/HTTPHelper.dart';
 import '../../widgets/_common/ajax.dart';
 import '../../widgets/buttons/my_button.dart';
 import '../../widgets/input_controls/my_text_field.dart';
@@ -603,11 +604,13 @@ class MemberRegisterVerify extends StatelessWidget {
                       w: 300,
                       color: Colors.pinkAccent,
                       onClick: () async {
-                        var response = await Ajax.post("/user/add",
+                        Map response = await HTTPHelper().addItem("/user/add",
                             {"data": jsonEncode(arguments).toString()});
 
+                        print(response);
+                        print(response["message"]);
+
                         if (response["success"]) {
-                          print(response["message"]);
                           Navigator.of(context)
                               .pushNamed(Routes.memberRegisteredPage);
                         }
