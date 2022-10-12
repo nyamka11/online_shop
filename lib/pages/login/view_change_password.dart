@@ -1,14 +1,16 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
 
 import 'package:flutter/material.dart';
-import 'package:online_shop/_routers.dart';
-import 'package:online_shop/widgets/_Common/layout_template.dart';
-import 'package:online_shop/widgets/buttons/my_button.dart';
+import '../../_routers.dart';
+import '../../widgets/_Common/ajax.dart';
+import '../../widgets/_Common/layout_template.dart';
+import '../../widgets/buttons/my_button.dart';
 
 import '../../widgets/input_controls/my_text_field.dart';
 
 class ChangePasswordPage extends StatefulWidget {
-  const ChangePasswordPage({super.key});
+  final String email;
+  const ChangePasswordPage({super.key, required this.email});
 
   @override
   State<ChangePasswordPage> createState() => _ChangePasswordPageState();
@@ -197,7 +199,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   w: 300,
                   color: Colors.blue,
                   text: "パスワードを変更する",
-                  onClick: () {
+                  onClick: () async {
                     if (newPassController.text.length < 8) {
                       setState(() {
                         warningMsg = "パスワードの桁数が足りません。　８桁以上で指定してください。";
@@ -250,6 +252,21 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       }
                     }
 
+                    Map<String, dynamic> body = {
+                      "mailAdd": widget.email,
+                      "pswd": newPassController.text,
+                    };
+
+                    Map res = await Ajax.post("/login/updatePswd", body);
+
+                    if (res["success"] == false) {
+                      setState(() {
+                        warningMsg = res["message"];
+                      });
+                      return;
+                    }
+
+                    // ignore: use_build_context_synchronously
                     Navigator.pushNamed(
                       context,
                       Routes.passwordChanged,

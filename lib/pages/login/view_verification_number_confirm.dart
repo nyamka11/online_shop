@@ -2,11 +2,13 @@
 
 import 'package:flutter/material.dart';
 import '../../_routers.dart';
+import '../../widgets/_Common/ajax.dart';
 import '../../widgets/_Common/layout_template.dart';
 import '../../widgets/input_controls/verify_number_input.dart';
 
 class VerificationNumberConfirmPage extends StatefulWidget {
-  const VerificationNumberConfirmPage({super.key});
+  final String param1;
+  const VerificationNumberConfirmPage({super.key, required this.param1});
 
   @override
   State<VerificationNumberConfirmPage> createState() =>
@@ -16,12 +18,15 @@ class VerificationNumberConfirmPage extends StatefulWidget {
 class _VerificationNumberConfirmPageState
     extends State<VerificationNumberConfirmPage> {
   List<TextEditingController> inputController = [];
+  String warningMsg = "";
+
   @override
   void initState() {
     inputController.clear();
     for (int i = 0; i < 6; i++) {
       inputController.add(TextEditingController());
     }
+    warningMsg = "";
     super.initState();
   }
 
@@ -31,23 +36,39 @@ class _VerificationNumberConfirmPageState
       inputController[i].dispose();
     }
     inputController.clear();
+    warningMsg = "";
     super.dispose();
   }
 
-  void checkValidNumber() {
+  void checkValidNumber() async {
     String inputNumber = "";
     for (var e in inputController) {
       if (e.text.isEmpty) break;
       inputNumber = inputNumber + e.text.trim();
     }
-    if (inputNumber == "123456") {
-      print("OKKK");
-      Navigator.pushNamed(
-        context,
-        Routes.changePasswordPage,
-      );
-    } else if (inputNumber.length == 6) {
-      print("Message haruulnaa");
+
+    if (inputNumber.length == 6) {
+      Map<String, dynamic> body = {
+        "mailAdd": widget.param1,
+        "tempCode": inputNumber,
+      };
+
+      Map res = await Ajax.post("/login/checkTempCode", body);
+      if (res["success"] == false) {
+        setState(() {
+          warningMsg = res["message"];
+        });
+        return;
+      } else {
+        // ignore: use_build_context_synchronously
+        Navigator.pushNamed(
+          context,
+          Routes.changePasswordPage,
+          arguments: {
+            "email": widget.param1,
+          },
+        );
+      }
     }
   }
 
@@ -129,6 +150,15 @@ class _VerificationNumberConfirmPageState
                     ),
                   ],
                 ),
+                if (warningMsg != "") dummySpaceBoxVer(15),
+                if (warningMsg != "")
+                  Text(
+                    warningMsg,
+                    style: const TextStyle(
+                      color: Colors.red,
+                      // fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 dummySpaceBoxVer(45),
                 const Text(
                   "【ご注意】",
