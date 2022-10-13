@@ -13,8 +13,8 @@ class Ajax {
       final urlParsed = Uri.parse(apiHost + url);
       final headers = {
         // 'content-type': 'application/json; charset=utf-8',
-        'content-type': 'application/x-www-form-urlencoded; charset=utf-8'
         // 'content-type': 'text/plain; charset=utf-8'
+        'content-type': 'application/x-www-form-urlencoded; charset=utf-8'
       };
 
       http.Response response = await http.post(urlParsed,
