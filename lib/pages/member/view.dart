@@ -159,7 +159,7 @@ class _TempRegisterPageState extends State<TempRegisterPage> {
                     ),
                     const Text(
                       "、",
-                      textAlign: TextAlign.left,
+                      textAlign: TextAlign.left, 
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
