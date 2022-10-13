@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:online_shop/_routers.dart';
+import 'package:online_shop/widgets/_common/loader.dart';
 import 'package:online_shop/widgets/buttons/my_button.dart';
 import 'package:online_shop/widgets/input_controls/my_text_field.dart';
 
@@ -55,6 +56,7 @@ Widget requiredText() {
 class _MemberRegisterState extends State<MemberRegister> {
   double h = 10;
   double w = 25;
+  bool isLoader = false;
 
   final userNameContorller = TextEditingController();
   final passwordContorller = TextEditingController();
@@ -73,6 +75,7 @@ class _MemberRegisterState extends State<MemberRegister> {
   final inviteCodeContorller = TextEditingController();
   final keyWordContorller = TextEditingController();
 
+  bool _isObscure = true;
   bool isCheckBagde1 = false;
   bool isCheckBagde2 = false;
   bool isCheckBagde3 = false;
@@ -82,6 +85,12 @@ class _MemberRegisterState extends State<MemberRegister> {
   bool isAgree = false;
 
   List<String> errorMsg = [];
+
+  void isLoaderFn() {
+    setState(() {
+      isLoader = true;
+    });
+  }
 
   void isAgreeFn(bool value) {
     isAgree = value;
@@ -248,6 +257,19 @@ class _MemberRegisterState extends State<MemberRegister> {
                           width: 500,
                           controller: passwordContorller,
                           hintText: "半角英数字8文字以上",
+                          obscureText: _isObscure,
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _isObscure
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _isObscure = !_isObscure;
+                              });
+                            },
+                          ),
                         ),
                       ],
                     ),
@@ -269,6 +291,19 @@ class _MemberRegisterState extends State<MemberRegister> {
                           width: 373,
                           controller: repasswordContorller,
                           hintText: "半角英数字8文字以上",
+                          obscureText: _isObscure,
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _isObscure
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _isObscure = !_isObscure;
+                              });
+                            },
+                          ),
                         ),
                       ],
                     ),
@@ -383,7 +418,13 @@ class _MemberRegisterState extends State<MemberRegister> {
                         ),
                         widthSpace(w),
                         ElevatedButton(
-                          onPressed: () async {},
+                          onPressed: () async {
+                            await HTTPHelper().addItem(
+                              context,
+                              "/user/add",
+                              {"data": "asdfas"},
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                             // ignore: deprecated_member_use
                             primary: const Color.fromARGB(

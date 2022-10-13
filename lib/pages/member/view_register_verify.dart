@@ -604,11 +604,13 @@ class MemberRegisterVerify extends StatelessWidget {
                       w: 300,
                       color: Colors.pinkAccent,
                       onClick: () async {
-                        Map response = await HTTPHelper().addItem("/user/add",
-                            {"data": jsonEncode(arguments).toString()});
-
-                        print(response);
-                        print(response["message"]);
+                        Map response = await HTTPHelper().addItem(
+                          context,
+                          "/user/add",
+                          {
+                            "data": jsonEncode(arguments).toString(),
+                          },
+                        );
 
                         if (response["success"]) {
                           Navigator.of(context)

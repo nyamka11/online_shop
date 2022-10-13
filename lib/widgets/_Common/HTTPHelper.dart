@@ -1,8 +1,12 @@
+import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'loader.dart';
 
 class HTTPHelper {
   String apiHost = dotenv.get("API_HOST", fallback: "");
@@ -45,8 +49,15 @@ class HTTPHelper {
   }
 
   //-- Add a new item
-  Future<Map> addItem(String url, Map data) async {
+  Future<Map> addItem(BuildContext ctx, String url, Map data) async {
     final urlParsed = Uri.parse(apiHost + url);
+    showDialog(
+      context: ctx,
+      barrierDismissible: false,
+      builder: (_) {
+        return requestLoader();
+      },
+    );
 
     http.Response response = await http.post(
       urlParsed,
@@ -54,8 +65,11 @@ class HTTPHelper {
       body: data,
     );
 
-    Map map = jsonDecode(response.body);
-    return map;
+    return Future.delayed(const Duration(milliseconds: 1000), () {
+      Navigator.of(ctx).pop();
+      print(response.body);
+      return jsonDecode(response.body);
+    });
   }
 
 //-- Update an item

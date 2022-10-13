@@ -101,14 +101,17 @@ class MyApp extends StatelessWidget {
 
         if (Routes.memberRegisterPage == uriData.path) {
           var param1 = uriData.queryParameters["param1"];
-          if (param1 == null) {
+
+          try {
+            // param1 = utf8.fuse(base64).decode(param1!);  // tvr zuur
+            param1 = param1;
+          } catch (e) {
             return MaterialPageRoute(
               settings: settings,
               builder: (context) => HomePage(),
             );
           }
 
-          param1 = utf8.fuse(base64).decode(param1);
           return MaterialPageRoute(
             settings: settings,
             builder: (context) => MemberRegister(param1: param1.toString()),
