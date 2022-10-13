@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import '../../_routers.dart';
-import '../../widgets/_Common/ajax.dart';
 import '../../widgets/_Common/layout_template.dart';
+import '../../widgets/_common/HTTPHelper.dart';
 import '../../widgets/input_controls/verify_number_input.dart';
 
 class VerificationNumberConfirmPage extends StatefulWidget {
@@ -53,7 +53,9 @@ class _VerificationNumberConfirmPageState
         "tempCode": inputNumber,
       };
 
-      Map res = await Ajax.post("/login/checkTempCode", body);
+      Map res =
+          await HTTPHelper().addItem(context, "/login/checkTempCode", body);
+
       if (res["success"] == false) {
         setState(() {
           warningMsg = res["message"];

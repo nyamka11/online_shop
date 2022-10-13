@@ -6,9 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import '../../_routers.dart';
 import '../../widgets/_Common/layout_template.dart';
+import '../../widgets/_common/HTTPHelper.dart';
 import '../../widgets/input_controls/my_text_field.dart';
-
-import '../../widgets/_Common/ajax.dart';
 import '../../widgets/buttons/my_button.dart';
 
 class LoginPage extends StatefulWidget {
@@ -211,7 +210,8 @@ class _LoginPageState extends State<LoginPage> {
                       "pswd": passwordController.text,
                     };
 
-                    Map res = await Ajax.post("/login/login", body);
+                    Map res = await HTTPHelper()
+                        .addItem(context, "/login/login", body);
 
                     print(res["success"]);
                     if (res["success"] == false) {

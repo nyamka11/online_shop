@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
 
 import 'package:flutter/material.dart';
+import 'package:online_shop/widgets/_common/HTTPHelper.dart';
 import '../../_routers.dart';
-import '../../widgets/_Common/ajax.dart';
 import '../../widgets/_Common/layout_template.dart';
 import '../../widgets/buttons/my_button.dart';
 
@@ -257,7 +257,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       "pswd": newPassController.text,
                     };
 
-                    Map res = await Ajax.post("/login/updatePswd", body);
+                    Map res = await HTTPHelper()
+                        .addItem(context, "/login/updatePswd", body);
 
                     if (res["success"] == false) {
                       setState(() {

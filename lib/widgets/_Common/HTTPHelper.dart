@@ -68,7 +68,7 @@ class HTTPHelper {
     return Future.delayed(const Duration(milliseconds: 1000), () {
       Navigator.of(ctx).pop();
       print(response.body);
-      return jsonDecode(response.body);
+      return jsonDecode(response.body) as Map;
     });
   }
 

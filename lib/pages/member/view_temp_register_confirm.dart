@@ -9,7 +9,6 @@ import 'package:online_shop/widgets/_common/HTTPHelper.dart';
 import '../../widgets/buttons/my_button.dart';
 import '../../widgets/input_controls/my_text_field.dart';
 import '../../_routers.dart';
-import '../../widgets/_Common/ajax.dart';
 import '../../widgets/_Common/layout_template.dart';
 
 import '../../widgets/input_controls/verify_number_input.dart';
