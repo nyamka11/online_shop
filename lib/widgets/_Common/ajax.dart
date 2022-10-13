@@ -1,5 +1,6 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:convert';
-import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -10,10 +11,15 @@ class Ajax {
       String apiHost = dotenv.get("API_HOST", fallback: "");
 
       final urlParsed = Uri.parse(apiHost + url);
-      final headers = {'Content-Type': 'charset=UTF-8'};
+      final headers = {
+        // 'content-type': 'application/json; charset=utf-8',
+        'content-type': 'application/x-www-form-urlencoded; charset=utf-8'
+        // 'content-type': 'text/plain; charset=utf-8'
+      };
+
       http.Response response = await http.post(urlParsed,
-          // headers: headers,
-          headers: {},
+          headers: headers,
+          // headers: {},
           body: body
           // encoding: encoding,
           );
