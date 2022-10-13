@@ -6,7 +6,6 @@ import "package:flutter/material.dart";
 import '../../_routers.dart';
 import '../../widgets/_Common/layout_template.dart';
 import '../../widgets/_common/HTTPHelper.dart';
-import '../../widgets/_common/ajax.dart';
 import '../../widgets/buttons/my_button.dart';
 import '../../widgets/input_controls/my_text_field.dart';
 
@@ -613,6 +612,7 @@ class MemberRegisterVerify extends StatelessWidget {
                         );
 
                         if (response["success"]) {
+                          // ignore: use_build_context_synchronously
                           Navigator.of(context)
                               .pushNamed(Routes.memberRegisteredPage);
                         }

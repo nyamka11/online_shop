@@ -3,7 +3,7 @@
 import 'dart:convert';
 import 'dart:html' as html;
 import 'package:flutter/material.dart';
-import '../../widgets/_common/ajax.dart';
+import '../../widgets/_common/HTTPHelper.dart';
 import '../../widgets/buttons/my_button.dart';
 import '../../widgets/input_controls/my_text_field.dart';
 import '../../_routers.dart';
@@ -248,7 +248,8 @@ class _TempRegisterPageState extends State<TempRegisterPage> {
                       return;
                     }
                     // ignore: unrelated_type_equality_checks
-                    if (register(loginIdController.text) == false) return;
+                    if (register(loginIdController.text, context) == false)
+                      return;
                     Navigator.pushNamed(
                       context,
                       Routes.tempRegisteredPage,
@@ -283,13 +284,12 @@ class _TempRegisterPageState extends State<TempRegisterPage> {
   }
 }
 
-register(String email) async {
+register(String email, BuildContext context) async {
   Map<String, dynamic> data = {"mailAdd": email};
   // Map<String, dynamic> body = {'mailAdd': email};
   Map<String, dynamic> body = {
     "url": Uri.base.origin + Routes.tempRegisterConfirmPage,
     "data": jsonEncode(data).toString(),
   };
-
-  Ajax.post("/mAccountTemp/add", body);
+  HTTPHelper().addItem(context, "/mAccountTemp/add", body);
 }
