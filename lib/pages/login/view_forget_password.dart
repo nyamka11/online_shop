@@ -1,10 +1,15 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
 
+import 'dart:convert';
+import 'dart:html' as html;
+
 import 'package:flutter/material.dart';
-import 'package:online_shop/_routers.dart';
-import 'package:online_shop/widgets/_Common/layout_template.dart';
-import 'package:online_shop/widgets/buttons/my_button.dart';
-import 'package:online_shop/widgets/input_controls/my_text_field.dart';
+import '../../_routers.dart';
+import '../../widgets/_Common/layout_template.dart';
+import '../../widgets/buttons/my_button.dart';
+import '../../widgets/input_controls/my_text_field.dart';
+
+import '../../widgets/_Common/ajax.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
   const ForgetPasswordPage({super.key});
@@ -130,7 +135,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                   w: 300,
                   text: "送信する",
                   color: Colors.blue,
-                  onClick: () {
+                  onClick: () async {
                     if (loginIdController.text.isEmpty) {
                       setState(() {
                         warningMsg = "メールアドレスを入力してください。";
@@ -139,10 +144,37 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                       return;
                     }
 
-                    Navigator.pushNamed(
-                      context,
-                      Routes.verificationNumberConfirmPage,
-                    );
+                    Codec<String, String> stringToBase64 = utf8.fuse(base64);
+                    String encodedParam1 =
+                        stringToBase64.encode(loginIdController.text);
+
+                    Map<String, dynamic> data = {
+                      "mailAdd": loginIdController.text
+                    };
+                    Map<String, dynamic> body = {
+                      "url":
+                          "${Uri.base.origin}${Routes.verificationNumberConfirmPage}?param1=$encodedParam1",
+                      "data": jsonEncode(data).toString(),
+                    };
+
+                    Map res = await Ajax.post("/login/forgetPassword", body);
+
+                    if (res["success"] == false) {
+                      setState(() {
+                        warningMsg = res["message"];
+                      });
+                      return;
+                    }
+
+                    Map<String, String> queryParams = {"param1": encodedParam1};
+
+                    var url = Uri.base.origin +
+                        Uri(
+                                path: Routes.verificationNumberConfirmPage,
+                                queryParameters: queryParams)
+                            .toString();
+
+                    html.window.open(url, "_self");
                   },
                 ),
 

@@ -71,9 +71,12 @@ class MyApp extends StatelessWidget {
         Routes.homePage: (context) => HomePage(),
         Routes.loginPage: (context) => const LoginPage(),
         Routes.forgetPasswordPage: (context) => const ForgetPasswordPage(),
-        Routes.verificationNumberConfirmPage: (context) =>
-            const VerificationNumberConfirmPage(),
-        Routes.changePasswordPage: (context) => const ChangePasswordPage(),
+        // Routes.verificationNumberConfirmPage: (context) =>
+        //     const VerificationNumberConfirmPage(),
+        Routes.changePasswordPage: (context) {
+          var arguments = ModalRoute.of(context)!.settings.arguments as Map;
+          return ChangePasswordPage(email: arguments["email"]);
+        },
         Routes.passwordChanged: (context) => const PasswordChangedInfoPage(),
         Routes.productDetailPage: (context) => const ProductsDetailPage(),
         Routes.productListPage: (context) => const ProductListPage(),
@@ -117,6 +120,23 @@ class MyApp extends StatelessWidget {
             builder: (context) => MemberRegister(param1: param1.toString()),
           );
         }
+
+        if (Routes.verificationNumberConfirmPage == uriData.path) {
+          var param1 = uriData.queryParameters["param1"];
+          if (param1 != null) {
+            param1 = utf8.fuse(base64).decode(param1);
+            return MaterialPageRoute(
+              settings: settings,
+              builder: (context) =>
+                  VerificationNumberConfirmPage(param1: param1.toString()),
+            );
+          }
+        }
+
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) => HomePage(),
+        );
       },
     );
   }

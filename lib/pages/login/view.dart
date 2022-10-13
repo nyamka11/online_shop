@@ -4,11 +4,11 @@ import 'dart:html' show Storage, window;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
-import 'package:online_shop/_routers.dart';
-import 'package:online_shop/data/m_account_u_data.dart';
-import 'package:online_shop/widgets/_Common/layout_template.dart';
-import 'package:online_shop/widgets/input_controls/my_text_field.dart';
+import '../../_routers.dart';
+import '../../widgets/_Common/layout_template.dart';
+import '../../widgets/input_controls/my_text_field.dart';
 
+import '../../widgets/_Common/ajax.dart';
 import '../../widgets/buttons/my_button.dart';
 
 class LoginPage extends StatefulWidget {
@@ -206,30 +206,27 @@ class _LoginPageState extends State<LoginPage> {
                       return;
                     }
 
-                    if (accountUsers
-                        .where((element) =>
-                            element.mailAdd == loginIdController.text)
-                        .isEmpty) {
-                      setState(() {
-                        warningMsg = "ユーザーが登録されていません。ログインIDを確認してください。";
-                      });
-                      return;
-                    }
+                    Map<String, dynamic> body = {
+                      "mailAdd": loginIdController.text,
+                      "pswd": passwordController.text,
+                    };
 
-                    var user = accountUsers.firstWhere(
-                        (element) => element.mailAdd == loginIdController.text);
+                    Map res = await Ajax.post("/login/login", body);
 
-                    if (user.pswd != passwordController.text) {
+                    print(res["success"]);
+                    if (res["success"] == false) {
                       setState(() {
-                        warningMsg = "パスワードが異なっています。パスワードを確認してください。";
+                        warningMsg = res["message"];
                       });
                       return;
                     }
 
                     var sessionManager = SessionManager();
                     await sessionManager.set("isLogged", true);
-                    await sessionManager.set("loggedUserName", user.userName);
+                    await sessionManager.set(
+                        "loggedUserName", res["data"]["userName"]);
 
+                    // ignore: use_build_context_synchronously
                     Navigator.of(context).pushNamed(Routes.homePage);
                   },
                 ),
