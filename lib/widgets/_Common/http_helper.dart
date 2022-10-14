@@ -6,7 +6,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'loader.dart';
+import '../../models/dialog_types.dart';
+import 'alert_dialog.dart';
 
 class HTTPHelper {
   String apiHost = dotenv.get("API_HOST", fallback: "");
@@ -48,28 +49,49 @@ class HTTPHelper {
     return item;
   }
 
-  //-- Add a new item
-  Future<Map> addItem(BuildContext ctx, String url, Map data) async {
-    final urlParsed = Uri.parse(apiHost + url);
-    showDialog(
-      context: ctx,
-      barrierDismissible: false,
-      builder: (_) {
-        return requestLoader();
-      },
-    );
+  //-- post
+  Future<Map> post(
+    BuildContext ctx,
+    String url,
+    Map data, {
+    bool systemErrorDioagShow = true,
+  }) async {
+    try {
+      final urlParsed = Uri.parse(apiHost + url);
+      showDialog(
+        context: ctx,
+        barrierDismissible: false,
+        builder: (_) {
+          return MyAlertDialog(
+            height: 100,
+            type: DialogTypes.loading,
+            textBody: "読み込み中....",
+          );
+        },
+      );
 
-    http.Response response = await http.post(
-      urlParsed,
-      headers: headers,
-      body: data,
-    );
+      http.Response response;
+      try {
+        response = await http
+            .post(
+              urlParsed,
+              headers: headers,
+              body: data,
+            )
+            .timeout(const Duration(seconds: 30));
+      } catch (e) {
+        print(e);
+        return errorExceptionDialog(ctx, systemErrorDioagShow);
+      }
 
-    return Future.delayed(const Duration(milliseconds: 1000), () {
-      Navigator.of(ctx).pop();
-      print(response.body);
-      return jsonDecode(response.body) as Map;
-    });
+      return await Future.delayed(const Duration(seconds: 1), () {
+        Navigator.of(ctx).pop();
+        print(response.body);
+        return jsonDecode(response.body) as Map;
+      });
+    } on TimeoutException catch (_) {
+      return errorExceptionDialog(ctx, systemErrorDioagShow);
+    }
   }
 
 //-- Update an item
@@ -102,4 +124,28 @@ class HTTPHelper {
 
     return status;
   }
+}
+
+Map errorExceptionDialog(ctx, errorDioagShow) {
+  Navigator.of(ctx).pop();
+
+  if (errorDioagShow) {
+    showDialog(
+      context: ctx,
+      barrierDismissible: false,
+      builder: (_) {
+        return MyAlertDialog(
+          height: 80,
+          type: DialogTypes.error,
+          textBody: "システムエラーが発生しました。管理者に連絡してください",
+          cancelBtn: true,
+        );
+      },
+    );
+  }
+
+  return {
+    "success": false,
+    "message": "システムエラー",
+  };
 }

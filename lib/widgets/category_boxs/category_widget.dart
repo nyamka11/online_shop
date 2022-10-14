@@ -7,15 +7,19 @@ import '../../data/categories_data.dart';
 class CatBoxWidget extends StatelessWidget {
   final int index;
   final int catId;
+  final String catName;
 
   const CatBoxWidget({
     super.key,
     required this.index,
     required this.catId,
+    required this.catName,
   });
 
   @override
   Widget build(BuildContext context) {
+    // print(categories1);
+
     return LayoutBuilder(
       builder: (context, costraints) {
         double w = costraints.maxWidth;
@@ -46,7 +50,7 @@ class CatBoxWidget extends StatelessWidget {
                     width: w,
                     color: Colors.blue[300],
                     child: Text(
-                      categories[index].catName,
+                      catName,
                       style: const TextStyle(
                         fontSize: 17,
                         color: Colors.white,

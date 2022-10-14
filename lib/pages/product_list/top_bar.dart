@@ -23,7 +23,7 @@ class _TopBarState extends State<TopBar> {
   int selectedCatId = 0;
   int selectedBadgeId = 0;
 
-  final List<CategoryModel> categoryList = categories;
+  // final List<CategoryModel> categoryList = categories;
   final List<BadgeModel> bagdeList = badgeData;
 
   @override
@@ -78,24 +78,24 @@ class _TopBarState extends State<TopBar> {
                   padding: const EdgeInsets.only(left: 8, right: 8),
                   width: 200,
                   height: 35,
-                  child: DropdownButton(
-                    underline: const SizedBox(),
-                    value: selectedCatId,
-                    items: categoryList
-                        .map(
-                          (value) => DropdownMenuItem(
-                            value: value.id,
-                            child: Text(value.catName),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: (id) {
-                      setState(() {
-                        selectedCatId = id!;
-                      });
-                    },
-                    isExpanded: true,
-                  ),
+                  // child: DropdownButton(
+                  //   underline: const SizedBox(),
+                  //   value: selectedCatId,
+                  //   items: categoryList
+                  //       .map(
+                  //         (value) => DropdownMenuItem(
+                  //           value: value.catId,
+                  //           child: Text(value.catName),
+                  //         ),
+                  //       )
+                  //       .toList(),
+                  //   onChanged: (id) {
+                  //     setState(() {
+                  //       selectedCatId = id!;
+                  //     });
+                  //   },
+                  //   isExpanded: true,
+                  // ),
                 ),
                 const SizedBox(width: 20),
                 const Text(

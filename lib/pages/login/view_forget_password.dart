@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
-import 'package:online_shop/widgets/_common/HTTPHelper.dart';
+import 'package:online_shop/widgets/_common/http_helper.dart';
 import '../../_routers.dart';
 import '../../widgets/_Common/layout_template.dart';
 import '../../widgets/buttons/my_button.dart';
@@ -156,8 +156,8 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                       "data": jsonEncode(data).toString(),
                     };
 
-                    Map res = HTTPHelper()
-                        .addItem(context, "/login/forgetPassword", body) as Map;
+                    Map res = await HTTPHelper()
+                        .post(context, "/login/forgetPassword", body);
 
                     if (res["success"] == false) {
                       setState(() {

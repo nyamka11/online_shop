@@ -5,7 +5,7 @@ import 'dart:html' as html;
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:online_shop/widgets/_common/HTTPHelper.dart';
+import 'package:online_shop/widgets/_common/http_helper.dart';
 import '../../widgets/buttons/my_button.dart';
 import '../../widgets/input_controls/my_text_field.dart';
 import '../../_routers.dart';
@@ -258,8 +258,8 @@ class _TempRegisterConfirmPageState extends State<TempRegisterConfirmPage> {
                       "data": jsonEncode(data).toString(),
                     };
 
-                    Map res = HTTPHelper().addItem(
-                        context, "/mAccountTemp/confirmRegister", body) as Map;
+                    Map res = await HTTPHelper()
+                        .post(context, "/mAccountTemp/confirmRegister", body);
 
                     print(res["success"]);
                     if (res["success"] == false) {

@@ -1,13 +1,36 @@
 import "package:flutter/material.dart";
 import '../../data/categories_data.dart';
+import '../../models/category.dart';
+import '../../services/m_cateogory.dart';
 import './category_widget.dart';
 
-class CategoriesView extends StatelessWidget {
+class CategoriesView extends StatefulWidget {
   CategoriesView({super.key});
 
-  final categoriesData = categories;
+  @override
+  State<CategoriesView> createState() => _CategoriesViewState();
+}
 
-  Widget girdViewCustom(BuildContext context) {
+class _CategoriesViewState extends State<CategoriesView> {
+  List<CategoryModel> categories = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  void getData() async {
+    Future<List<CategoryModel>> categoriesFuture = CategoryService.getAll();
+    var categoriesAll = await categoriesFuture;
+    if (mounted) {
+      setState(() {
+        categories = categoriesAll;
+      });
+    }
+  }
+
+  Widget girdViewCustom(BuildContext context, List<CategoryModel> categories) {
     double screenWidth = MediaQuery.of(context).size.width;
     return screenWidth > 1000
         ? GridView.count(
@@ -18,9 +41,11 @@ class CategoriesView extends StatelessWidget {
             mainAxisSpacing: 10,
             crossAxisCount: 3,
             children: List.generate(
-              categoriesData.length,
-              (index) =>
-                  CatBoxWidget(index: index, catId: categories[index].id),
+              categories.length,
+              (index) => CatBoxWidget(
+                  index: index,
+                  catId: categories[index].catId,
+                  catName: categories[index].catName),
             ),
           )
         : GridView.builder(
@@ -32,9 +57,13 @@ class CategoriesView extends StatelessWidget {
               crossAxisSpacing: 20,
               mainAxisSpacing: 20,
             ),
-            itemCount: categoriesData.length,
+            itemCount: categories.length,
             itemBuilder: (BuildContext ctx, index) {
-              return CatBoxWidget(index: index, catId: categories[index].id);
+              return CatBoxWidget(
+                index: index,
+                catId: categories[index].catId,
+                catName: categories[index].catName,
+              );
             },
           );
   }
@@ -50,7 +79,7 @@ class CategoriesView extends StatelessWidget {
             "カテゴリー",
             style: TextStyle(fontSize: 20),
           ),
-          girdViewCustom(context)
+          girdViewCustom(context, categories)
         ],
       ),
     );

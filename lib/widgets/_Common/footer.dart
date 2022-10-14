@@ -72,52 +72,52 @@ class Footer extends StatelessWidget {
               ],
             ),
           ),
-          // Expanded(
-          //   flex: 6,
-          //   child: Row(
-          //     // crossAxisAlignment: CrossAxisAlignment.start,
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: [
-          //       ...Common.footerPageNames.map(
-          //         (item) => Row(
-          //           children: [
-          //             Container(
-          //               height: 15,
-          //               width: 2,
-          //               color: Colors.black,
-          //               margin: const EdgeInsets.all(15),
-          //             ),
-          //             InkWell(
-          //               onTap: () {
-          //                 if (item == "プライバシーポリシー") {
-          //                   Navigator.of(context)
-          //                       .pushNamed(Routes.privacyPolicyPdf);
-          //                 }
-          //                 if (item == "特定商法に基づく表記") {
-          //                   Navigator.of(context)
-          //                       .pushNamed(Routes.commercialTransactionPdf);
-          //                 }
-          //               },
-          //               child: Text(
-          //                 item,
-          //                 style: const TextStyle(
-          //                   color: Colors.white,
-          //                   decoration: TextDecoration.underline,
-          //                 ),
-          //               ),
-          //             ),
-          //           ],
-          //         ),
-          //       ),
-          //       Container(
-          //         height: 15,
-          //         width: 2,
-          //         color: Colors.black,
-          //         margin: const EdgeInsets.all(15),
-          //       ),
-          //     ],
-          //   ),
-          // ),
+          Expanded(
+            flex: 6,
+            child: Row(
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ...Common.footerPageNames.map(
+                  (item) => Row(
+                    children: [
+                      Container(
+                        height: 15,
+                        width: 2,
+                        color: Colors.black,
+                        margin: const EdgeInsets.all(15),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          if (item == "プライバシーポリシー") {
+                            Navigator.of(context)
+                                .pushNamed(Routes.privacyPolicyPdf);
+                          }
+                          if (item == "特定商法に基づく表記") {
+                            Navigator.of(context)
+                                .pushNamed(Routes.commercialTransactionPdf);
+                          }
+                        },
+                        child: Text(
+                          item,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 15,
+                  width: 2,
+                  color: Colors.black,
+                  margin: const EdgeInsets.all(15),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

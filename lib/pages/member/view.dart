@@ -3,7 +3,7 @@
 import 'dart:convert';
 import 'dart:html' as html;
 import 'package:flutter/material.dart';
-import '../../widgets/_common/HTTPHelper.dart';
+import '../../widgets/_common/http_helper.dart';
 import '../../widgets/buttons/my_button.dart';
 import '../../widgets/input_controls/my_text_field.dart';
 import '../../_routers.dart';
@@ -120,16 +120,6 @@ class _TempRegisterPageState extends State<TempRegisterPage> {
                     fontSize: 11,
                   ),
                 ),
-                if (warningMsg != "") dummySpaceBox(15),
-                if (warningMsg != "")
-                  Text(
-                    warningMsg,
-                    style: const TextStyle(
-                      color: Colors.red,
-                      // fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                // if (warningMsg != "") dummySpaceBox(15),
                 dummySpaceBox(45),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -159,7 +149,7 @@ class _TempRegisterPageState extends State<TempRegisterPage> {
                     ),
                     const Text(
                       "、",
-                      textAlign: TextAlign.left, 
+                      textAlign: TextAlign.left,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -223,13 +213,21 @@ class _TempRegisterPageState extends State<TempRegisterPage> {
                   ),
                 ),
                 dummySpaceBox(45),
-
+                if (warningMsg != "")
+                  Text(
+                    warningMsg,
+                    style: const TextStyle(
+                      color: Colors.red,
+                      // fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                if (warningMsg != "") dummySpaceBox(15),
                 MyButton(
                   h: 50,
                   w: 300,
                   text: "登録用メールを送信する",
                   color: Colors.blue,
-                  onClick: () {
+                  onClick: () async {
                     if (loginIdController.text.isEmpty) {
                       setState(() {
                         warningMsg = "メールアドレスを入力してください。";
@@ -247,9 +245,17 @@ class _TempRegisterPageState extends State<TempRegisterPage> {
                       });
                       return;
                     }
-                    // ignore: unrelated_type_equality_checks
-                    if (register(loginIdController.text, context) == false)
+
+                    Map res = await register(loginIdController.text, context);
+
+                    if (res["success"] == false) {
+                      setState(() {
+                        warningMsg = res["message"];
+                      });
                       return;
+                    }
+
+                    // ignore: use_build_context_synchronously
                     Navigator.pushNamed(
                       context,
                       Routes.tempRegisteredPage,
@@ -284,12 +290,12 @@ class _TempRegisterPageState extends State<TempRegisterPage> {
   }
 }
 
-register(String email, BuildContext context) async {
+Future<Map> register(String email, BuildContext context) async {
   Map<String, dynamic> data = {"mailAdd": email};
   // Map<String, dynamic> body = {'mailAdd': email};
   Map<String, dynamic> body = {
     "url": Uri.base.origin + Routes.tempRegisterConfirmPage,
     "data": jsonEncode(data).toString(),
   };
-  HTTPHelper().addItem(context, "/mAccountTemp/add", body);
+  return await HTTPHelper().post(context, "/mAccountTemp/add", body);
 }

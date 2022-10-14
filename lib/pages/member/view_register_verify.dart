@@ -5,7 +5,7 @@ import "package:flutter/material.dart";
 
 import '../../_routers.dart';
 import '../../widgets/_Common/layout_template.dart';
-import '../../widgets/_common/HTTPHelper.dart';
+import '../../widgets/_common/http_helper.dart';
 import '../../widgets/buttons/my_button.dart';
 import '../../widgets/input_controls/my_text_field.dart';
 
@@ -603,13 +603,10 @@ class MemberRegisterVerify extends StatelessWidget {
                       w: 300,
                       color: Colors.pinkAccent,
                       onClick: () async {
-                        Map response = await HTTPHelper().addItem(
-                          context,
-                          "/user/add",
-                          {
-                            "data": jsonEncode(arguments).toString(),
-                          },
-                        );
+                        Map response =
+                            await HTTPHelper().post(context, "/user/add", {
+                          "data": jsonEncode(arguments).toString(),
+                        });
 
                         if (response["success"]) {
                           // ignore: use_build_context_synchronously
