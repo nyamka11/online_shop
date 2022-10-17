@@ -1,37 +1,43 @@
 import 'dart:async';
-import 'dart:io';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-import '../../models/dialog_types.dart';
-import 'alert_dialog.dart';
+import 'navigator_global.dart';
 
 class HTTPHelper {
   String apiHost = dotenv.get("API_HOST", fallback: "");
-  // final headers = {'content-Type': 'charset=UTF-8'};
 
   // final headers = {'Content-type': 'application/json'};
   final headers = null;
 
   //--Fetching all items
   Future<List<Map>> fetchItems(String url) async {
-    List<Map> items = [];
+    try {
+      List<Map> items = [];
+      //--Get the data from the API
+      http.Response response;
+      try {
+        // GlobaAlertDialog.showLoadingDialog();
+        response = await http.get(Uri.parse(apiHost + url));
 
-    //--Get the data from the API
-    http.Response response = await http.get(Uri.parse(apiHost + url));
+        if (response.statusCode == 200) {
+          String jsonString = response.body;
+          List data = jsonDecode(jsonString);
+          items = data.cast<Map>();
+        }
 
-    if (response.statusCode == 200) {
-      //get the data from the response
-      String jsonString = response.body;
-      //Convert to List<Map>
-      List data = jsonDecode(jsonString);
-      items = data.cast<Map>();
+        // return await Future.delayed(const Duration(seconds: 1), () {
+        //   GlobaAlertDialog.pop();
+        //   return items;
+        // });
+
+        return items;
+      } catch (e) {
+        return errorExceptionDialog(true) as List<Map>;
+      }
+    } on TimeoutException catch (e) {
+      return errorExceptionDialog(true) as List<Map>;
     }
-
-    return items;
   }
 
   //--Fetch details of one item
@@ -51,25 +57,14 @@ class HTTPHelper {
 
   //-- post
   Future<Map> post(
-    BuildContext ctx,
     String url,
     Map data, {
     bool systemErrorDioagShow = true,
   }) async {
     try {
-      final urlParsed = Uri.parse(apiHost + url);
-      showDialog(
-        context: ctx,
-        barrierDismissible: false,
-        builder: (_) {
-          return MyAlertDialog(
-            height: 100,
-            type: DialogTypes.loading,
-            textBody: "読み込み中....",
-          );
-        },
-      );
+      GlobaAlertDialog.showLoadingDialog();
 
+      final urlParsed = Uri.parse(apiHost + url);
       http.Response response;
       try {
         response = await http
@@ -81,16 +76,15 @@ class HTTPHelper {
             .timeout(const Duration(seconds: 30));
       } catch (e) {
         print(e);
-        return errorExceptionDialog(ctx, systemErrorDioagShow);
+        return errorExceptionDialog(systemErrorDioagShow);
       }
 
       return await Future.delayed(const Duration(seconds: 1), () {
-        Navigator.of(ctx).pop();
-        print(response.body);
+        GlobaAlertDialog.pop();
         return jsonDecode(response.body) as Map;
       });
     } on TimeoutException catch (_) {
-      return errorExceptionDialog(ctx, systemErrorDioagShow);
+      return errorExceptionDialog(systemErrorDioagShow);
     }
   }
 
@@ -126,22 +120,11 @@ class HTTPHelper {
   }
 }
 
-Map errorExceptionDialog(ctx, errorDioagShow) {
-  Navigator.of(ctx).pop();
+Map errorExceptionDialog(errorDioagShow) {
+  GlobaAlertDialog.pop();
 
   if (errorDioagShow) {
-    showDialog(
-      context: ctx,
-      barrierDismissible: false,
-      builder: (_) {
-        return MyAlertDialog(
-          height: 80,
-          type: DialogTypes.error,
-          textBody: "システムエラーが発生しました。管理者に連絡してください",
-          cancelBtn: true,
-        );
-      },
-    );
+    GlobaAlertDialog.showErrorDialog();
   }
 
   return {

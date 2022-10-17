@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/models/badge.dart';
+import 'package:online_shop/services/m_cateogory.dart';
 
-import '../../data/badge.dart';
-import '../../data/categories_data.dart';
 import '../../models/category.dart';
+import '../../services/m_badge.dart';
 
 class TopBar extends StatefulWidget {
   Function changeSearchContitionEvent;
@@ -22,15 +22,37 @@ class TopBar extends StatefulWidget {
 class _TopBarState extends State<TopBar> {
   int selectedCatId = 0;
   int selectedBadgeId = 0;
-
-  // final List<CategoryModel> categoryList = categories;
-  final List<BadgeModel> bagdeList = badgeData;
+  List<CategoryModel> categoryList = [];
+  List<BadgeModel> bagdeList = [];
 
   @override
   void initState() {
-    selectedCatId = widget.forgetChosedCategoryId;
-    selectedBadgeId = badgeData.first.id;
     super.initState();
+    getDataCategory();
+    getDataBagde();
+  }
+
+  void getDataCategory() async {
+    Future<List<CategoryModel>> categoriesFuture =
+        CategoryService.getAll(context);
+    var categoriesAll = await categoriesFuture;
+
+    if (mounted) {
+      setState(() {
+        categoryList = categoriesAll;
+      });
+    }
+  }
+
+  void getDataBagde() async {
+    Future<List<BadgeModel>> badgeFuture = BadgeService.getAll();
+    var badgeAll = await badgeFuture;
+
+    if (mounted) {
+      setState(() {
+        bagdeList = badgeAll;
+      });
+    }
   }
 
   @override
@@ -78,24 +100,24 @@ class _TopBarState extends State<TopBar> {
                   padding: const EdgeInsets.only(left: 8, right: 8),
                   width: 200,
                   height: 35,
-                  // child: DropdownButton(
-                  //   underline: const SizedBox(),
-                  //   value: selectedCatId,
-                  //   items: categoryList
-                  //       .map(
-                  //         (value) => DropdownMenuItem(
-                  //           value: value.catId,
-                  //           child: Text(value.catName),
-                  //         ),
-                  //       )
-                  //       .toList(),
-                  //   onChanged: (id) {
-                  //     setState(() {
-                  //       selectedCatId = id!;
-                  //     });
-                  //   },
-                  //   isExpanded: true,
-                  // ),
+                  child: DropdownButton(
+                    underline: const SizedBox(),
+                    value: selectedCatId,
+                    items: categoryList
+                        .map(
+                          (value) => DropdownMenuItem(
+                            value: value.catId,
+                            child: Text(value.catName),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (id) {
+                      setState(() {
+                        selectedCatId = id!;
+                      });
+                    },
+                    isExpanded: true,
+                  ),
                 ),
                 const SizedBox(width: 20),
                 const Text(
@@ -116,7 +138,7 @@ class _TopBarState extends State<TopBar> {
                     items: bagdeList
                         .map(
                           (value) => DropdownMenuItem(
-                            value: value.id,
+                            value: value.badgeId,
                             child: Text(value.badgeName),
                           ),
                         )

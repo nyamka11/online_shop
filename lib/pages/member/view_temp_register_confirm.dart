@@ -259,7 +259,7 @@ class _TempRegisterConfirmPageState extends State<TempRegisterConfirmPage> {
                     };
 
                     Map res = await HTTPHelper()
-                        .post(context, "/mAccountTemp/confirmRegister", body);
+                        .post("/mAccountTemp/confirmRegister", body);
 
                     print(res["success"]);
                     if (res["success"] == false) {

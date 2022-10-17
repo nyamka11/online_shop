@@ -156,8 +156,8 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                       "data": jsonEncode(data).toString(),
                     };
 
-                    Map res = await HTTPHelper()
-                        .post(context, "/login/forgetPassword", body);
+                    Map res =
+                        await HTTPHelper().post("/login/forgetPassword", body);
 
                     if (res["success"] == false) {
                       setState(() {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:online_shop/data/badge.dart';
+
 import 'package:online_shop/data/product_data.dart';
 import 'package:online_shop/models/badge.dart';
 import 'package:online_shop/models/product.dart';
@@ -19,8 +19,8 @@ class _ProductListPageState extends State<ProductListPage> {
   List<ProductModel> productList = products;
   List<ProductModel> productListWhere = [];
 
-  List<BadgeModel> badgetList = badgeData;
-  List<BadgeModel> bagdeDataListWhere = [];
+  // List<BadgeModel> badgetList = badgeData;
+  // List<BadgeModel> bagdeDataListWhere = [];
 
   bool isInit = false;
   int searchCatId = 0;

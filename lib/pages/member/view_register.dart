@@ -419,7 +419,6 @@ class _MemberRegisterState extends State<MemberRegister> {
                         ElevatedButton(
                           onPressed: () async {
                             await HTTPHelper().post(
-                              context,
                               "/user/add",
                               {"data": "asdfas"},
                             );

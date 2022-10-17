@@ -297,5 +297,5 @@ Future<Map> register(String email, BuildContext context) async {
     "url": Uri.base.origin + Routes.tempRegisterConfirmPage,
     "data": jsonEncode(data).toString(),
   };
-  return await HTTPHelper().post(context, "/mAccountTemp/add", body);
+  return await HTTPHelper().post("/mAccountTemp/add", body);
 }

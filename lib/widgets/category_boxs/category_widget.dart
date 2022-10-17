@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:online_shop/_routers.dart';
 import 'package:online_shop/widgets/_common/box_custom.dart';
 
-import '../../data/categories_data.dart';
-
 class CatBoxWidget extends StatelessWidget {
   final int index;
   final int catId;

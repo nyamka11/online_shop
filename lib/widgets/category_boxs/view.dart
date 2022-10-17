@@ -1,11 +1,10 @@
 import "package:flutter/material.dart";
-import '../../data/categories_data.dart';
 import '../../models/category.dart';
 import '../../services/m_cateogory.dart';
 import './category_widget.dart';
 
 class CategoriesView extends StatefulWidget {
-  CategoriesView({super.key});
+  const CategoriesView({super.key});
 
   @override
   State<CategoriesView> createState() => _CategoriesViewState();
@@ -21,7 +20,8 @@ class _CategoriesViewState extends State<CategoriesView> {
   }
 
   void getData() async {
-    Future<List<CategoryModel>> categoriesFuture = CategoryService.getAll();
+    Future<List<CategoryModel>> categoriesFuture =
+        CategoryService.getAll(context);
     var categoriesAll = await categoriesFuture;
     if (mounted) {
       setState(() {

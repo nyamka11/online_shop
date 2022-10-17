@@ -1,5 +1,5 @@
 class BadgeModel {
-  final int id;
+  final int badgeId;
   final String badgeName;
   final String imageName;
   final String imagePath;
@@ -13,7 +13,7 @@ class BadgeModel {
   final DateTime expirationDate;
 
   BadgeModel({
-    required this.id,
+    required this.badgeId,
     required this.badgeName,
     required this.imageName,
     required this.imagePath,
@@ -25,4 +25,20 @@ class BadgeModel {
     required this.validFlg,
     required this.expirationDate,
   });
+
+  factory BadgeModel.fromJson(Map<String, dynamic> data) {
+    return BadgeModel(
+      badgeId: data['badgeId'] as int,
+      badgeName: data['badgeName'] as String,
+      imageName: data['imageName'] as String,
+      imagePath: data['imagePath'] as String,
+      imageType: data['imageType'] as String,
+      imageSize: (data['imageSize'] ?? "") as String,
+      createDate: DateTime.parse(data['createDate']),
+      updateDate: DateTime.parse(data['updateDate']),
+      deleteDate: DateTime.parse(data['deleteDate']),
+      validFlg: data['validFlg'] as int,
+      expirationDate: DateTime.parse(data['expirationDate']),
+    );
+  }
 }

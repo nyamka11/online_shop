@@ -603,8 +603,7 @@ class MemberRegisterVerify extends StatelessWidget {
                       w: 300,
                       color: Colors.pinkAccent,
                       onClick: () async {
-                        Map response =
-                            await HTTPHelper().post(context, "/user/add", {
+                        Map response = await HTTPHelper().post("/user/add", {
                           "data": jsonEncode(arguments).toString(),
                         });
 

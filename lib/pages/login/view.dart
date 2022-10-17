@@ -210,8 +210,7 @@ class _LoginPageState extends State<LoginPage> {
                       "pswd": passwordController.text,
                     };
 
-                    Map res =
-                        await HTTPHelper().post(context, "/login/login", body);
+                    Map res = await HTTPHelper().post("/login/login", body);
 
                     print(res["success"]);
                     if (res["success"] == false) {

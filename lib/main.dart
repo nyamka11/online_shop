@@ -1,6 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:online_shop/widgets/_common/navigator_key.dart';
 import 'pages/member/view_register.dart';
 import 'pages/member/view_register_verify.dart';
 import '_routers.dart';
@@ -33,7 +33,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
 
 main() async {
-  // await DotEnv.load(fileName: ".env.development");
   await dotenv.load(fileName: ".env");
 
   usePathUrlStrategy();
@@ -54,10 +53,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // String email = Uri.base.queryParameters["email"] ?? "xxxx";
-    // print(email);
-
     return MaterialApp(
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       title: 'A-MON Market',
       theme: ThemeData(

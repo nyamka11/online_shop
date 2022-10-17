@@ -53,7 +53,7 @@ class _VerificationNumberConfirmPageState
         "tempCode": inputNumber,
       };
 
-      Map res = await HTTPHelper().post(context, "/login/checkTempCode", body);
+      Map res = await HTTPHelper().post("/login/checkTempCode", body);
 
       if (res["success"] == false) {
         setState(() {

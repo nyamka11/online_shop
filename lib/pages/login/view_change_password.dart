@@ -257,8 +257,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       "pswd": newPassController.text,
                     };
 
-                    Map res = await HTTPHelper()
-                        .post(context, "/login/updatePswd", body);
+                    Map res =
+                        await HTTPHelper().post("/login/updatePswd", body);
 
                     if (res["success"] == false) {
                       setState(() {
