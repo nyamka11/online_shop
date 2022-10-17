@@ -244,7 +244,7 @@ class _TempRegisterConfirmPageState extends State<TempRegisterConfirmPage> {
 
                     Map<String, dynamic> data = {
                       "mailAdd": loginIdController.text,
-                      "userName": inputNumber,
+                      "tmp_code": inputNumber,
                     };
 
                     Codec<String, String> stringToBase64 = utf8.fuse(base64);
