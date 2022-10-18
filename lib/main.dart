@@ -5,7 +5,7 @@ import 'pages/member/view_register.dart';
 import 'pages/member/view_register_verify.dart';
 import '_routers.dart';
 import 'pages/home_page.dart';
-import 'pages/invitation/view%20invitation_result.dart';
+import 'pages/invitation/view_invitation_result.dart';
 import 'pages/invitation/view.dart';
 import 'pages/login/view.dart';
 import 'pages/login/view_change_password.dart';

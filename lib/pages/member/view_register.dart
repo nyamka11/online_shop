@@ -7,7 +7,7 @@ import 'package:online_shop/_routers.dart';
 import 'package:online_shop/widgets/buttons/my_button.dart';
 import 'package:online_shop/widgets/input_controls/my_text_field.dart';
 
-import '../../widgets/_Common/layout_template.dart';
+import '../../widgets/_common/layout_template.dart';
 import '../../widgets/_common/http_helper.dart';
 import '../../widgets/check_box_custom.dart';
 

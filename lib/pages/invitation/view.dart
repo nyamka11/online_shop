@@ -1,13 +1,13 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
-import 'dart:html' show Storage, window;
+import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:online_shop/widgets/buttons/my_button.dart';
-import '../../widgets/_Common/layout_template.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
+import '../../widgets/buttons/my_button.dart';
+import '../../widgets/_common/layout_template.dart';
 import '../../_routers.dart';
 import '../../widgets/check_box_custom.dart';
-import 'dart:js' as js;
 
 class InvitationPage extends StatefulWidget {
   const InvitationPage({super.key});
@@ -21,16 +21,17 @@ class _InvitationPageState extends State<InvitationPage> {
   List<TextEditingController> inputNameController = [];
   List<TextEditingController> inputEmailController = [];
 
-  Storage localStorage = window.localStorage;
-
   String storageLoginId = "loggedUserName";
+  String? loggedUserName;
   String warningMsg = "";
   String code = "";
   bool inviteRuleVerifed = false;
 
   @override
   void initState() {
-    code = "123456";
+    Random random = Random();
+    int randomNumber = random.nextInt(900000) + 100000;
+    code = randomNumber.toString();
     warningMsg = "";
     inputNameController.clear();
     for (int i = 0; i < 10; i++) {
@@ -42,20 +43,7 @@ class _InvitationPageState extends State<InvitationPage> {
       inputEmailController.add(TextEditingController());
     }
 
-    String msg = """                      さん\n""".padLeft(40);
-    msg = "$msg${"${localStorage[storageLoginId] ?? ""} ".padRight(38)}です。\n";
-    // msg = "$msg ${localStorage[storageLoginId]} です。\n";
-    msg = "$msg Emon Market の商品を紹介します。\n";
-    msg = "$msg \nホームページのＵＲＬ　です。\n";
-    msg = "$msg http://18.222.230.119/webpage\n";
-    msg = "$msg \n会員登録の時に、下記の招待コードを入力していただけると\n私が招待した会員として登録されます。\n";
-    msg = "$msg \n招待コード：$code\n";
-    msg = "$msg \nこのサイトでは招待した会員がこのサイトで商品を購入すると、\n招待した人にポイントがつく仕組みがあります。\n";
-    msg = "$msg \nエシカル商品を購入して、お友達を紹介してお得に買い物ができます。\n";
-    msg = "$msg \n安心なエシカル商品を生活に取り入れる良い機会になると思います。\n";
-    msg = "$msg 一度おとずれてみてください。\n";
-
-    msgController.text = msg;
+    getSessionData();
 
     super.initState();
   }
@@ -77,6 +65,13 @@ class _InvitationPageState extends State<InvitationPage> {
     super.dispose();
   }
 
+  getSessionData() async {
+    var tmpLoggedUserName = await SessionManager().get("loggedUserName");
+    setState(() {
+      loggedUserName = tmpLoggedUserName;
+    });
+  }
+
   void inviteRuleVerifedFn(bool value) {
     setState(() {
       inviteRuleVerifed = value;
@@ -85,12 +80,26 @@ class _InvitationPageState extends State<InvitationPage> {
 
   @override
   Widget build(BuildContext context) {
-    var textFieldHeight = 40.0;
     SizedBox dummySpaceBoxVer(double height) {
       return SizedBox(
         height: height,
       );
     }
+
+    String msg = """                      さん\n""".padLeft(40);
+    msg = "$msg${" $loggedUserName ".padRight(38)}です。\n";
+    // msg = "$msg ${localStorage[storageLoginId]} です。\n";
+    msg = "$msg Emon Market の商品を紹介します。\n";
+    msg = "$msg \nホームページのＵＲＬ　です。\n";
+    msg = "$msg http://18.222.230.119/webpage\n";
+    msg = "$msg \n会員登録の時に、下記の招待コードを入力していただけると\n私が招待した会員として登録されます。\n";
+    msg = "$msg \n招待コード：$code\n";
+    msg = "$msg \nこのサイトでは招待した会員がこのサイトで商品を購入すると、\n招待した人にポイントがつく仕組みがあります。\n";
+    msg = "$msg \nエシカル商品を購入して、お友達を紹介してお得に買い物ができます。\n";
+    msg = "$msg \n安心なエシカル商品を生活に取り入れる良い機会になると思います。\n";
+    msg = "$msg 一度おとずれてみてください。\n";
+
+    msgController.text = msg;
 
     return MainLayoutTemplate(
       bgColor: Colors.white,
@@ -108,7 +117,7 @@ class _InvitationPageState extends State<InvitationPage> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "${"${localStorage[storageLoginId] ?? ""} ".padRight(38)}さん。      お友達を招待しましょう。",
+                    "${"$loggedUserName ".padRight(38)}さん。      お友達を招待しましょう。",
                     textAlign: TextAlign.left,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,

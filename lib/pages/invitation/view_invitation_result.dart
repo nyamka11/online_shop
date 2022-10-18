@@ -1,9 +1,6 @@
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' show Storage, window;
-
 import 'package:flutter/material.dart';
-import 'package:online_shop/widgets/_Common/layout_template.dart';
-import '../../widgets/input_controls/input_invitation_info.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
+import '../../widgets/_common/layout_template.dart';
 
 class InvitationResultPage extends StatefulWidget {
   const InvitationResultPage({super.key});
@@ -17,18 +14,26 @@ class _InvitationResultPageState extends State<InvitationResultPage> {
   List<TextEditingController> inputNameController = [];
   List<TextEditingController> inputEmailController = [];
 
-  Storage localStorage = window.localStorage;
-
   String storageLoginId = "loggedUserName";
+  String? loggedUserName;
 
   @override
   void initState() {
+    getSessionData();
+
     super.initState();
   }
 
   @override
   void dispose() {
     super.dispose();
+  }
+
+  getSessionData() async {
+    var tmpLoggedUserName = await SessionManager().get("loggedUserName");
+    setState(() {
+      loggedUserName = tmpLoggedUserName;
+    });
   }
 
   @override
@@ -70,7 +75,7 @@ class _InvitationResultPageState extends State<InvitationResultPage> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "${"${localStorage[storageLoginId] ?? ""} ".padRight(38)}さん。      お友達招待が完了いたしました。",
+                    "${"$loggedUserName".padRight(38)}さん。      お友達招待が完了いたしました。",
                     textAlign: TextAlign.left,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,

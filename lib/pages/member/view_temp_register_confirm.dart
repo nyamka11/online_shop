@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
 // ignore: depend_on_referenced_packages
-import 'package:http/http.dart' as http;
 import 'dart:html' as html;
 import 'dart:convert';
 
@@ -9,7 +8,7 @@ import 'package:online_shop/widgets/_common/http_helper.dart';
 import '../../widgets/buttons/my_button.dart';
 import '../../widgets/input_controls/my_text_field.dart';
 import '../../_routers.dart';
-import '../../widgets/_Common/layout_template.dart';
+import '../../widgets/_common/layout_template.dart';
 
 import '../../widgets/input_controls/verify_number_input.dart';
 

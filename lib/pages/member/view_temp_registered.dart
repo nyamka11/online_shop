@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import '../../_routers.dart';
-import '../../widgets/_Common/layout_template.dart';
+import '../../widgets/_common/layout_template.dart';
 
 class TempRegisteredPage extends StatelessWidget {
   const TempRegisteredPage({super.key});
